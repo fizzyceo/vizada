@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/24/solid";
 import Chiffres from "./Chiffres";
 const Services = () => {
+
   const [tabSelected, setTabSelected] = useState(1);
 
   const data = [

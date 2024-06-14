@@ -4,54 +4,31 @@ import {
   CardBody,
   Typography,
   Button,
+  CardFooter,
 } from "@material-tailwind/react";
 
 export default function CourseCard({ content }) {
   return (
-    <Card className="w-2/5 max-w-[48rem] flex-row">
-      <CardHeader
-        shadow={false}
-        floated={false}
-        className="m-0 w-2/5 shrink-0 rounded-r-none"
-      >
-        <img
-          src={content.image}
-          alt="card-image"
-          className="h-full w-full object-cover"
-        />
+    <Card className="">
+      <CardHeader color="blue-gray" className="relative h-56">
+        <img src={content.image} alt="card-image" />
       </CardHeader>
       <CardBody>
-        <Typography variant="h6" color="gray" className="mb-4 uppercase">
+        <Typography
+          variant="h6"
+          color="blue-gray"
+          className="text-xs text-gray-500 mb-2"
+        >
           {content.subCategory}
         </Typography>
-        <Typography variant="h4" color="blue-gray" className="mb-2">
+        <Typography variant="h5" color="blue-gray" className="mb-2">
           {content.title}
         </Typography>
-        <Typography color="gray" className="mb-8 font-normal text-sm">
-          {content.description}
-        </Typography>
-        <a href="#" className="inline-block">
-          <Button variant="text" className="flex items-center gap-2">
-            <a href={content.link}>
-              Learn More
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="h-4 w-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                />
-              </svg>
-            </a>
-          </Button>
-        </a>
+        <Typography>{content.description}</Typography>
       </CardBody>
+      <CardFooter className="pt-0">
+        <Button>Read More</Button>
+      </CardFooter>
     </Card>
   );
 }
