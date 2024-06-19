@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Navbar from "../Home/components/Navbar";
 import { Button, IconButton, Input } from "@material-tailwind/react";
 import {
@@ -143,10 +143,20 @@ const Courses = (props) => {
   return (
     <div className="min-h-screen bg-gray-50 ">
       <Navbar />
-      <div className="w-[90%] mx-auto mt-10 space-y-5 teko-400">
-        <h1 className="text-gray-600">
-          {courseList.length} Courses in {courseType}
-        </h1>
+      <div className="w-[90%] mx-auto mt-10  space-y-5 teko-400">
+        <div className="flex flex-row items-center justify-between">
+          <h1 className="text-gray-600">
+            {courseList.length} Courses in {courseType}
+          </h1>
+          <Button>
+            <Link
+              className="flex flex-row  items-center justify-between"
+              to={`/courses?type=${courseType === "IT" ? "management" : "IT"}`}
+            >
+              {courseType === "IT" ? "Management" : "IT"} Courses
+            </Link>
+          </Button>
+        </div>
         <div className="filters flex flex-row items-center justify-between flex-wrap w-full">
           <div className="flex flex-row items-center flex-wrap justify-center gap-5 w-full mb-8">
             <div className="lg:w-[30%] w-full">

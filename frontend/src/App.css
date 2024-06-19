@@ -79,3 +79,50 @@
     filter: hue-rotate(250deg);
   }
 }
+
+.partners {
+  padding: 10px;
+}
+
+@-webkit-keyframes slideleft {
+  0% {
+    background-position: 385000px;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+
+@keyframes slideleft {
+  0% {
+    background-position: 385000px;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+
+.partners-img-container {
+  height: 100px;
+  width: 100%;
+  overflow: auto;
+}
+
+.partners-img-container::-webkit-scrollbar {
+  width: 0 !important;
+} /* hide scrollbar in Chrome */
+.partners-img-container {
+  scrollbar-width: none;
+} /* hide scrollbar in mozilla */
+.partners-img-container {
+  -ms-overflow-style: none;
+} /* hide scrollbar in IE */
+
+.partners-img-container .partners-img {
+  height: 100%;
+  width: 100%;
+  background: transparent url("./assets/vizada-logo.png") repeat-x 50% 0;
+  -webkit-animation: slideleft 5000s linear infinite;
+  animation: slideleft 5000s linear infinite;
+  cursor: grab;
+}

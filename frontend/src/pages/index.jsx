@@ -2,6 +2,7 @@ import Home from "./Home";
 
 import Analytics from "./Analytics";
 import Login from "./Auth/Login";
+import SignUp from "./Auth/signup";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
-export { Home, Analytics, Login, Dashboard, Courses };
+export { Home, Analytics, Login, Dashboard, Courses, SignUp };

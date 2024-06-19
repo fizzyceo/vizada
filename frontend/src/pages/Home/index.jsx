@@ -7,18 +7,22 @@ import QnA from "./components/QnA";
 import Contact from "./components/Contact";
 import Pricing from "./components/Pricing";
 import { FooterWithLogo } from "./components/Footer";
+import Intro2 from "./components/Intro2";
 const Home = () => {
   return (
-    <div className="home bg-gray-50 ">
+    <div className="home  bg-gradient-to-tr from-[#fffdf7] to-[#fffaf2] ">
       {/**navbar: logo login button  + hyperlinks(courses, Pricing, Q/A,  ) */}
       <React.Fragment>
         <Navbar />
       </React.Fragment>
       <Intro />
-      <div className="teko-400 w-[100%] bg-gray-50  my-5 flex items-center justify-center flex-col gap-5">
+      <Intro2 />
+      <section className="teko-400 w-[100%]   my-5  flex items-center justify-center flex-col gap-5 partners">
         <h1 className="text-2xl">Nos Partenaires</h1>
-        <div className="w-full  p-4">\ </div>
-      </div>
+        <div className="partners-img-container">
+          <div className="partners-img"></div>
+        </div>
+      </section>
       <Services />
       <Courses />
       <Pricing />

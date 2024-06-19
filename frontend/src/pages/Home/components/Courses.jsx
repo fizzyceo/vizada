@@ -19,13 +19,29 @@ const Courses = () => {
       <div className="indexer flex flex-col items-center w-full justify-center gap-5  mx-auto">
         <h1 className=" text-4xl text-center">Choose your Course Type</h1>
         <div className="w-full flex flex-row items-center justify-center gap-5 flex-wrap">
-          <Card className="p-2 py-7   bg-gray-200 text-gray-900 relative z-10 card-wrapper flex items-center justify-center">
+          <Card
+            onClick={() => {
+              const element = document.getElementById("management");
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+            className="p-2 py-7  cursor-pointer  bg-gray-200 text-gray-900 relative z-10 card-wrapper flex items-center justify-center"
+          >
             <CardBody className="z-10 min-h-64 flex flex-col items-center justify-between ">
               <img src={vizadaLogo} alt="" />
               <h1 className="text-xl ">Management Courses</h1>
             </CardBody>
           </Card>
-          <Card className="p-2 py-7 bg-gray-900 text-gray-50 relative z-10 card-wrapper flex items-center justify-center">
+          <Card
+            onClick={() => {
+              const element = document.getElementById("IT");
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+            className="p-2 py-7 cursor-pointer bg-gray-900 text-gray-50 relative z-10 card-wrapper flex items-center justify-center"
+          >
             <CardBody className="min-h-64 flex flex-col items-center justify-between ">
               <img src={vizadaLogo} alt="" />
               <h1 className="text-xl ">Information technology Courses</h1>
@@ -33,7 +49,7 @@ const Courses = () => {
           </Card>
         </div>
 
-        <div className="managemet bg-gray-50 flex w-full  ">
+        <div id="management" className="managemet bg-gray-50 flex w-full  ">
           <div className="mx-auto flex flex-col items-center justify-center bg-orange-900 p-5 w-[95%] lg:w-[80%] rounded-lg ">
             <div className="min-h-[300px] relative  flex flex-row flex-wrap items-center justify-center gap-10 ">
               <div className="flex flex-col  justify-center items-start gap-5 lg:max-w-[45%]">
@@ -73,7 +89,7 @@ const Courses = () => {
           </div>
         </div>
 
-        <div className="managemet bg-gray-50 flex w-full  ">
+        <div id="IT" className="IT bg-gray-50 flex w-full  ">
           <div className="mx-auto flex flex-col items-center justify-center bg-gray-900 p-5 w-[95%] lg:w-[80%] rounded-lg ">
             <div className="min-h-[300px] relative  flex flex-row flex-wrap items-center justify-center gap-10 ">
               <div className="flex flex-col  justify-center items-start gap-5 lg:max-w-[45%]">

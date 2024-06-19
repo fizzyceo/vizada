@@ -220,7 +220,7 @@ export default function NavbarWithMegaMenu() {
           <div className="hidden lg:block">
             <NavList />
           </div>
-          {loggedIn ? (
+          {!loggedIn ? (
             <ProfileMenu />
           ) : (
             <Button variant="gradient" size="sm">

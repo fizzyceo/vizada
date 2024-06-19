@@ -18,15 +18,14 @@ const Intro = () => {
               GROW WITH <span className="gradient-text ">VIZADA</span>
             </h1>
 
-            <h3 className="text-xl">reach 10x your potentiel</h3>
+            <h3 className="text-xl">Multiverse of Courses</h3>
             <Typography
               variant="h4"
               className="text-md !font-medium text-blue-gray-800"
             >
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque
-              impedit eum sapiente adipisci laboriosam blanditiis quos velit.
-              Facilis nostrum dolorum consectetur excepturi qui quis, tempora
-              velit in, neque mollitia consequuntur.
+              Vizada propose une gamme complète de formations sur le management,
+              le marketing, la sécurité, la gestion de projet et les systèmes
+              d’information.
             </Typography>
             <Button className=" bg-orange-800 flex items-center justify-between place-self-start rounded-full space-x-4">
               <a

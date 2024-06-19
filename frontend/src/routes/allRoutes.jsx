@@ -1,4 +1,4 @@
-import { Home, Analytics, Login, Dashboard, Courses } from "../pages";
+import { Home, Analytics, Login, Dashboard, Courses, SignUp } from "../pages";
 
 const authProtectedRoutes = [
   { path: "/analytics", component: <Analytics /> },
@@ -6,9 +6,12 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
+  { path: "/dashboard", component: <Dashboard /> },
+
   { path: "/", component: <Home /> },
   { path: "/Courses", component: <Courses /> },
   { path: "/login", component: <Login /> },
+  { path: "/signup", component: <SignUp /> },
 ];
 
 export { authProtectedRoutes, publicRoutes };
