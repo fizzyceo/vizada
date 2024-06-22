@@ -19,10 +19,10 @@ import {
   BellIcon,
   ChatBubbleLeftRightIcon,
   AcademicCapIcon,
+  CogIcon,
 } from "@heroicons/react/24/solid";
 import Chiffres from "./Chiffres";
 const Services = () => {
-
   const [tabSelected, setTabSelected] = useState(1);
 
   const data = [
@@ -102,7 +102,11 @@ const Services = () => {
                 <div className="absolute right-4 lg:right-8 z-0   top-0 rounded-full w-24 h-24 opacity-25 bg-orange-400 blur-xl"></div>
                 <div className="absolute right-8 lg:right-16 z-0   bottom-0 rounded-full w-24 h-24 opacity-30 bg-gray-400 blur-xl"></div>
                 {/* {document.createElement("img", data[tabSelected - 1].icon)} */}
-                <Square3Stack3DIcon width={34} />
+                {tabSelected === 1 && (
+                  <Square3Stack3DIcon className="w-16 h-16" />
+                )}
+                {tabSelected === 2 && <UserCircleIcon className="w-16 h-16" />}
+                {tabSelected === 3 && <CogIcon className="w-16 h-16" />}
                 <h1 className="font-semibold text-xl">
                   {data[tabSelected - 1].label}
                 </h1>

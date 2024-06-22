@@ -21,10 +21,10 @@ const Pricing = () => {
   }, [isYearly]);
   return (
     <div id="pricing" className="space-y-5 my-5">
-      <h1 className="text-4xl teko-400 text-center my-10">
+      <h1 className="text-4xl poppins text-center my-10">
         Start learning <span className="text-orange-800">Now!</span>{" "}
       </h1>
-      <p className="w-[90%] mx-auto text-center text-sm">
+      <p className="w-[80%] mx-auto text-center text-sm">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem
         repellat quam numquam deleniti ratione eaque quo animi? Rem, autem,
         eligendi perspiciatis dolores at repudiandae cum molestiae doloribus,
@@ -32,7 +32,7 @@ const Pricing = () => {
         repellendus fugiat in nam?
       </p>
 
-      <div className="switch teko-400 text-3xl flex flex-row items-center justify-center gap-5">
+      <div className="switch poppins text-3xl flex flex-row items-center justify-center gap-5">
         <h2>Monthly</h2>
         <Switch
           color="orange"

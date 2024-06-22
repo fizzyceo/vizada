@@ -1,11 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 .bebas-neue-regular {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
-
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
 .fontc {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-weight: 600;
@@ -39,7 +46,7 @@
 }
 
 .gradient-text {
-  background: -webkit-linear-gradient(#ef6c00, #fd8585);
+  background: -webkit-linear-gradient(#7d3901, #fb2e2e);
   text-decoration-line: underline;
   text-decoration-color: #ef6c00;
   text-decoration-style: wavy;

@@ -62,7 +62,7 @@ const Contact = () => {
             </CardHeader>
 
             <CardBody className="space-y-5">
-              {!isSubmitted ? (
+              {isSubmitted ? (
                 <React.Fragment>
                   <Input
                     color="orange"

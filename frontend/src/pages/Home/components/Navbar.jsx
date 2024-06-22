@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -18,19 +18,13 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  NewspaperIcon,
-  PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
-  SunIcon,
-  TagIcon,
-  UserGroupIcon,
   ComputerDesktopIcon,
+  RectangleGroupIcon,
 } from "@heroicons/react/24/solid";
-import vizadaLogo from "../../../assets/vizada-logo.png";
+import vizadaLogo from "../../../assets/navlogo.jpeg";
 import { ProfileMenu } from "./ProfileMenu";
+import { useAuth } from "../../../stores/Auth";
+
 const navListMenuItems = [
   {
     title: "Information Technology",
@@ -38,7 +32,6 @@ const navListMenuItems = [
     icon: ComputerDesktopIcon,
     link: "/courses?type=IT",
   },
-
   {
     title: "Management",
     description: "Numerous Courses in Management, explore!",
@@ -50,36 +43,32 @@ const navListMenuItems = [
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   const renderItems = navListMenuItems.map(
-    ({ icon, title, description, link }, key) => (
-      <a href="#" key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6",
-            })}
-          </div>
-          <div>
-            <a href={link}>
-              <Typography
-                variant="h6"
-                color="blue-gray"
-                className="flex items-center text-sm font-bold"
-              >
-                {title}
-              </Typography>
-              <Typography
-                variant="paragraph"
-                className="text-xs !font-medium text-blue-gray-500"
-              >
-                {description}
-              </Typography>
-            </a>
-          </div>
-        </MenuItem>
-      </a>
+    ({ icon: Icon, title, description, link }, index) => (
+      <MenuItem
+        key={index}
+        className="flex items-center gap-3 rounded-lg"
+        onClick={() => {
+          // Handle navigation logic here
+          window.location.href = link;
+        }}
+      >
+        <div className="flex items-center justify-center rounded-lg bg-blue-gray-50 p-2">
+          <Icon className="h-6 text-gray-700 w-6" />
+        </div>
+        <div>
+          <Typography
+            color="blue-gray"
+            className="flex items-center text-sm font-bold"
+          >
+            {title}
+          </Typography>
+          <Typography className="text-xs font-medium text-blue-gray-500">
+            {description}
+          </Typography>
+        </div>
+      </MenuItem>
     )
   );
 
@@ -93,9 +82,9 @@ function NavListMenu() {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography as="div" variant="small" className="font-medium">
+          <Typography variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-600"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -130,73 +119,91 @@ function NavListMenu() {
 
 function NavList() {
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 ">
       <NavListMenu />
 
       <Typography
-        as="a"
         variant="small"
         color="blue-gray"
-        className="font-medium"
+        className="font-normal text-gray-700"
       >
-        <a
-          onClick={() => {
-            const element = document.getElementById("pricing");
-            element.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <a
+            href="#pricing"
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById("pricing");
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
             Tarifs
-          </ListItem>
-        </a>
+          </a>
+        </ListItem>
       </Typography>
       <Typography
-        as="a"
         variant="small"
         color="blue-gray"
-        className="font-medium"
+        className="font-normal text-gray-700"
       >
-        <a
-          onClick={() => {
-            const element = document.getElementById("about");
-            element.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <a
+            href="#about"
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById("about");
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
             About Us
-          </ListItem>
-        </a>
+          </a>
+        </ListItem>
       </Typography>
       <Typography
-        as="a"
         variant="small"
         color="blue-gray"
-        className="font-medium"
+        className="font-normal text-gray-700"
       >
-        <a
-          onClick={() => {
-            const element = document.getElementById("contact");
-            element.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          <a
+            href="#contact"
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              const element = document.getElementById("contact");
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
+          >
             Contact Us
-          </ListItem>
-        </a>
+          </a>
+        </ListItem>
       </Typography>
     </List>
   );
 }
 
 export default function NavbarWithMegaMenu() {
-  const [openNav, setOpenNav] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [openNav, setOpenNav] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const { user } = useAuth((state) => state);
+  useEffect(() => {
+    console.log("User object changed:", user);
+    if (Object.keys(user || {}).length > 0) {
+      console.log("Setting loggedIn to true");
+      setLoggedIn(true);
+    } else {
+      console.log("Setting loggedIn to false");
+      setLoggedIn(false);
+    }
+  }, [user]);
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -206,22 +213,18 @@ export default function NavbarWithMegaMenu() {
 
   return (
     <Navbar className="z-20 mx-auto max-w-screen-xl px-4 py-2 sticky top-3">
-      <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
-        >
+      <div className="flex items-center justify-between text-blue-gray-600">
+        <Typography variant="h6" className="mr-4 cursor-pointer py-1.5 lg:ml-2">
           <a href="/">
-            <img src={vizadaLogo} width={84} />
+            <img src={vizadaLogo} width={84} alt="Vizada Logo" />
           </a>
         </Typography>
         <div className="flex flex-row justify-center gap-2">
           <div className="hidden lg:block">
             <NavList />
           </div>
-          {!loggedIn ? (
-            <ProfileMenu />
+          {loggedIn ? (
+            <ProfileMenu user={user} />
           ) : (
             <Button variant="gradient" size="sm">
               <a href="/login">Sign In</a>
