@@ -11,25 +11,30 @@ import {
   MenuItem,
   Checkbox,
 } from "@material-tailwind/react";
+import { useCoursesStore } from "../../../stores/Courses";
 
-export default function MenuFilter() {
-  const categories = [
-    { id: 1, name: "Development" },
-    { id: 2, name: "Data Science" },
-    { id: 3, name: "Artificial Intelligence" },
-    { id: 4, name: "Cyber Security" },
-    { id: 5, name: "Cyber Security1" },
-    { id: 6, name: "Cyber Security2" },
-    { id: 7, name: "Cyber Security3" },
-  ];
+export default function MenuFilter({
+  currentSubCategory,
+  setCurrentSubCategory,
+  courseType,
+}) {
+  // const categories = [
+  //   { id: 1, name: "Development" },
+  //   { id: 2, name: "Data Science" },
+  //   { id: 3, name: "Artificial Intelligence" },
+  //   { id: 4, name: "Cyber Security" },
+  //   { id: 5, name: "Cyber Security1" },
+  //   { id: 6, name: "Cyber Security2" },
+  //   { id: 7, name: "Cyber Security3" },
+  // ];
+
+  const { getSubCategories, subcategories, getCategories, categories } =
+    useCoursesStore((state) => state);
   const contentRef = useRef(null);
   const rightArrowRef = useRef(null);
   const leftArrowRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(1);
-  const [currentSubCategory, setCurrentSubCategory] = useState(
-    categories[0].id
-  );
-
+  const [relevantSubCat, setRelevantSubCat] = useState([]);
   const Move = (dir) => {
     const contentElement = contentRef.current;
     const totalWidth = contentElement.getBoundingClientRect().width;
@@ -52,7 +57,24 @@ export default function MenuFilter() {
       contentElement.style.left = `${leftValue}px`;
     }
   };
-
+  useEffect(() => {
+    getSubCategories();
+    getCategories();
+  }, []);
+  useEffect(() => {
+    if (subcategories.length > 0 && categories.length > 0) {
+      let chosenCat = categories.filter(
+        (cat) => cat.Nomcategorie.toLowerCase() === courseType.toLowerCase()
+      );
+      let relevant = subcategories.filter(
+        (cat) => cat.Id_c === chosenCat[0].id
+      );
+      setRelevantSubCat(subcategories);
+      if (relevant.length > 0) {
+        setCurrentSubCategory(relevant[0].id);
+      }
+    }
+  }, [subcategories, categories]);
   useEffect(() => {
     manageButtons();
   }, [currentSlide]);
@@ -63,7 +85,6 @@ export default function MenuFilter() {
     const nbSlides = totalWidth / widthToMove;
     const rightElement = rightArrowRef.current;
     const leftElement = leftArrowRef.current;
-    console.log(nbSlides, currentSlide);
     if (currentSlide === parseInt(nbSlides))
       rightElement.style.display = "none";
     else rightElement.style.display = "flex";
@@ -72,7 +93,7 @@ export default function MenuFilter() {
     else leftElement.style.display = "flex";
   };
   return (
-    <div className="min-w-[95%] lg:min-w-[100%] relative overflow-hidden min-h-14 p-5 transition-all bg-gray-200 rounded-full">
+    <div className="min-w-[95%] lg:min-w-fit relative overflow-hidden min-h-14 p-5 transition-all bg-gray-200 rounded-full">
       <span
         ref={leftArrowRef}
         onClick={() => Move("right")}
@@ -96,8 +117,8 @@ export default function MenuFilter() {
         ref={contentRef}
         className="absolute left-0 top-[50%] translate-y-[-50%] transition-all  flex flex-row gap-5 items-center justify-center"
       >
-        {categories.length > 0 &&
-          categories.map((category) => (
+        {relevantSubCat.length > 0 &&
+          relevantSubCat.map((category) => (
             <div
               key={category.id}
               onClick={() => setCurrentSubCategory(category.id)}
@@ -107,7 +128,7 @@ export default function MenuFilter() {
                   : ""
               }`}
             >
-              <h1>{category.name}</h1>
+              <h1>{category.Nomsouscategorie}</h1>
             </div>
           ))}
       </div>

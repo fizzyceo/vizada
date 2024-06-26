@@ -62,6 +62,9 @@ const Login = (props) => {
                 Password
               </label>
             </div>
+            <a className="text-xs hover:underline" href="/forget">
+              have you forgotten your Password ?{" "}
+            </a>
           </div>
           <div className="p-6 pt-0">
             <Button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Menu,
   MenuHandler,
@@ -6,9 +6,13 @@ import {
   MenuItem,
   Typography,
 } from "@material-tailwind/react";
+import { useAuth } from "../../../stores/Auth";
 
-export function ProfileMenu({ user }) {
+export function ProfileMenu() {
+  const { user } = useAuth((state) => state);
+
   const { first_name } = user;
+  const [randomColor, setRandomColor] = useState("#EF4444");
 
   // Function to generate random background color
   const getRandomColor = () => {
@@ -24,7 +28,9 @@ export function ProfileMenu({ user }) {
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   };
-
+  useEffect(() => {
+    setRandomColor(getRandomColor());
+  }, []);
   // Get the first letter of first_name
   const firstLetter = first_name ? first_name.charAt(0).toUpperCase() : "";
 
@@ -32,11 +38,11 @@ export function ProfileMenu({ user }) {
     <Menu>
       <MenuHandler>
         <div
-          className="cursor-pointer flex items-center justify-center rounded-full"
+          className="cursor-pointer flex items-center justify-center rounded-full "
           style={{
             width: "40px",
             height: "40px",
-            backgroundColor: getRandomColor(),
+            backgroundColor: randomColor,
             color: "#ffffff", // Text color
             fontWeight: "bold",
             fontSize: "16px",
@@ -45,7 +51,7 @@ export function ProfileMenu({ user }) {
           {firstLetter}
         </div>
       </MenuHandler>
-      <MenuList>
+      <MenuList className="roboto">
         <MenuItem className="flex items-center gap-2">
           <svg
             width="16"
@@ -73,7 +79,7 @@ export function ProfileMenu({ user }) {
             {/* Your SVG path */}
           </svg>
           <a href="/dashboard">
-            <Typography variant="small" className="font-medium">
+            <Typography variant="small" className="font-medium ">
               Dashboard
             </Typography>{" "}
           </a>
@@ -91,7 +97,7 @@ export function ProfileMenu({ user }) {
             {/* Your SVG path */}
           </svg>
           <a href="/logout">
-            <Typography variant="small" className="font-medium">
+            <Typography variant="small" className="font-medium text-red-900">
               Sign Out
             </Typography>
           </a>

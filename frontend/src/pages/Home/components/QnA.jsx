@@ -13,7 +13,7 @@ export default function AccordionCustomStyles() {
   return (
     <div className="bg-gray-50 p-5 space-y-5">
       <div>
-        <h1 className="teko-400 text-4xl text-center">
+        <h1 className="roboto text-4xl text-center">
           Have some questions for us ?
         </h1>
       </div>

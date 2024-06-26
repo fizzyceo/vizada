@@ -52,17 +52,17 @@ const Contact = () => {
   return (
     <div id="contact" className="bg-gray-50 p-5 space-y-5">
       <div>
-        <h1 className="teko-400 text-4xl text-center">
+        <h1 className="roboto text-4xl text-center">
           Your Question is unique?{" "}
         </h1>
         <div className="w-4/5 lg:w-2/5 mx-auto my-10 ">
           <Card className="bg-gray-50">
             <CardHeader>
-              <h1 className="teko-400 text-3xl text-center">Contact us </h1>
+              <h1 className="roboto text-3xl text-center">Contact us </h1>
             </CardHeader>
 
             <CardBody className="space-y-5">
-              {isSubmitted ? (
+              {!isSubmitted ? (
                 <React.Fragment>
                   <Input
                     color="orange"

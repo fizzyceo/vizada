@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Navbar from "../Home/components/Navbar";
 import { Button, IconButton, Input } from "@material-tailwind/react";
@@ -10,103 +10,90 @@ import {
 import MenuFilter from "./filters/MenuFilter";
 import CourseCard from "./CourseCard";
 import { FooterWithLogo } from "../Home/components/Footer";
+import { useCoursesStore } from "../../stores/Courses";
+import { useAuth } from "../../stores/Auth";
+import withRouter from "../../Components/Common/withRouter";
 
 const Courses = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const courseType = searchParams.get("type");
-  const [courseList, setCourseList] = useState([
-    {
-      id: 1,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 2,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 3,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 4,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 5,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
+  const { getCourses, courses, getFavorites, favorites } = useCoursesStore(
+    (state) => state
+  );
+  const [currentSubCategory, setCurrentSubCategory] = useState(null);
+  const [courseList, setCourseList] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [infoText, setInfoText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { accessToken } = useAuth((state) => state);
+  useEffect(() => {
+    setLoading(false);
+    if (accessToken) {
+      getFavorites();
+    }
+    getCourses();
 
-    {
-      id: 6,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 7,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-    {
-      id: 8,
-      link: "/",
-      image:
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      title: "Comptia+",
-      description:
-        "Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Yet its own business model disruption is only part of the story",
-      subCategory: "Cyber Security",
-    },
-  ]);
+    setLoading(true);
+  }, []);
+
+  useEffect(() => {
+    if (courses.length > 0 && currentSubCategory) {
+      let list = courses.filter((crs) => crs.Id_sc === currentSubCategory);
+      list = list.map((course) => {
+        const isFavorite = favorites.find((fav) => fav.Id_c === course.id);
+        console.log(isFavorite);
+
+        return {
+          ...course,
+          idFav: isFavorite?.id || null,
+          isFavorite: !!isFavorite,
+        };
+      });
+      setCourseList(list);
+      setFilteredCourses(list); // Initialize filtered courses with all courses
+      console.log(list);
+      if (list.length > 0) {
+        setInfoText("");
+      } else {
+        setInfoText("No Courses Available for this category...");
+      }
+    }
+  }, [courses, currentSubCategory]);
+
+  useEffect(() => {
+    // Filter courses based on searchQuery
+    if (searchQuery.length > 2) {
+      const filtered = courseList.filter(
+        (course) =>
+          course.Nomc?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.Descriptionc?.toLowerCase().includes(
+            searchQuery.toLowerCase()
+          ) ||
+          course.image?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.link?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredCourses(filtered);
+    } else {
+      // If searchQuery length is less than or equal to 2, show all courses
+      setFilteredCourses(courseList);
+    }
+  }, [searchQuery, courseList]);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   const [active, setActive] = useState(1);
   const itemsPerPage = 3;
 
-  // Calculate total number of pages
-  const totalPages = Math.ceil(courseList.length / itemsPerPage);
+  // Calculate total number of pages for filtered courses
+  const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
   // Calculate courses to display for the current page
   const start = (active - 1) * itemsPerPage;
   const end = start + itemsPerPage;
-  const coursesToShow = courseList.slice(start, end);
+  const coursesToShow = filteredCourses.slice(start, end);
 
   // Handler for changing active page
   const changePage = (pageNumber) => {
@@ -143,18 +130,21 @@ const Courses = (props) => {
   return (
     <div className="min-h-screen bg-gray-50 ">
       <Navbar />
-      <div className="w-[90%] mx-auto mt-10  space-y-5 teko-400">
+      <div className="w-[90%] mx-auto mt-10  space-y-5 roboto">
         <div className="flex flex-row items-center justify-between">
           <h1 className="text-gray-600">
-            {courseList.length} Courses in {courseType}
+            {filteredCourses.length} Courses in {courseType}
           </h1>
-          <Button>
-            <Link
-              className="flex flex-row  items-center justify-between"
-              to={`/courses?type=${courseType === "IT" ? "management" : "IT"}`}
-            >
-              {courseType === "IT" ? "Management" : "IT"} Courses
-            </Link>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              const newUrl = `/courses?type=${
+                courseType === "IT" ? "management" : "IT"
+              }`;
+              window.location.href = newUrl;
+            }}
+          >
+            {courseType === "IT" ? "Management" : "IT"} Courses
           </Button>
         </div>
         <div className="filters flex flex-row items-center justify-between flex-wrap w-full">
@@ -164,16 +154,27 @@ const Courses = (props) => {
                 type="text"
                 label="Mot Cle"
                 icon={<MagnifyingGlassIcon className="w-6" />}
+                onChange={(e) => handleSearch(e.target.value)}
               />
             </div>
             <div className="subCategories flex-grow w-[60%] ">
-              <MenuFilter />
+              <MenuFilter
+                courseType={courseType}
+                currentSubCategory={currentSubCategory}
+                setCurrentSubCategory={setCurrentSubCategory}
+              />
             </div>
           </div>
         </div>
+        <h1 className="text-lg text-gray-700">{infoText}</h1>
         <div className="courses w-full  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center gap-10 justify-center flex-wrap p-2">
           {coursesToShow.map((course) => (
-            <CourseCard key={course.id} content={course} />
+            <CourseCard
+              router={props.router}
+              key={course.id}
+              content={course}
+              isFavorite={course.isFavorite} // Pass isFavorite prop
+            />
           ))}
         </div>
       </div>
@@ -203,4 +204,4 @@ const Courses = (props) => {
   );
 };
 
-export default Courses;
+export default withRouter(Courses);

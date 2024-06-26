@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
 import Courses from "./components/Courses";
@@ -11,7 +11,17 @@ import Intro2 from "./components/Intro2";
 import toutApprendre from "../../assets/toutapprendre.svg";
 import alphrom from "../../assets/alphorm.svg";
 import tex from "../../assets/tex.png";
+import { useCoursesStore } from "../../stores/Courses";
+
 const Home = () => {
+  const { getCategories, categories } = useCoursesStore((state) => state);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
   return (
     <div className="home  bg-gray-100 poppins">
       {/**navbar: logo login button  + hyperlinks(courses, Pricing, Q/A,  ) */}
@@ -32,7 +42,7 @@ const Home = () => {
         </div>
       </section>
       {/* <Services /> */}
-      <Courses />
+      <Courses categories={categories} />
       <Pricing />
 
       <QnA />

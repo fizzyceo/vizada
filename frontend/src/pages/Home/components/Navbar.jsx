@@ -21,7 +21,7 @@ import {
   ComputerDesktopIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/solid";
-import vizadaLogo from "../../../assets/navlogo.jpeg";
+import vizadaLogo from "../../../assets/navlogonbg.png";
 import { ProfileMenu } from "./ProfileMenu";
 import { useAuth } from "../../../stores/Auth";
 
@@ -82,7 +82,7 @@ function NavListMenu() {
         allowHover={true}
       >
         <MenuHandler>
-          <Typography variant="small" className="font-medium">
+          <Typography variant="h6" className="font-medium">
             <ListItem
               className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-600"
               selected={isMenuOpen || isMobileMenuOpen}
@@ -119,72 +119,71 @@ function NavListMenu() {
 
 function NavList() {
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 ">
+    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-center justify-center">
       <NavListMenu />
 
-      <Typography
-        variant="small"
-        color="blue-gray"
-        className="font-normal text-gray-700"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <a
-            href="#pricing"
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById("pricing");
-              element.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-          >
+      <ListItem className="flex items-center w-fit justify-center ">
+        <a
+          href="#pricing"
+          className="cursor-pointer w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            const element = document.getElementById("pricing");
+            element.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          <Typography variant="small" color="blue-gray" className="font-normal">
             Tarifs
-          </a>
-        </ListItem>
-      </Typography>
-      <Typography
-        variant="small"
-        color="blue-gray"
-        className="font-normal text-gray-700"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <a
-            href="#about"
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById("about");
-              element.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
+          </Typography>
+        </a>
+      </ListItem>
+
+      {/* <ListItem className="flex items-center w-fit justify-center ">
+        {" "}
+        <a
+          href="#about"
+          className="cursor-pointer w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            const element = document.getElementById("about");
+            element.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal text-gray-700"
           >
             About Us
-          </a>
-        </ListItem>
-      </Typography>
-      <Typography
-        variant="small"
-        color="blue-gray"
-        className="font-normal text-gray-700"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          <a
-            href="#contact"
-            className="cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              const element = document.getElementById("contact");
-              element.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
+          </Typography>
+        </a>
+      </ListItem> */}
+
+      <ListItem className="flex items-center w-fit justify-center ">
+        <a
+          href="#contact"
+          className="cursor-pointer w-fit"
+          onClick={(e) => {
+            e.preventDefault();
+            const element = document.getElementById("contact");
+            element.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal text-gray-700"
           >
             Contact Us
-          </a>
-        </ListItem>
-      </Typography>
+          </Typography>
+        </a>
+      </ListItem>
     </List>
   );
 }
@@ -194,12 +193,9 @@ export default function NavbarWithMegaMenu() {
   const [loggedIn, setLoggedIn] = useState(false);
   const { user } = useAuth((state) => state);
   useEffect(() => {
-    console.log("User object changed:", user);
     if (Object.keys(user || {}).length > 0) {
-      console.log("Setting loggedIn to true");
       setLoggedIn(true);
     } else {
-      console.log("Setting loggedIn to false");
       setLoggedIn(false);
     }
   }, [user]);
@@ -219,14 +215,14 @@ export default function NavbarWithMegaMenu() {
             <img src={vizadaLogo} width={84} alt="Vizada Logo" />
           </a>
         </Typography>
-        <div className="flex flex-row justify-center gap-2">
+        <div className="flex flex-row justify-center items-center gap-2">
           <div className="hidden lg:block">
             <NavList />
           </div>
           {loggedIn ? (
-            <ProfileMenu user={user} />
+            <ProfileMenu />
           ) : (
-            <Button variant="gradient" size="sm">
+            <Button variant="gradient" className="" size="md">
               <a href="/login">Sign In</a>
             </Button>
           )}

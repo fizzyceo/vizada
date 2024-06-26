@@ -15,7 +15,14 @@ const signup = () => {
     password: "",
     re_password: "",
   });
-  const { first_name, last_name, email, password, re_password } = formData;
+  const {
+    first_name,
+    last_name,
+    email,
+    password,
+    re_password,
+    Date_Naissance,
+  } = formData;
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -24,7 +31,9 @@ const signup = () => {
   };
   const [rePass, setRePass] = useState("");
   const [error, setError] = useState("");
-  const { register, loadingRegister } = useAuth((state) => state);
+  const { register, loadingRegister, RegistrationComplete } = useAuth(
+    (state) => state
+  );
   const [completed, setCompleted] = useState(false);
   useEffect(() => {
     if (rePass) {
@@ -48,6 +57,7 @@ const signup = () => {
         last_name,
         email,
         password,
+        Date_Naissance,
         re_password,
       };
       try {
@@ -67,7 +77,7 @@ const signup = () => {
       <NavbarWithMegaMenu />
       <div className="w-full my-16 items-center justify-center flex">
         {" "}
-        {!completed ? (
+        {RegistrationComplete ? (
           <div>
             <div className="w-full my-16 items-center justify-center flex flex-col space-y-5">
               <h1 className="text-xl lg:text-3xl">

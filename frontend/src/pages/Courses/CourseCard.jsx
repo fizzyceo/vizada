@@ -1,3 +1,4 @@
+import { BookmarkIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   CardHeader,
@@ -6,12 +7,67 @@ import {
   Button,
   CardFooter,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useCoursesStore } from "../../stores/Courses";
+import { useAuth } from "../../stores/Auth";
 
-export default function CourseCard({ content }) {
+export default function CourseCard({ content, isFavorite, router }) {
+  const [isSaved, setIsSaved] = useState(content.isFavorite);
+  const { insertFavorite, RemoveFavorite } = useCoursesStore((state) => state);
+  const user = useAuth((state) => state.user);
+  const verifyRefreshAuthenticity = useAuth(
+    (state) => state.verifyRefreshAuthenticity
+  );
+  // const deleteFavorite = async()=>{
+
+  // }
+
+  // const addFavorite = async()=>{
+  //   insertFavorite()
+
+  // }
+
+  const Saved = async () => {
+    verifyRefreshAuthenticity(router);
+    if (isSaved) {
+      RemoveFavorite(content.idFav);
+    } else {
+      insertFavorite(user.id, content.id);
+    }
+    setIsSaved(!isSaved);
+  };
   return (
     <Card className="">
-      <CardHeader color="blue-gray" className="relative h-56">
-        <img src={content.image} alt="card-image" />
+      <CardHeader
+        color="blue-gray"
+        className="relative h-56 "
+        style={{
+          overflow: "hidden", // Ensure the image does not overflow the CardHeader
+        }}
+      >
+        <span className="w-7 fontb absolute top-1 right-2 z-20 cursor-pointer ">
+          <BookmarkIcon
+            onClick={Saved}
+            className={`shadow-md hover:fill-orange-400 ${
+              isSaved ? "text-orange-900 fill-orange-900" : "text-gray-100"
+            }`}
+            style={{
+              transition: "color 0.3s ease", // Transition effect on color change
+            }}
+          />
+        </span>
+        <img
+          style={{
+            width: "100%", // Make the image cover the entire CardHeader
+            height: "100%",
+            transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
+            objectFit: "cover", // Ensure the image covers the space without stretching
+          }}
+          src={content.image}
+          alt="card-image"
+          className="hover:scale-105" // Apply scale transform on hover
+        />
       </CardHeader>
       <CardBody>
         <Typography
@@ -22,12 +78,14 @@ export default function CourseCard({ content }) {
           {content.subCategory}
         </Typography>
         <Typography variant="h5" color="blue-gray" className="mb-2">
-          {content.title}
+          {content.Nomc}
         </Typography>
-        <Typography>{content.description}</Typography>
+        <Typography>{content.Descriptionc}</Typography>
       </CardBody>
       <CardFooter className="pt-0">
-        <Button>Read More</Button>
+        <Button>
+          <Link to={content.link}>Read More</Link>
+        </Button>
       </CardFooter>
     </Card>
   );

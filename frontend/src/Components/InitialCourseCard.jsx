@@ -9,8 +9,19 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+// Helper function to wrap text
+function wrapText(text) {
+  // Define the length at which to break the line
+  const breakLength = 30;
 
-export default function InitialCourseCard({ type }) {
+  // If the text length exceeds the break length, insert a break
+  if (text.length > breakLength) {
+    return text.substring(0, breakLength) + " ...";
+  } else {
+    return text;
+  }
+}
+export default function InitialCourseCard({ type, course }) {
   return (
     <Card className="w-fit  lg:w-64 h-fit ">
       <CardBody className="space-y-2">
@@ -20,11 +31,11 @@ export default function InitialCourseCard({ type }) {
           <RectangleGroupIcon className="h-8 text-gray-900 w-8" />
         )}
 
-        <Typography variant="h5" color="blue-gray" className="text-md mb-1">
-          UI/UX Review Check
+        <Typography variant="h5" color="blue-gray" className="text-sm mb-1">
+          {wrapText(course.Nomc)}{" "}
         </Typography>
-        <Typography className="text-sm">
-          Because it&apos;s about motivating
+        <Typography className="text-xs">
+          {wrapText(course.Descriptionc)}{" "}
         </Typography>
       </CardBody>
       <CardFooter className="pt-0">
@@ -32,6 +43,7 @@ export default function InitialCourseCard({ type }) {
           <Button
             size="sm"
             variant="text"
+            onClick={() => (window.location.href = course.link)}
             className="text-xs flex items-center gap-2"
           >
             Learn More

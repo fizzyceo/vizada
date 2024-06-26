@@ -7,36 +7,29 @@ const config = {
     "Content-type": "application/json",
   },
 };
-export const useAuth = create((set) => ({
+export const useAuth = create((set, get) => ({
   user: tokenHelper.getUser(),
   accessToken: tokenHelper.getToken(),
   refreshToken: tokenHelper.getRefreshToken(),
+
   isLoading: null,
   loadingRegister: null,
   LoadingActivation: null,
   LoadingAuthenticity: null,
+  loadChangePass: null,
+  changeCompleted: false,
   error: null,
   errorMsg: null,
   RegistrationComplete: false,
 
   login: async (data, router) => {
-    console.log(router);
     set({ isLoading: true, errorMsg: null });
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/user/",
+        "http://127.0.0.1:8000/jwt/user/",
         data,
         config
       );
-      // const response = await axiosHelper.post("/v1/auth/jwt/create/", data);
-      // if (!response.data) {
-      //   return;
-      // }
-      console.log(response?.data);
-
-      //verification
-
-      //tous va bien
 
       tokenHelper.setToken(response?.data?.access);
       tokenHelper.setRefreshToken(response?.data?.refresh);
@@ -57,7 +50,6 @@ export const useAuth = create((set) => ({
   register: async (data) => {
     try {
       set({ loadingRegister: true });
-      console.log(data);
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/users/",
         data,
@@ -102,26 +94,6 @@ export const useAuth = create((set) => ({
     tokenHelper.removeRefreshToken();
   },
 
-  resetPassword: async (newPassword, router) => {
-    try {
-      set({ isLoading: true });
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/user/",
-        data,
-        config
-      );
-
-      if (response.result) {
-        set((state) => ({ ...state, user: (state.user.tempPassword = false) }));
-        router.navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      // router.navigate("/login",);
-    } finally {
-      set({ isLoading: false });
-    }
-  },
   ActivateUser: async (uid, token, router) => {
     try {
       set({ LoadingActivation: true });
@@ -134,7 +106,48 @@ export const useAuth = create((set) => ({
       toast.success("Activation Completed!");
       router.navigate("/login");
     } catch (error) {
-      console.log(error?.response?.status);
+      if (error?.response?.status === 400) {
+        toast.error("Corrupted Activation Link!");
+        return;
+      }
+      // router.navigate("/login",);
+    } finally {
+      set({ LoadingActivation: false });
+    }
+  },
+  ForgetPassword: async (uid, token, new_password, re_new_password, router) => {
+    try {
+      set({ LoadingActivation: true });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
+        { uid, token, new_password, re_new_password },
+        config
+      );
+
+      toast.success("Activation Completed!");
+      router.navigate("/login");
+    } catch (error) {
+      if (error?.response?.status === 400) {
+        toast.error("Corrupted Activation Link!");
+        return;
+      }
+      // router.navigate("/login",);
+    } finally {
+      set({ LoadingActivation: false });
+    }
+  },
+  sendEmailResetPass: async (email) => {
+    try {
+      set({ LoadingActivation: true });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/users/reset_password/",
+        { email: email },
+        config
+      );
+
+      toast.success("Email Sent!");
+      router.navigate("/login");
+    } catch (error) {
       if (error?.response?.status === 400) {
         toast.error("Corrupted Activation Link!");
         return;
@@ -156,7 +169,7 @@ export const useAuth = create((set) => ({
       );
     } catch (error) {
       toast.error("Session expired, Please login again");
-      router.navigate("/login");
+      router.navigate("/logout");
     } finally {
       set({ LoadingAuthenticity: false });
     }
@@ -172,18 +185,77 @@ export const useAuth = create((set) => ({
         toast.error("access Token Expired");
       }
     } catch (error) {
-      console.log(error.response.status === 400);
       console.log("Generate a new token");
       const resNewAT = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/jwt/refresh/",
         { refresh: tokenHelper.getRefreshToken() },
         config
       );
-      console.log(resNewAT);
-      tokenHelper.setToken(resNewAT.data.access);
+      tokenHelper.setToken(resNewAT.data?.access);
       toast.info("Regenerating new Access Token");
     } finally {
       set({ LoadingAuthenticity: false });
+    }
+  },
+  changePassword: async (current_password, new_password, re_new_password) => {
+    try {
+      set({ loadChangePass: false });
+
+      get().verifyRefreshAuthenticity();
+      let headers = {
+        ...config.headers,
+        Authorization: "Bearer " + tokenHelper.getToken(),
+      };
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/users/set_password/",
+        {
+          current_password: current_password,
+          new_password,
+          re_new_password,
+        },
+        { headers: headers }
+      );
+      set({ loadChangePass: true, changeCompleted: true });
+      toast.success("Password updated successfully");
+    } catch (e) {
+      if (e.response.data.current_password[0].length > 0) {
+        toast.error("Invalid Password");
+      }
+    }
+  },
+  updateProfile: async (accessToken, data) => {
+    try {
+      get().verifyRefreshAuthenticity();
+      let headers = {
+        ...config.headers,
+        Authorization: "Bearer " + accessToken,
+      };
+
+      const responseUpdateDevice = await axios.put(
+        "http://127.0.0.1:8000/api/updateprofile/",
+        { ...data },
+        { headers: headers }
+      );
+
+      if (responseUpdateDevice.status === 200) {
+        toast.success("Profile updated successfully");
+        console.log({
+          ...tokenHelper.getUser(),
+          ...responseUpdateDevice.data,
+        });
+        tokenHelper.setUser({
+          ...tokenHelper.getUser(),
+          ...responseUpdateDevice.data,
+        });
+      }
+    } catch (e) {
+      if (e.response?.data?.ntel?.length > 0) {
+        toast.error("Update Failed: Phone Number already in use.");
+      }
+      if (e.response?.data?.detail?.length > 0) {
+        toast.error(`Update Failed: ${e.response.data.detail[0]}.`);
+      }
+      console.log(e);
     }
   },
 }));
