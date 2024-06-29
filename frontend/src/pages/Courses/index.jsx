@@ -17,9 +17,8 @@ import withRouter from "../../Components/Common/withRouter";
 const Courses = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const courseType = searchParams.get("type");
-  const { getCourses, courses, getFavorites, favorites } = useCoursesStore(
-    (state) => state
-  );
+  const { getCoursesByCategory, getCourses, courses, getFavorites, favorites } =
+    useCoursesStore((state) => state);
   const [currentSubCategory, setCurrentSubCategory] = useState(null);
   const [courseList, setCourseList] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
@@ -36,7 +35,7 @@ const Courses = (props) => {
 
     setLoading(true);
   }, []);
-
+  //getCoursesByCategory next...
   useEffect(() => {
     if (courses.length > 0 && currentSubCategory) {
       let list = courses.filter((crs) => crs.Id_sc === currentSubCategory);
@@ -133,7 +132,7 @@ const Courses = (props) => {
       <div className="w-[90%] mx-auto mt-10  space-y-5 roboto">
         <div className="flex flex-row items-center justify-between">
           <h1 className="text-gray-600">
-            {filteredCourses.length} Courses in {courseType}
+            {courseList.length} Courses in {courseType}
           </h1>
           <Button
             onClick={(e) => {

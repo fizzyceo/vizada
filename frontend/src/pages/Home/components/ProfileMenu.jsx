@@ -84,6 +84,22 @@ export function ProfileMenu() {
             </Typography>{" "}
           </a>
         </MenuItem>
+        <MenuItem className="flex items-center gap-2">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Your SVG path */}
+          </svg>
+          <a href="/saved">
+            <Typography variant="small" className="font-medium ">
+              Saved Courses
+            </Typography>{" "}
+          </a>
+        </MenuItem>
 
         <hr className="my-2 border-blue-gray-50" />
         <MenuItem className="flex items-center gap-2 ">

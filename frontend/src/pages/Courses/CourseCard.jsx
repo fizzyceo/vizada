@@ -27,7 +27,9 @@ export default function CourseCard({ content, isFavorite, router }) {
   //   insertFavorite()
 
   // }
-
+  useEffect(() => {
+    console.log(content);
+  }, [content]);
   const Saved = async () => {
     verifyRefreshAuthenticity(router);
     if (isSaved) {

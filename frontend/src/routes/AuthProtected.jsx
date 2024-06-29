@@ -37,3 +37,13 @@ export const AuthProtected = (props) => {
 
   return <React.Fragment>{props.children}</React.Fragment>;
 };
+
+export const RoleProtected = ({ children, role }) => {
+  const user = useAuth((state) => state.user);
+
+  if (user.role === role) {
+    return children;
+  }
+
+  return <Navigate to="/dashboard" />; // Redirect to the dashboard if the role does not match
+};

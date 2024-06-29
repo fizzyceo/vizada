@@ -6,4 +6,5 @@ import Logout from "./Auth/Logout";
 import SignUp from "./Auth/signup";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
-export { Home, Analytics, Login, Dashboard, Courses, SignUp };
+import Saved from "./saved";
+export { Home, Analytics, Login, Dashboard, Courses, SignUp, Saved };

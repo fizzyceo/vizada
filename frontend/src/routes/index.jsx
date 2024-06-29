@@ -2,8 +2,8 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 //routes
-import { authProtectedRoutes, publicRoutes } from "./allRoutes";
-import { AuthProtected } from "./AuthProtected";
+import { authProtectedRoutes, publicRoutes, adminRoutes } from "./allRoutes";
+import { AuthProtected, RoleProtected } from "./AuthProtected";
 //do the same as authProtectedRoutes but with the admin routes & the other roles routes
 
 const Index = () => {
@@ -26,6 +26,22 @@ const Index = () => {
             <Route
               path={route.path}
               element={<AuthProtected>{route.component}</AuthProtected>}
+              key={idx}
+              exact={true}
+            />
+          ))}
+        </Route>
+        {/* Admin Routes */}
+
+        <Route>
+          {adminRoutes.map((route, idx) => (
+            <Route
+              path={route.path}
+              element={
+                <AuthProtected>
+                  <RoleProtected role={false}>{route.component}</RoleProtected>
+                </AuthProtected>
+              }
               key={idx}
               exact={true}
             />

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import InitialCourseCard from "../../../Components/InitialCourseCard";
 import { ArrowRightIcon } from "@heroicons/react/16/solid";
 import { useCoursesStore } from "../../../stores/Courses";
+import CarouselCourses from "./CarouselCourses";
 
 const CategorySection = ({ cat }) => {
   const { getCoursesByCategory, categoryCourses } = useCoursesStore(
@@ -19,7 +20,7 @@ const CategorySection = ({ cat }) => {
         const coursesCopy = relevant.slice(); // Create a copy of courses array
         const randomCourses = [];
 
-        while (randomCourses.length < 3 && coursesCopy.length > 0) {
+        while (randomCourses.length < 9 && coursesCopy.length > 0) {
           const randomIndex = Math.floor(Math.random() * coursesCopy.length);
           randomCourses.push(coursesCopy[randomIndex]);
           coursesCopy.splice(randomIndex, 1); // Remove selected course to avoid duplicates
@@ -91,14 +92,19 @@ const CategorySection = ({ cat }) => {
             */}
           </div>
         </div>
-        <div className="bg-blue-gray-50 p-2 lg:p-5 w-fit max-w-full flex flex-col gap-5 rounded-lg overflow-hidden items-center justify-center flex-wrap">
+        <div className="bg-blue-gray-800 p-2 lg:p-5 w-fit max-w-full flex flex-col gap-5 rounded-lg overflow-hidden items-center justify-center flex-wrap">
           {/* <h1 className="tex  t-lg">Trending Courses:</h1> */}
-          <div className="flex flex-row gap-5 w-fit flex-wrap mx-auto items-center justify-center ">
+
+          <CarouselCourses
+            type={cat.Nomcategorie}
+            randomCourseList={randomCourseList}
+          />
+          {/* <div className="flex flex-row gap-5 w-fit flex-wrap mx-auto items-center justify-center ">
             {randomCourseList.length > 0 &&
               randomCourseList.map((crs) => (
                 <InitialCourseCard type={cat.Nomcategorie} course={crs} />
               ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

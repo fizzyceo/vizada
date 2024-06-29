@@ -36,7 +36,7 @@ export const useAuth = create((set, get) => ({
       tokenHelper.setUser(response.data?.user);
       set({ user: response.data?.user, accessToken: response.data?.access });
       set({ isLoading: false });
-      navigateAfterLogin(false, router);
+      navigateAfterLogin(response?.data?.user?.role, router);
     } catch (error) {
       if (error.response.data.non_field_errors) {
         set({ isLoading: false });
@@ -87,11 +87,30 @@ export const useAuth = create((set, get) => ({
       set({ loadingRegister: false });
     }
   },
-  logout: () => {
-    tokenHelper.removeToken();
-    tokenHelper.removeUser();
+  logout: async () => {
+    let refresh = tokenHelper.getRefreshToken();
+    let token = tokenHelper.getToken();
+    let headers = {
+      ...config.headers,
+      Authorization: "Bearer " + token,
+    };
+
+    if (refresh && token) {
+      tokenHelper.removeToken();
+      tokenHelper.removeUser();
+      tokenHelper.removeRefreshToken();
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/auth/logout/",
+        { refresh: refresh },
+        { headers: headers }
+      );
+      console.log(response);
+
+      toast.success("Logging Out!");
+    }
+
     set({ user: null, accessToken: null, refreshToken: null });
-    tokenHelper.removeRefreshToken();
   },
 
   ActivateUser: async (uid, token, router) => {
@@ -110,7 +129,6 @@ export const useAuth = create((set, get) => ({
         toast.error("Corrupted Activation Link!");
         return;
       }
-      // router.navigate("/login",);
     } finally {
       set({ LoadingActivation: false });
     }
@@ -124,7 +142,7 @@ export const useAuth = create((set, get) => ({
         config
       );
 
-      toast.success("Activation Completed!");
+      toast.success("Password Changed!");
       router.navigate("/login");
     } catch (error) {
       if (error?.response?.status === 400) {
@@ -155,6 +173,22 @@ export const useAuth = create((set, get) => ({
       // router.navigate("/login",);
     } finally {
       set({ LoadingActivation: false });
+    }
+  },
+  verifyingRefresh: async (router) => {
+    try {
+      set({ LoadingAuthenticity: true });
+      console.log("Checking refresh authentication");
+      const responseRefreshToken = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
+        { token: tokenHelper.getRefreshToken() },
+        config
+      );
+    } catch (error) {
+      toast.error("Session expired, Please login again");
+      router.navigate("/logout");
+    } finally {
+      set({ LoadingAuthenticity: false });
     }
   },
   verifyRefreshAuthenticity: async (router) => {
@@ -260,8 +294,9 @@ export const useAuth = create((set, get) => ({
   },
 }));
 
-const navigateAfterLogin = (tempPassword, router) => {
-  router.navigate("/dashboard");
+const navigateAfterLogin = (role, router) => {
+  if (role === false) router.navigate("/analytics");
+  else router.navigate("/dashboard");
 };
 
 const navigateAfterResetPassword = (x, router) => {};

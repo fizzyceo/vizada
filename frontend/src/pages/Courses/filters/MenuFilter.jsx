@@ -66,10 +66,15 @@ export default function MenuFilter({
       let chosenCat = categories.filter(
         (cat) => cat.Nomcategorie.toLowerCase() === courseType.toLowerCase()
       );
+
+      console.log(chosenCat);
+
       let relevant = subcategories.filter(
         (cat) => cat.Id_c === chosenCat[0].id
       );
-      setRelevantSubCat(subcategories);
+      console.log(relevant);
+
+      setRelevantSubCat(relevant);
       if (relevant.length > 0) {
         setCurrentSubCategory(relevant[0].id);
       }

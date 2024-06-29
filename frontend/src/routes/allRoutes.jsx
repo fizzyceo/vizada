@@ -1,4 +1,12 @@
-import { Home, Analytics, Login, Dashboard, Courses, SignUp } from "../pages";
+import {
+  Home,
+  Analytics,
+  Login,
+  Dashboard,
+  Courses,
+  SignUp,
+  Saved,
+} from "../pages";
 import Activation from "../pages/Activate";
 import Logout from "../pages/Auth/Logout";
 import ChangePass from "../pages/ChangePass";
@@ -6,8 +14,6 @@ import ForgetPass from "../pages/ForgetPass";
 import Profile from "../pages/Profile";
 
 const authProtectedRoutes = [
-  { path: "/analytics", component: <Analytics /> },
-
   { path: "/dashboard", component: <Dashboard /> },
   {
     path: "/profile",
@@ -15,6 +21,7 @@ const authProtectedRoutes = [
   },
 ];
 
+const adminRoutes = [{ path: "/analytics", component: <Analytics /> }];
 const publicRoutes = [
   { path: "/activate/:param1/:param2", component: <Activation /> },
   {
@@ -25,7 +32,10 @@ const publicRoutes = [
     path: "/password/reset/confirm/:param1/:param2",
     component: <ChangePass />,
   },
-
+  {
+    path: "/saved",
+    component: <Saved />,
+  },
   {
     path: "/forget",
     component: <ForgetPass />,
@@ -38,4 +48,4 @@ const publicRoutes = [
   { path: "/signup", component: <SignUp /> },
 ];
 
-export { authProtectedRoutes, publicRoutes };
+export { authProtectedRoutes, publicRoutes, adminRoutes };

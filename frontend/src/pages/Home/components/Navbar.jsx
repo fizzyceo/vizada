@@ -24,6 +24,7 @@ import {
 import vizadaLogo from "../../../assets/navlogonbg.png";
 import { ProfileMenu } from "./ProfileMenu";
 import { useAuth } from "../../../stores/Auth";
+import { useNavigate } from "react-router-dom";
 
 const navListMenuItems = [
   {
@@ -191,14 +192,23 @@ function NavList() {
 export default function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const { user } = useAuth((state) => state);
+  const { refreshToken, accessToken, user, verifyRefreshAuthenticity } =
+    useAuth((state) => state);
+  let navigate = useNavigate();
+
   useEffect(() => {
-    if (Object.keys(user || {}).length > 0) {
+    // if (accessToken) {
+    //   let router = {
+    //     navigate,
+    //   };
+    //   verifyRefreshAuthenticity(router);
+    // }
+    if (refreshToken) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-  }, [user]);
+  }, [refreshToken]);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -219,7 +229,7 @@ export default function NavbarWithMegaMenu() {
           <div className="hidden lg:block">
             <NavList />
           </div>
-          {loggedIn ? (
+          {refreshToken ? (
             <ProfileMenu />
           ) : (
             <Button variant="gradient" className="" size="md">
