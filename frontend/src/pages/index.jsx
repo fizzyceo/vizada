@@ -7,4 +7,14 @@ import SignUp from "./Auth/signup";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
 import Saved from "./saved";
-export { Home, Analytics, Login, Dashboard, Courses, SignUp, Saved };
+import Analytics2 from "./Analytics2";
+export {
+  Home,
+  Analytics,
+  Login,
+  Dashboard,
+  Courses,
+  SignUp,
+  Saved,
+  Analytics2,
+};

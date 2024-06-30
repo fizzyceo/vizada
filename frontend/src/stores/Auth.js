@@ -295,7 +295,7 @@ export const useAuth = create((set, get) => ({
 }));
 
 const navigateAfterLogin = (role, router) => {
-  if (role === false) router.navigate("/analytics");
+  if (role === false) router.navigate("/analytics1");
   else router.navigate("/dashboard");
 };
 

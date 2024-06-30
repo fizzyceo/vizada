@@ -6,6 +6,7 @@ import {
   Courses,
   SignUp,
   Saved,
+  Analytics2,
 } from "../pages";
 import Activation from "../pages/Activate";
 import Logout from "../pages/Auth/Logout";
@@ -21,7 +22,10 @@ const authProtectedRoutes = [
   },
 ];
 
-const adminRoutes = [{ path: "/analytics", component: <Analytics /> }];
+const adminRoutes = [
+  { path: "/analytics1", component: <Analytics /> },
+  { path: "/analytics2", component: <Analytics2 /> },
+];
 const publicRoutes = [
   { path: "/activate/:param1/:param2", component: <Activation /> },
   {
