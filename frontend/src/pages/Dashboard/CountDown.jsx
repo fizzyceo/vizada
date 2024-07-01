@@ -56,7 +56,7 @@ const Timer = ({ daysLeft, totalDays }) => {
           onComplete={() => {}}
         >
           {({ remainingTime }) => (
-            <div className="base-timer__label text-xl text-gray-800">
+            <div className="base-timer__label text-base text-gray-800">
               {`${formatTime(remainingTime)} left`}
             </div>
           )}

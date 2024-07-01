@@ -40,7 +40,7 @@ export const AuthProtected = (props) => {
 
 export const RoleProtected = ({ children, role }) => {
   const user = useAuth((state) => state.user);
-
+  console.log(role, user.role);
   if (user.role === role) {
     return children;
   }

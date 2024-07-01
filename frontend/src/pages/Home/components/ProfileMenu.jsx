@@ -11,7 +11,7 @@ import { useAuth } from "../../../stores/Auth";
 export function ProfileMenu() {
   const { user } = useAuth((state) => state);
 
-  const { first_name } = user;
+  const { first_name, role } = user;
   const [randomColor, setRandomColor] = useState("#EF4444");
 
   // Function to generate random background color
@@ -52,66 +52,43 @@ export function ProfileMenu() {
         </div>
       </MenuHandler>
       <MenuList className="roboto">
-        <MenuItem className="flex items-center gap-2">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Your SVG path */}
-          </svg>
+        <MenuItem className="flex items-center justify-center">
           <a href="/profile">
             <Typography variant="small" className="font-medium">
               My Profile
             </Typography>
           </a>
         </MenuItem>
-        <MenuItem className="flex items-center gap-2">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Your SVG path */}
-          </svg>
-          <a href="/dashboard">
-            <Typography variant="small" className="font-medium ">
-              Dashboard
-            </Typography>{" "}
-          </a>
-        </MenuItem>
-        <MenuItem className="flex items-center gap-2">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Your SVG path */}
-          </svg>
-          <a href="/saved">
-            <Typography variant="small" className="font-medium ">
-              Saved Courses
-            </Typography>{" "}
-          </a>
-        </MenuItem>
 
+        {role === false && (
+          <>
+            <MenuItem className="flex items-center gap-2">
+              <a href="/dashboard">
+                <Typography variant="small" className="font-medium ">
+                  Dashboard
+                </Typography>{" "}
+              </a>
+            </MenuItem>
+            <MenuItem className="flex items-center gap-2">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Your SVG path */}
+              </svg>
+              <a href="/saved">
+                <Typography variant="small" className="font-medium ">
+                  Saved Courses
+                </Typography>{" "}
+              </a>
+            </MenuItem>
+          </>
+        )}
         <hr className="my-2 border-blue-gray-50" />
-        <MenuItem className="flex items-center gap-2 ">
-          <svg
-            width="16"
-            height="14"
-            viewBox="0 0 16 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Your SVG path */}
-          </svg>
+        <MenuItem className="flex items-center justify-center gap-2 ">
           <a href="/logout">
             <Typography variant="small" className="font-medium text-red-900">
               Sign Out

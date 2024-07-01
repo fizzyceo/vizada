@@ -12,18 +12,18 @@ import Timer from "./CountDown";
 
 const Subscription = ({ state, type }) => {
   return (
-    <div className=" w-full flex flex-col items-center justify-start text-gray-100 my-3 pb-7">
+    <div className=" w-full flex flex-col roboto   items-center justify-start text-gray-100 my-3 pb-7">
       <CreditCardIcon className="w-24 lg:w-24 text-gray-100 z-20" />
-      <div className="teko-400 flex flex-row gap-2 w-full z-20 items-center justify-center">
+      {/* <div className="roboto flex flex-row gap-2 w-full z-20 items-center justify-center">
         {" "}
         <InformationCircleIcon className="text-gray-100 w-7 lg:w-14" />
         <h1 className="text-lg lg:text-3xl">
           You are{" "}
-          <span className={`text-gray-800`}>
+          <span className={`text-red-800`}>
             {!state ? "Subscribed" : "Not Subscribed"}
           </span>
         </h1>
-      </div>
+      </div> */}
       {!state ? (
         <div className="flex flex-col items-center justify-center gap-2">
           <div className="flex flex-row items-center justify-center gap-2">
@@ -34,7 +34,9 @@ const Subscription = ({ state, type }) => {
             )}
             {/* <StarIcon className="text-gray-50 w-6" /> */}
 
-            <h1 className="text-xl">{type}</h1>
+            <h1 className="text-xl">
+              You Are Subscribed to <span className="font-bold">{type}</span>
+            </h1>
           </div>
           <Timer totalDays={30} daysLeft={14} />
           {/* <div className="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center ">
