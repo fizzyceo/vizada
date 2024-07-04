@@ -22,14 +22,17 @@ import {
 import vizadaLogo from "../../assets/vizada-logo.png";
 import Subscription from "./Subscription";
 import Credentials from "./Credentials";
+import NavbarWithMegaMenu from "../Home/components/Navbar";
+import NavbarAdmin from "../Home/components/NavbarAdmin";
 
 const Dashboard = (props) => {
   const [tabSelected, setTabSelected] = useState(1);
 
   const user = useAuth((state) => state.user);
+  const { role } = user;
   return (
     <div className="min-h-screen bg-gray-50 ">
-      <Navbar />
+      {role === false ? <NavbarWithMegaMenu /> : <NavbarAdmin />}
       <div className="my-10 flex flex-row items-center justify-between w-[90%] mx-auto">
         <h1>Marhaba {user?.name || "ilyes"}!</h1>
         <p className="text-gray-600 text-sm">Need Help ?</p>

@@ -52,6 +52,111 @@ export const useCoursesStore = create((set, get) => ({
       set({ fetchingError: "error getting categories" });
     }
   },
+  getOneCourses: async (id) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/course/${id}/`,
+        config
+      );
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  getOneSousCategory: async (id) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        config
+      );
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  ModifySousCategory: async (id, data) => {
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        data,
+        config
+      );
+      toast.success("A categorie has been modified successfully!");
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  ModifyCourse: async (id, data) => {
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/course/${id}/`,
+        data,
+        config
+      );
+      toast.success("A course has been modified successfully!");
+      get().getCoursesDetails();
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  AddCourse: async (data) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:8000/api/course/`,
+        data,
+        config
+      );
+      toast.success("A course has been added successfully!");
+      get().getCoursesDetails();
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  deleteCourse: async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:8000/api/course/${id}/`,
+        config
+      );
+      toast.success("A course has been removed successfully!");
+      get().getCoursesDetails();
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  deleteSousCategory: async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        config
+      );
+
+      toast.success("A categorie has been removed successfully!");
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  getCoursesDetails: async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/coursedetail/`,
+        config
+      );
+      set({ courses: response.data });
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
   getCoursesByCategory: async (idcategory) => {
     try {
       const response = await axios.get(

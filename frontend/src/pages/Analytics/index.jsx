@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavbarWithMegaMenu from "../Home/components/Navbar";
 import "./styling.css";
 import NavbarAdmin from "../Home/components/NavbarAdmin";
@@ -7,20 +7,38 @@ import { NewUsers } from "./NewUsers";
 import { Card, CardBody } from "@material-tailwind/react";
 import CountUp from "react-countup";
 import { UserGroupIcon, UserIcon } from "@heroicons/react/24/solid";
+import { useSubStore } from "../../stores/Subs";
 
 const Analytics = () => {
+  const { getUsers, users, getSubs, subs } = useSubStore((state) => state);
+  const [usersRows, setUsersRows] = useState([]);
+  const [subsRows, setSubsRows] = useState([]);
+  useEffect(() => {
+    getUsers();
+    getSubs();
+  }, []);
+  useEffect(() => {
+    if (users.length > 0) {
+      setUsersRows(users);
+    }
+  }, [users]);
+  useEffect(() => {
+    if (subs.length > 0) {
+      setSubsRows(subs);
+    }
+  }, [subs]);
   return (
-    <div className="min-h-screen w-full bg-gray-100 ">
+    <div className="min-h-screen w-full bg-gray-100 p-3">
       <NavbarAdmin />
       <div className="w-full">
-        <div className="cards w-full p-5 bg-green-500"></div>
+        <div className="cards w-full p-5 "></div>
         <div className="tables w-[95%] mx-auto">
-          <div className="subscribers w-full flex flex-row items-center justify-center gap-5 flex-wrap">
+          <div className="subscribers w-full flex flex-row  gap-5 flex-wrap">
             <div className="flex-grow">
-              <SubscribersTable />
+              <SubscribersTable subsRows={subsRows} />
             </div>
-            <div className="flex-grow">
-              <div className="flex flex-row items-center flex-wrap gap-4 my-5">
+            <div className="flex-grow  py-0 flex flex-col gap-4">
+              <div className="flex flex-row items-center flex-wrap gap-4 ">
                 <Card className="flex-grow">
                   <CardBody className="text-center">
                     <div className="mb-1">
@@ -30,7 +48,7 @@ const Analytics = () => {
                       >
                         <CountUp
                           start={0}
-                          end={501}
+                          end={users.length}
                           decimals={0}
                           suffix=""
                           duration={4}
@@ -53,7 +71,7 @@ const Analytics = () => {
                       >
                         <CountUp
                           start={0}
-                          end={210}
+                          end={subs.length}
                           decimals={0}
                           suffix=""
                           duration={4}
@@ -70,12 +88,12 @@ const Analytics = () => {
                   </CardBody>
                 </Card>
               </div>
-              <Card className="flex-grow">
-                <CardBody>
-                  <h1 className="roboto text-sm mb-3">
+              <Card className="  w-full flex-grow ">
+                <CardBody className="w-full h-full">
+                  <h1 className="roboto text-xs mb-3">
                     A list of the 5 latest Joined Users
                   </h1>
-                  <NewUsers />
+                  <NewUsers usersRows={usersRows} />
                 </CardBody>
               </Card>
             </div>

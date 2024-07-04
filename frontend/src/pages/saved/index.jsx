@@ -10,13 +10,16 @@ import { useCoursesStore } from "../../stores/Courses";
 import withRouter from "../../Components/Common/withRouter";
 import CourseCard from "../Courses/CourseCard";
 import { Button, IconButton } from "@material-tailwind/react";
+import NavbarAdmin from "../Home/components/NavbarAdmin";
+import { useAuth } from "../../stores";
 
 const saved = (props) => {
   const { getCoursesByCategory, getCourses, courses, getFavorites, favorites } =
     useCoursesStore((state) => state);
   const [coursesList, SetCoursesList] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
-
+  const user = useAuth((state) => state.user);
+  const { role } = user;
   useEffect(() => {
     getFavorites();
     getCourses();
@@ -91,8 +94,7 @@ const saved = (props) => {
   return (
     <div className="flex items-center bg-gradient-to-b from-blue-700 to-white justify-center w-full min-h-screen roboto">
       <div className="w-full min-h-screen  overflow-x-hidden ">
-        <NavbarWithMegaMenu />
-
+        {role === false ? <NavbarWithMegaMenu /> : <NavbarAdmin />}
         <div className="w-full h-full flex  my-24 items-center flex-col ">
           <div className=" flex items-center justify-center w-fit h-fit mx-auto mb-10">
             <BookmarkIcon className="w-16 text-white" />

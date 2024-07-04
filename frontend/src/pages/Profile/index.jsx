@@ -20,6 +20,7 @@ import {
   DialogHeader,
 } from "@material-tailwind/react";
 import { FooterWithLogo } from "../Home/components/Footer";
+import NavbarAdmin from "../Home/components/NavbarAdmin";
 
 const Profile = () => {
   const {
@@ -39,6 +40,7 @@ const Profile = () => {
     date_naissance,
     last_update_profile,
     date_joined,
+    role,
   } = user;
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -140,7 +142,7 @@ const Profile = () => {
         </div>
       ) : (
         <div className="w-full h-screen  overflow-x-hidden ">
-          <NavbarWithMegaMenu />
+          {role === false ? <NavbarWithMegaMenu /> : <NavbarAdmin />}
 
           <div className="w-full h-full flex mb-36 mt-32 ">
             <div className="flex-1 flex  justify-center  ">

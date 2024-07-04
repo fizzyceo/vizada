@@ -189,26 +189,9 @@ function NavList() {
   );
 }
 
-export default function NavbarWithMegaMenu() {
+export default function NavbarWithMegaMenu({ isLogged }) {
   const [openNav, setOpenNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const { refreshToken, accessToken, user, verifyRefreshAuthenticity } =
-    useAuth((state) => state);
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    // if (accessToken) {
-    //   let router = {
-    //     navigate,
-    //   };
-    //   verifyRefreshAuthenticity(router);
-    // }
-    if (refreshToken) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  }, [refreshToken]);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -229,7 +212,7 @@ export default function NavbarWithMegaMenu() {
           <div className="hidden lg:block">
             <NavList />
           </div>
-          {refreshToken ? (
+          {isLogged ? (
             <ProfileMenu />
           ) : (
             <Button variant="gradient" className="" size="md">

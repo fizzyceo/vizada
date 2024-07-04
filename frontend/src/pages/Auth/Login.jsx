@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavbarWithMegaMenu from "../Home/components/Navbar";
 import { FooterWithLogo } from "../Home/components/Footer";
 import { useAuth } from "../../stores/Auth";
 import withRouter from "../../Components/Common/withRouter";
 import { Button } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const { login, isLoading } = useAuth((state) => state);
+  const { login, isLoading, accessToken, user } = useAuth((state) => state);
   const { email, password } = formData;
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -18,6 +19,7 @@ const Login = (props) => {
       [e.target.name]: e.target.value,
     }));
   };
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +30,19 @@ const Login = (props) => {
     };
     login(userData, props.router);
   };
+  useEffect(() => {
+    if (accessToken) {
+      if (user?.role) {
+        navigate("/analytics1");
+      } else {
+        navigate("/dashboard");
+      }
+    }
+  }, [accessToken]);
+
   return (
     <div className="h-screen w-full bg-gray-50 ">
-      <NavbarWithMegaMenu />
+      <NavbarWithMegaMenu isLogged={false} />
       <div className="w-full my-16 items-center justify-center flex">
         <div className="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
           <div className="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-gradient-to-tr from-gray-900 to-gray-800 bg-clip-border shadow-gray-900/20">

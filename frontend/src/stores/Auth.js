@@ -195,7 +195,6 @@ export const useAuth = create((set, get) => ({
     //token
     try {
       set({ LoadingAuthenticity: true });
-      console.log("Checking refresh authentication");
       const responseRefreshToken = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
         { token: tokenHelper.getRefreshToken() },
@@ -208,25 +207,23 @@ export const useAuth = create((set, get) => ({
       set({ LoadingAuthenticity: false });
     }
     try {
-      console.log("Checking Access authentication");
       const responseAccessToken = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
         { token: tokenHelper.getToken() },
         config
       );
-
       if (responseAccessToken.status !== 200) {
         toast.error("access Token Expired");
       }
     } catch (error) {
-      console.log("Generate a new token");
       const resNewAT = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/jwt/refresh/",
         { refresh: tokenHelper.getRefreshToken() },
         config
       );
+
       tokenHelper.setToken(resNewAT.data?.access);
-      toast.info("Regenerating new Access Token");
+      tokenHelper.setRefreshToken(resNewAT.data?.refresh);
     } finally {
       set({ LoadingAuthenticity: false });
     }

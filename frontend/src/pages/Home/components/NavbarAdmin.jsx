@@ -40,14 +40,7 @@ function NavList() {
       <ListItem className="flex items-center w-fit justify-center ">
         <a href="/analytics2">
           <Typography variant="small" className="font-medium ">
-            Courses
-          </Typography>{" "}
-        </a>
-      </ListItem>
-      <ListItem className="flex items-center w-fit justify-center ">
-        <a href="/analytics3">
-          <Typography variant="small" className="font-medium ">
-            Categories
+            Courses & Categories
           </Typography>{" "}
         </a>
       </ListItem>
