@@ -82,13 +82,8 @@ export default function NavbarAdmin() {
           <div className="hidden lg:block">
             <NavList />
           </div>
-          {refreshToken ? (
-            <ProfileMenu />
-          ) : (
-            <Button variant="gradient" className="" size="md">
-              <a href="/login">Sign In</a>
-            </Button>
-          )}
+
+          <ProfileMenu />
 
           <IconButton
             variant="text"

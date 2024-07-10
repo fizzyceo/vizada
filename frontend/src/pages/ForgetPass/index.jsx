@@ -30,7 +30,7 @@ const ForgetPass = () => {
 
   return (
     <div className="bg-gradient-to-b from-blue-700 to-white">
-      <NavbarWithMegaMenu />
+      <NavbarWithMegaMenu isLogged={false} />
       <div className="flex h-[500px] w-full items-center justify-center">
         <Card className="w-[400px]">
           <CardBody className="flex flex-col gap-5 justify-center items-center">

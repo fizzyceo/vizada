@@ -51,7 +51,7 @@ export const useAuth = create((set, get) => ({
     try {
       set({ loadingRegister: true });
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/users/",
+        "http://127.0.0.1:8000/api/auth/users/",
         data,
         config
       );
@@ -105,9 +105,6 @@ export const useAuth = create((set, get) => ({
         { refresh: refresh },
         { headers: headers }
       );
-      console.log(response);
-
-      toast.success("Logging Out!");
     }
 
     set({ user: null, accessToken: null, refreshToken: null });
@@ -185,7 +182,6 @@ export const useAuth = create((set, get) => ({
         config
       );
     } catch (error) {
-      toast.error("Session expired, Please login again");
       router.navigate("/logout");
     } finally {
       set({ LoadingAuthenticity: false });
@@ -201,7 +197,6 @@ export const useAuth = create((set, get) => ({
         config
       );
     } catch (error) {
-      toast.error("Session expired, Please login again");
       router.navigate("/logout");
     } finally {
       set({ LoadingAuthenticity: false });
@@ -213,7 +208,6 @@ export const useAuth = create((set, get) => ({
         config
       );
       if (responseAccessToken.status !== 200) {
-        toast.error("access Token Expired");
       }
     } catch (error) {
       const resNewAT = await axios.post(

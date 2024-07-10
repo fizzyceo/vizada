@@ -6,6 +6,9 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { useAuth } from "../../../stores/Auth";
+import { useNavigate } from "react-router-dom";
+import { useInvoiceStore } from "../../../stores/Payment";
 
 function CheckIcon() {
   return (
@@ -26,7 +29,35 @@ function CheckIcon() {
   );
 }
 
-export default function PricingCard({ price, isYearly }) {
+export default function ManagementPricingCard({ price, isYearly }) {
+  const user = useAuth((state) => state.user);
+  const navigate = useNavigate();
+  const { CreateInvoice } = useInvoiceStore((state) => state);
+  const InitiatePayment = async () => {
+    if (user && Object.keys(user).length > 0) {
+      let body = {
+        amount: parseFloat(price.replace(/\s/g, "")),
+        url: `${import.meta.env.VITE_PUBLIC_URL}/dashboard`,
+        items: [
+          {
+            name: `management ${isYearly ? "yearly" : "monthly"}`,
+            price: parseFloat(price.replace(/\s/g, "")),
+            quantity: 1,
+          },
+        ],
+        firstname: user.last_name,
+        lastname: user.first_name,
+
+        email: user.email,
+        phone: user.ntel,
+        address: "xxxxxx",
+      };
+      console.log(body);
+      await CreateInvoice(body, navigate);
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <Card color="gray" variant="gradient" className="w-fit max-w-[20rem] p-8">
       <CardHeader
@@ -91,6 +122,7 @@ export default function PricingCard({ price, isYearly }) {
           className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
           ripple={false}
           fullWidth={true}
+          onClick={InitiatePayment}
         >
           Buy Now
         </Button>

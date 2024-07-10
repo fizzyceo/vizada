@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuItem,
   Checkbox,
+  Tooltip,
 } from "@material-tailwind/react";
 import { useCoursesStore } from "../../../stores/Courses";
 
@@ -97,8 +98,16 @@ export default function MenuFilter({
     if (currentSlide === 1) leftElement.style.display = "none";
     else leftElement.style.display = "flex";
   };
+  function wrapText(text, length) {
+    if (text.length > length) {
+      return text.substring(0, length) + " ...";
+    } else {
+      return text;
+    }
+  }
+
   return (
-    <div className="min-w-[95%] lg:min-w-fit relative overflow-hidden min-h-14 p-5 transition-all bg-gray-200 rounded-full">
+    <div className="min-w-[95%] lg:min-w-fit relative overflow-hidden min-h-14 p-5 transition-all bg-gray-100 shadow-lg rounded-full">
       <span
         ref={leftArrowRef}
         onClick={() => Move("right")}
@@ -127,13 +136,27 @@ export default function MenuFilter({
             <div
               key={category.id}
               onClick={() => setCurrentSubCategory(category.id)}
-              className={`px-5 cursor-pointer py-3 min-w-[150px] text-center transition-all bg-gray-200 border-orange-800 border rounded-full text-sm ${
+              className={`px-5 cursor-pointer py-3 min-w-[150px] w-fit  text-center transition-all bg-gray-200 border-red-900 border rounded-full text-sm ${
                 currentSubCategory === category.id
-                  ? "text-gray-50 bg-orange-800 "
+                  ? "text-gray-50 bg-red-900 "
                   : ""
               }`}
+              style={{
+                whiteSpace: "nowrap", // Prevent text wrapping
+                overflow: "hidden", // Hide overflowed text
+                textOverflow: "ellipsis", // Display ellipsis (...) when text overflows
+                maxWidth: "200px", // Limit the width of the container
+              }}
             >
-              <h1>{category.Nomsouscategorie}</h1>
+              <Tooltip
+                animate={{
+                  mount: { scale: 1, y: 0 },
+                  unmount: { scale: 0, y: 25 },
+                }}
+                content={category.Nomsouscategorie}
+              >
+                <h1>{wrapText(category.Nomsouscategorie, 20)}</h1>
+              </Tooltip>
             </div>
           ))}
       </div>

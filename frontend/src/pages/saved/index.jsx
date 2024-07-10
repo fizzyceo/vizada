@@ -94,7 +94,11 @@ const saved = (props) => {
   return (
     <div className="flex items-center bg-gradient-to-b from-blue-700 to-white justify-center w-full min-h-screen roboto">
       <div className="w-full min-h-screen  overflow-x-hidden ">
-        {role === false ? <NavbarWithMegaMenu /> : <NavbarAdmin />}
+        {role === false ? (
+          <NavbarWithMegaMenu isLogged={user ? true : false} />
+        ) : (
+          <NavbarAdmin />
+        )}
         <div className="w-full h-full flex  my-24 items-center flex-col ">
           <div className=" flex items-center justify-center w-fit h-fit mx-auto mb-10">
             <BookmarkIcon className="w-16 text-white" />

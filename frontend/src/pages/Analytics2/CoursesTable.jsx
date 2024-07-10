@@ -132,9 +132,9 @@ export function CoursesTable({ courses }) {
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              {TABLE_HEAD.map((head) => (
+              {TABLE_HEAD.map((head, index) => (
                 <th
-                  key={head}
+                  key={index}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
                 >
                   <Typography

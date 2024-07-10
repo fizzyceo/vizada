@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Switch } from "@material-tailwind/react";
 import PricingCard from "./ManagementPricingCard";
 import ItPricingCard from "./ItPricingCard";
+import ManagementPricingCard from "./ManagementPricingCard";
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(true);
   const [price, setPrice] = useState("5000");
@@ -42,7 +43,7 @@ const Pricing = () => {
         <h2>Yearly</h2>
       </div>
       <div className="options flex flex-row gap-5 items-center justify-center flex-wrap">
-        <PricingCard isYearly={isYearly} price={price} />
+        <ManagementPricingCard isYearly={isYearly} price={price} />
         <ItPricingCard price={price} isYearly={isYearly} />
       </div>
     </div>

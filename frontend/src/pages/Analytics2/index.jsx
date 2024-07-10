@@ -10,14 +10,14 @@ import toutApprendre from "../../assets/toutapprendre.svg";
 import alphrom from "../../assets/alphorm.svg";
 import { useCoursesStore } from "../../stores/Courses";
 const Analytics2 = () => {
-  const { subcategories, getCoursesDetails, courses, getSubCategories } =
+  const { subcategories, getCoursesDetails, courses, getSubCategoriesDetails } =
     useCoursesStore((state) => state);
   const [coursesRows, setCoursesRows] = useState([]);
   const [categoriesRows, setCategoriesRows] = useState([]);
   useEffect(() => {
     getCoursesDetails();
 
-    getSubCategories();
+    getSubCategoriesDetails();
   }, []);
   useEffect(() => {
     setCoursesRows(courses);
@@ -32,20 +32,7 @@ const Analytics2 = () => {
       <NavbarAdmin />
       <div className="w-full">
         <div className="cards w-full p-5 "></div>
-        <section className=" w-[100%]   my-5  flex items-center justify-center flex-col gap-5 partners ">
-          <div className="flex flex-row items-center justify-center gap-10 lg:gap-20  w-full opacity-50 ">
-            <img
-              src={toutApprendre}
-              className="w-40 lg:w-44 h-24 invert cursor-pointer hover:bg-red-900 py-1 px-4 rounded-full  text-gray-900"
-              alt=""
-            />
-            <img
-              src={alphrom}
-              className="w-40 lg:w-44 h-24 invert cursor-pointer hover:bg-red-900 p-3 rounded-full  text-gray-900"
-              alt=""
-            />
-          </div>
-        </section>
+        <section className=" w-[100%]   my-5  flex items-center justify-center flex-col gap-5 partners "></section>
         <div className="tables w-[95%] mx-auto">
           <div className="subscribers w-full flex flex-row  gap-5 flex-wrap">
             <div className="flex-grow">
@@ -57,7 +44,7 @@ const Analytics2 = () => {
                   <h1 className="roboto text-xs mb-3">
                     A list of the 5 latest Joined Users
                   </h1>
-                  {/* <CategoriesTable categories={subcategories} /> */}
+                  <CategoriesTable Souscategorie={subcategories} />
                 </CardBody>
               </Card>
             </div>

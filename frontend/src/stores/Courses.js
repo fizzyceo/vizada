@@ -40,6 +40,18 @@ export const useCoursesStore = create((set, get) => ({
       set({ fetchingError: "error getting categories" });
     }
   },
+  getSubCategoriesDetails: async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/souscategoriedetail/",
+
+        config
+      );
+      set({ subcategories: response.data });
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
   getCourses: async () => {
     try {
       const response = await axios.get(
@@ -82,6 +94,7 @@ export const useCoursesStore = create((set, get) => ({
         config
       );
       toast.success("A categorie has been modified successfully!");
+      get().getSubCategoriesDetails();
 
       return response.data;
     } catch (e) {
@@ -100,6 +113,15 @@ export const useCoursesStore = create((set, get) => ({
 
       return response.data;
     } catch (e) {
+      console.log(e.response);
+      if (e.response.data?.image?.length > 0) {
+        toast.error("insert a valid image");
+        console.log(e.response.data?.image[0]);
+      }
+      if (e.response.data?.link?.length > 0) {
+        toast.error("insert a valid link");
+        console.log(e.response.data?.link[0]);
+      }
       set({ fetchingError: "error getting categories" });
     }
   },
@@ -112,6 +134,21 @@ export const useCoursesStore = create((set, get) => ({
       );
       toast.success("A course has been added successfully!");
       get().getCoursesDetails();
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting categories" });
+    }
+  },
+  AddSousCategory: async (data) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:8000/api/souscategorie/`,
+        data,
+        config
+      );
+      toast.success("A new subcategorie has been added successfully!");
+      get().getSubCategoriesDetails();
 
       return response.data;
     } catch (e) {
@@ -137,6 +174,7 @@ export const useCoursesStore = create((set, get) => ({
         `http://127.0.0.1:8000/api/souscategorie/${id}/`,
         config
       );
+      get().getSubCategoriesDetails();
 
       toast.success("A categorie has been removed successfully!");
 

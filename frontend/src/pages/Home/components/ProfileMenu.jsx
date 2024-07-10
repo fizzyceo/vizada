@@ -7,6 +7,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { useAuth } from "../../../stores/Auth";
+import {
+  BookmarkIcon,
+  InboxIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/solid";
 
 export function ProfileMenu() {
   const { user } = useAuth((state) => state);
@@ -51,8 +56,9 @@ export function ProfileMenu() {
           {firstLetter}
         </div>
       </MenuHandler>
-      <MenuList className="roboto">
-        <MenuItem className="flex items-center justify-center">
+      <MenuList className="roboto flex flex-col items-center justify-center gap-2">
+        <MenuItem className="flex items-center gap-2">
+          <UserCircleIcon className="w-6 h-6 text-gray-600" />
           <a href="/profile">
             <Typography variant="small" className="font-medium">
               My Profile
@@ -63,23 +69,18 @@ export function ProfileMenu() {
         {role === false && (
           <>
             <MenuItem className="flex items-center gap-2">
-              <a href="/dashboard">
+              <InboxIcon className="w-6 h-6 text-gray-600" />
+
+              <a href="/dashboard" className="w-full">
                 <Typography variant="small" className="font-medium ">
                   Dashboard
                 </Typography>{" "}
               </a>
             </MenuItem>
             <MenuItem className="flex items-center gap-2">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Your SVG path */}
-              </svg>
-              <a href="/saved">
+              <BookmarkIcon className="w-6 h-6 text-gray-600" />
+
+              <a href="/saved" className=" w-full ">
                 <Typography variant="small" className="font-medium ">
                   Saved Courses
                 </Typography>{" "}

@@ -8,15 +8,18 @@ import {
   Tooltip,
   IconButton,
 } from "@material-tailwind/react";
-import { useSubStore } from "../../stores/Subs";
-import { PencilIcon } from "@heroicons/react/24/solid";
-import { useCoursesStore } from "../../../stores/Courses";
 
-export function ViewCategory({ content, openViewCat, setOpenViewCat }) {
-  const handleOpen = () => setOpenViewCat(!openViewCat);
+import { PencilIcon } from "@heroicons/react/24/solid";
+
+export function ViewCategory({
+  content,
+  OpenViewCategory,
+  setOpenViewCategory,
+}) {
+  const handleOpen = () => setOpenViewCategory(!OpenViewCategory);
   const handleOk = () => {
     // Close the dialog
-    setOpenViewCat(!openViewCat);
+    setOpenViewCategory(!OpenViewCategory);
   };
 
   return (
@@ -27,7 +30,7 @@ export function ViewCategory({ content, openViewCat, setOpenViewCat }) {
         </IconButton>
       </Tooltip>
       <Dialog
-        open={openViewCat}
+        open={OpenViewCategory}
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -35,9 +38,9 @@ export function ViewCategory({ content, openViewCat, setOpenViewCat }) {
         }}
       >
         <DialogHeader>Category Details</DialogHeader>
-        <DialogBody>
-          <h1>Name: {content.Nomc}</h1>
-          <h1>Description: {content.Descriptionc}</h1>
+        <DialogBody className="space-y-3">
+          <h1>Name: {content.Nomsouscategorie}</h1>
+          <h1>Of Type : {content?.nom_categorie?.Nomcategorie}</h1>
         </DialogBody>
         <DialogFooter>
           <Button

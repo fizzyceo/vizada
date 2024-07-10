@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Intro from "./components/Intro";
 import Courses from "./components/Courses";
@@ -12,21 +12,45 @@ import toutApprendre from "../../assets/toutapprendre.svg";
 import alphrom from "../../assets/alphorm.svg";
 import tex from "../../assets/tex.png";
 import { useCoursesStore } from "../../stores/Courses";
+import NavbarWithMegaMenu from "./components/Navbar";
+import { useAuth } from "../../stores/Auth";
+import NavbarAdmin from "./components/NavbarAdmin";
 
 const Home = () => {
   const { getCategories, categories } = useCoursesStore((state) => state);
-
+  const user = useAuth((state) => state.user);
+  const [isSubbed, setIsSubbed] = useState(null);
   useEffect(() => {
     getCategories();
   }, []);
   useEffect(() => {
     console.log(categories);
   }, [categories]);
+
+  // useEffect(()=>{
+  //   const checkSub = async (id)=>{
+
+  //     let res = await getOneSub(id)
+
+  //   }
+
+  //   if(user){
+  //     //check if he has a subscription
+
+  //     checkSub(user.id)
+
+  //     // setIsSubbed()
+  //   }
+  // },[user])
   return (
     <div className="home  bg-gray-100 poppins">
       {/**navbar: logo login button  + hyperlinks(courses, Pricing, Q/A,  ) */}
       <React.Fragment>
-        <Navbar />
+        {user?.role ? (
+          <NavbarAdmin />
+        ) : (
+          <NavbarWithMegaMenu isLogged={user ? true : false} />
+        )}
       </React.Fragment>
       <Intro />
       {/* <Intro2 /> */}

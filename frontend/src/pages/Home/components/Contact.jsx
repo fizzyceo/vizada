@@ -9,10 +9,16 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
+import { toast } from "react-toastify";
+import { useContactStore } from "../../../stores/Contact";
 const Contact = () => {
   const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
   const [emailValidity, setEmailValidity] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { sendContact } = useContactStore((state) => state);
   const validateEmail = (email) => {
     // Regular expression for email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,19 +35,26 @@ const Contact = () => {
     setLoading(true);
     if (!validateEmail(email)) {
       // If email is not valid, display an error message or handle it as needed
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       return;
     }
     try {
-      await axios.post("/send-email", { name, email, message });
-      alert("Email sent successfully");
-      setName("");
+      if (!message || !email || !subject) {
+        toast.error("Please fill all the fields.");
+        return;
+      }
+      sendContact({ subject: subject, sender_email: email, message: message });
+
+      setSubject("");
+
       setEmail("");
+
       setMessage("");
+      toast.success("email sent successfully");
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error sending email:", error);
-      alert("Error sending email");
+      toast.error("Error sending email");
     } finally {
       setLoading(false);
     }
@@ -72,12 +85,18 @@ const Contact = () => {
                     onChange={handleEmailChange}
                     error={!emailValidity}
                   />
-                  <Input color="orange" label="Your name" type="text" />
+                  <Input
+                    color="orange"
+                    label="Your name"
+                    type="text"
+                    onChange={(e) => setSubject(e.target.value)}
+                  />
                   <Textarea
                     draggable={"true"}
                     color="orange"
                     label="Your message"
                     type="text"
+                    onChange={(e) => setMessage(e.target.value)}
                   />
                   <Button
                     className="hover:bg-transparent hover:text-orange-800  bg-orange-800"

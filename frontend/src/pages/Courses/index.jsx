@@ -13,6 +13,8 @@ import { FooterWithLogo } from "../Home/components/Footer";
 import { useCoursesStore } from "../../stores/Courses";
 import { useAuth } from "../../stores/Auth";
 import withRouter from "../../Components/Common/withRouter";
+import NavbarAdmin from "../Home/components/NavbarAdmin";
+import NavbarWithMegaMenu from "../Home/components/Navbar";
 
 const Courses = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -25,7 +27,7 @@ const Courses = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [infoText, setInfoText] = useState("");
   const [loading, setLoading] = useState(false);
-  const { accessToken } = useAuth((state) => state);
+  const { accessToken, user } = useAuth((state) => state);
   useEffect(() => {
     setLoading(false);
     if (accessToken) {
@@ -128,7 +130,11 @@ const Courses = (props) => {
 
   return (
     <div className="min-h-screen bg-gray-50 ">
-      <Navbar />
+      {user?.role ? (
+        <NavbarAdmin />
+      ) : (
+        <NavbarWithMegaMenu isLogged={user ? true : false} />
+      )}{" "}
       <div className="w-[90%] mx-auto mt-10  space-y-5 roboto">
         <div className="flex flex-row items-center justify-between">
           <h1 className="text-gray-600">
@@ -177,7 +183,6 @@ const Courses = (props) => {
           ))}
         </div>
       </div>
-
       <div className="flex items-center gap-4 my-5 mx-auto w-fit">
         <Button
           variant="text"
@@ -197,7 +202,6 @@ const Courses = (props) => {
           Next <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
         </Button>
       </div>
-
       <FooterWithLogo />
     </div>
   );

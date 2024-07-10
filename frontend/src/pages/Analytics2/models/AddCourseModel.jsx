@@ -10,6 +10,8 @@ import {
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { useCoursesStore } from "../../../stores/Courses";
 import { convertToBase64 } from "../../../Components/Common/convertToBase64";
+import vizadaLogo from "../../../assets/vizadalogo.png";
+import { toast } from "react-toastify";
 
 export function AddCourseModel({
   subcategories,
@@ -21,7 +23,7 @@ export function AddCourseModel({
     const base64 = await convertToBase64(file);
     setBody((prevBody) => ({ ...prevBody, image: base64 }));
   };
-
+  const [errormsg, setError] = useState("");
   const handleOpen = () => setOpenAddCourse(!OpenAddCourse);
   const { AddCourse } = useCoursesStore((state) => state);
 
@@ -46,11 +48,31 @@ export function AddCourseModel({
   };
 
   const handleOk = () => {
-    // Convert image to base64 if a new image was selected
-    console.log(body);
-    AddCourse({ ...body, prix: 4.1 });
+    // Validate fields before proceeding
+    if (!body.image) {
+      setError("Please choose an image.");
+      return;
+    }
+    if (!body?.link || !body?.Id_sc || !body?.Nomc || !body?.Descriptionc) {
+      setError("Please fill in all required fields.");
 
-    setOpenAddCourse(!OpenAddCourse);
+      return;
+    }
+
+    // Validate link format
+    const linkRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    if (!linkRegex.test(body.link)) {
+      setError("Please enter a valid URL for the link field.");
+      return;
+    }
+
+    try {
+      AddCourse({ ...body, prix: 4.1 });
+      setOpenAddCourse(false); // Close the dialog
+    } catch (error) {
+      console.error("Error modifying course:", error);
+      // Handle error (e.g., show error message to the user)
+    }
   };
 
   return (
@@ -67,6 +89,7 @@ export function AddCourseModel({
         <DialogHeader>Course Details</DialogHeader>
         <DialogBody>
           <div className="space-y-4">
+            <p className="text-red-900 font-bold text-lg">{errormsg}</p>
             <div className="relative">
               <label
                 htmlFor="courseImage"
@@ -82,12 +105,17 @@ export function AddCourseModel({
                 />
                 <PencilIcon className="w-5 h-5 text-gray-50" />
               </label>
-
-              <img
-                src={body?.image}
-                className="self-center w-[80%] mx-auto h-[300px]"
-                alt="image"
-              />
+              {body?.image ? (
+                <img
+                  src={body?.image}
+                  className="self-center w-[80%] mx-auto h-[300px] "
+                  alt="image"
+                />
+              ) : (
+                <div className="self-center flex items-center justify-center w-[80%] mx-auto h-[300px] bg-red-100">
+                  <img src={vizadaLogo} alt="" className="w-[90%] mx-auto" />
+                </div>
+              )}
             </div>
             <div>
               <label className="text-gray-700">Name</label>

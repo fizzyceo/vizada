@@ -13,7 +13,7 @@ export const useSubStore = create((set, get) => ({
   users: [],
   isError: null,
   isLoading: false,
-
+  currentSub: null,
   fetchingError: "",
   getSubs: async () => {
     try {
@@ -25,6 +25,35 @@ export const useSubStore = create((set, get) => ({
       set({ subs: response.data });
     } catch (e) {
       set({ fetchingError: "error getting categories" });
+    }
+  },
+
+  createSub: async (body) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/subscribe/",
+        body,
+        config
+      );
+      toast.success("a New Subscription has been created");
+      get().getOneSub(body.Id_user);
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error creating sub" });
+    }
+  },
+  getOneSub: async (id) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/check_subscription/${id}`,
+
+        config
+      );
+      set({ currentSub: response.data });
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting sub" });
     }
   },
   getUsers: async () => {

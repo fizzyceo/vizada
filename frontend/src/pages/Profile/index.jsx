@@ -142,7 +142,11 @@ const Profile = () => {
         </div>
       ) : (
         <div className="w-full h-screen  overflow-x-hidden ">
-          {role === false ? <NavbarWithMegaMenu /> : <NavbarAdmin />}
+          {role === false ? (
+            <NavbarWithMegaMenu isLogged={user ? true : false} />
+          ) : (
+            <NavbarAdmin />
+          )}
 
           <div className="w-full h-full flex mb-36 mt-32 ">
             <div className="flex-1 flex  justify-center  ">

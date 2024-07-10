@@ -12,6 +12,7 @@ import {
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { useCoursesStore } from "../../../stores/Courses";
 import { convertToBase64 } from "../../../Components/Common/convertToBase64";
+import vizadaLogo from "../../../assets/vizadalogo.png";
 
 export function ModifyCourseModel({
   id,
@@ -22,6 +23,7 @@ export function ModifyCourseModel({
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
+
     setBody((prevBody) => ({ ...prevBody, image: base64 }));
   };
 
@@ -43,12 +45,22 @@ export function ModifyCourseModel({
   };
 
   const handleOk = () => {
-    // Convert image to base64 if a new image was selected
-    console.log(body);
-    ModifyCourse(id, body);
+    // Determine the modified fields
+    const modifiedFields = {};
+    for (const key in body) {
+      if (body[key] !== content[key]) {
+        modifiedFields[key] = body[key];
+      }
+    }
 
-    setOpenModifyCourse(!OpenModifyCourse);
+    try {
+      ModifyCourse(id, modifiedFields);
+      setOpenModifyCourse(!OpenModifyCourse);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
     <>
       <Dialog
@@ -79,11 +91,17 @@ export function ModifyCourseModel({
                 <PencilIcon className="w-5 h-5 text-gray-50" />
               </label>
 
-              <img
-                src={body?.image}
-                className="self-center w-[80%] mx-auto h-[300px]"
-                alt="image"
-              />
+              {body?.image ? (
+                <img
+                  src={body?.image}
+                  className="self-center w-[80%] mx-auto h-[300px] "
+                  alt="image"
+                />
+              ) : (
+                <div className="self-center flex items-center justify-center w-[80%] mx-auto h-[300px] bg-red-100">
+                  <img src={vizadaLogo} alt="" className="w-[90%] mx-auto" />
+                </div>
+              )}
             </div>
             <div>
               <label className="text-gray-700">Name</label>

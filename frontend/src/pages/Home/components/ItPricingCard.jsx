@@ -6,6 +6,8 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../stores/Auth";
 
 function CheckIcon() {
   return (
@@ -27,6 +29,33 @@ function CheckIcon() {
 }
 
 export default function PricingCard({ price, isYearly }) {
+  const user = useAuth((state) => state.user);
+  const navigate = useNavigate();
+  const InitiatePayment = async () => {
+    if (user && Object.keys(user).length > 0) {
+      let body = {
+        amount: parseFloat(price.replace(/\s/g, "")),
+        url: `${import.meta.env.VITE_PUBLIC_URL}/dashboard`,
+        items: [
+          {
+            name: `IT ${isYearly ? "yearly" : "monthly"}`,
+            price: parseFloat(price.replace(/\s/g, "")),
+            quantity: 1,
+          },
+        ],
+        firstname: user.last_name,
+        lastname: user.first_name,
+
+        email: user.email,
+        phone: user.ntel,
+        address: "xxxxxx",
+      };
+      console.log(body);
+      await CreateInvoice(body, navigate);
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <Card
       color="blue-gray"
@@ -94,6 +123,7 @@ export default function PricingCard({ price, isYearly }) {
           color="orange"
           className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
           ripple={false}
+          onClick={InitiatePayment}
           fullWidth={true}
         >
           Buy Now

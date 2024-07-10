@@ -23,7 +23,7 @@ export function CredModel({ body, id, open, setOpen }) {
     console.log("Modify sub state function:", modifySubState);
 
     // Call modifySubState to update the subscription state
-    modifySubState(id, { ...body, active: 1 });
+    modifySubState(id, { ...body, active: 1, DateDebSession: new Date() });
 
     // Log confirmation message
     console.log("Subscription state updated.");

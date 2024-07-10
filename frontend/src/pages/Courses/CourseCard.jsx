@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCoursesStore } from "../../stores/Courses";
 import { useAuth } from "../../stores/Auth";
+import vizadaLogo from "../../assets/navlogonbg.png";
 
 export default function CourseCard({ content, isFavorite, router }) {
   const [isSaved, setIsSaved] = useState(content.isFavorite);
@@ -59,17 +60,31 @@ export default function CourseCard({ content, isFavorite, router }) {
             }}
           />
         </span>
-        <img
-          style={{
-            width: "100%", // Make the image cover the entire CardHeader
-            height: "100%",
-            transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
-            objectFit: "cover", // Ensure the image covers the space without stretching
-          }}
-          src={content.image}
-          alt="card-image"
-          className="hover:scale-105" // Apply scale transform on hover
-        />
+        {content.image ? (
+          <img
+            style={{
+              width: "100%", // Make the image cover the entire CardHeader
+              height: "100%",
+              transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
+              objectFit: "cover", // Ensure the image covers the space without stretching
+            }}
+            src={content.image}
+            alt="card-image"
+            className="hover:scale-105" // Apply scale transform on hover
+          />
+        ) : (
+          <div
+            style={{
+              width: "100%", // Make the image cover the entire CardHeader
+              height: "100%",
+              transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
+              objectFit: "cover", // Ensure the image covers the space without stretching
+            }}
+            className="bg-red-100 flex items-center justify-center"
+          >
+            <img src={vizadaLogo} className="w-40" />
+          </div>
+        )}
       </CardHeader>
       <CardBody>
         <Typography
