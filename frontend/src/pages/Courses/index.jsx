@@ -24,6 +24,8 @@ const Courses = (props) => {
   const [currentSubCategory, setCurrentSubCategory] = useState(null);
   const [courseList, setCourseList] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [currentSubCategoryName, setCurrentSubCategoryName] = useState(null);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [infoText, setInfoText] = useState("");
   const [loading, setLoading] = useState(false);
@@ -167,6 +169,7 @@ const Courses = (props) => {
                 courseType={courseType}
                 currentSubCategory={currentSubCategory}
                 setCurrentSubCategory={setCurrentSubCategory}
+                setCurrentSubCategoryName={setCurrentSubCategoryName}
               />
             </div>
           </div>

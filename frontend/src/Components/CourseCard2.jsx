@@ -13,13 +13,6 @@ import { useCoursesStore } from "../../stores/Courses";
 import { useAuth } from "../../stores/Auth";
 import vizadaLogo from "../../assets/navlogonbg.png";
 
-function wrapText(text, length) {
-  if (text.length > length) {
-    return text.substring(0, length) + " ...";
-  } else {
-    return text;
-  }
-}
 export default function CourseCard({ content, isFavorite, router }) {
   const [isSaved, setIsSaved] = useState(content.isFavorite);
   const { insertFavorite, RemoveFavorite } = useCoursesStore((state) => state);
@@ -47,18 +40,17 @@ export default function CourseCard({ content, isFavorite, router }) {
     }
     setIsSaved(!isSaved);
   };
-
   return (
-    <Card className="p-0 min-h-[350px]">
-      {/* <CardHeader
+    <Card className="">
+      <CardHeader
         color="blue-gray"
         className="relative h-56 "
         style={{
           overflow: "hidden", // Ensure the image does not overflow the CardHeader
         }}
-      ></CardHeader> */}
-      <CardBody className=" p-0 w-full">
-        <div className="w-full h-[220px] overflow-hidden rounded-t-lg">
+      ></CardHeader>
+      <CardBody>
+        <div>
           <span className="w-7 fontb absolute top-1 right-2 z-20 cursor-pointer ">
             <BookmarkIcon
               onClick={Saved}
@@ -78,11 +70,7 @@ export default function CourseCard({ content, isFavorite, router }) {
                 transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
                 objectFit: "cover", // Ensure the image covers the space without stretching
               }}
-              src={
-                content.image.startsWith("http")
-                  ? content.image
-                  : `${import.meta.env.VITE_BACKNED_URL}/${content.image}`
-              }
+              src={content.image}
               alt="card-image"
               className="hover:scale-105" // Apply scale transform on hover
             />
@@ -100,21 +88,17 @@ export default function CourseCard({ content, isFavorite, router }) {
             </div>
           )}
         </div>
-        <div className="px-6 p-2 mb-2">
-          <Typography
-            variant="h6"
-            color="blue-gray"
-            className="text-xs text-gray-500 mb-2"
-          >
-            {content.subCategory}
-          </Typography>
-          <Typography variant="h5" color="blue-gray" className="mb-2">
-            {wrapText(content.Nomc, 50)}
-          </Typography>
-          <Typography className="h-20 ">
-            {wrapText(content.Descriptionc, 100)}
-          </Typography>
-        </div>
+        <Typography
+          variant="h6"
+          color="blue-gray"
+          className="text-xs text-gray-500 mb-2"
+        >
+          {content.subCategory}
+        </Typography>
+        <Typography variant="h5" color="blue-gray" className="mb-2">
+          {content.Nomc}
+        </Typography>
+        <Typography>{content.Descriptionc}</Typography>
       </CardBody>
       <CardFooter className="pt-0">
         <Button>

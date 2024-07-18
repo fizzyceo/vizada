@@ -15,6 +15,11 @@ import { useCoursesStore } from "../../stores/Courses";
 import NavbarWithMegaMenu from "./components/Navbar";
 import { useAuth } from "../../stores/Auth";
 import NavbarAdmin from "./components/NavbarAdmin";
+import { Button } from "@material-tailwind/react";
+import { InboxArrowDownIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import ContactBanner from "./components/ContactBanner";
+import DownloadApp from "./components/DownloadApp";
+import Courses2 from "./components/Courses2";
 
 const Home = () => {
   const { getCategories, categories } = useCoursesStore((state) => state);
@@ -43,7 +48,7 @@ const Home = () => {
   //   }
   // },[user])
   return (
-    <div className="home  bg-gray-100 poppins">
+    <div className="home  bg-gray-50 poppins">
       {/**navbar: logo login button  + hyperlinks(courses, Pricing, Q/A,  ) */}
       <React.Fragment>
         {user?.role ? (
@@ -66,11 +71,17 @@ const Home = () => {
         </div>
       </section>
       {/* <Services /> */}
-      <Courses categories={categories} />
+      {/* <Courses categories={categories} /> */}
+
+      <Courses2 categories={categories} />
+      <DownloadApp />
       <Pricing />
 
       <QnA />
       <Contact />
+
+      <ContactBanner />
+
       <FooterWithLogo />
     </div>
   );

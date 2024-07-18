@@ -197,8 +197,11 @@ export const useCoursesStore = create((set, get) => ({
   },
   getCoursesByCategory: async (idcategory) => {
     try {
+      const capitalizedIdCategory =
+        idcategory.charAt(0).toUpperCase() + idcategory.slice(1);
+
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/category/${idcategory}/`,
+        `http://127.0.0.1:8000/api/course/category/${capitalizedIdCategory}/`,
         config
       );
       console.log(idcategory, response.data);
@@ -208,14 +211,15 @@ export const useCoursesStore = create((set, get) => ({
       set({ fetchingError: "error getting categories" });
     }
   },
-  getCoursesBySousCategory: async (idsouscategory) => {
+  getCoursesBySousCategory: async (name) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/souscategory/${idsouscategory}/`,
+        `http://127.0.0.1:8000/api/course/souscategory/${name}/`,
         config
       );
       console.log(response.data);
-      set({ sousCategoryCourses: response.data });
+      return response.data;
+      // set({ sousCategoryCourses: response.data });
     } catch (e) {
       set({ fetchingError: "error getting categories" });
     }

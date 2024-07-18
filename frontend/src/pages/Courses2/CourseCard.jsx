@@ -78,11 +78,7 @@ export default function CourseCard({ content, isFavorite, router }) {
                 transition: "transform 0.2s ease-in-out", // Add a transition effect on transform
                 objectFit: "cover", // Ensure the image covers the space without stretching
               }}
-              src={
-                content.image.startsWith("http")
-                  ? content.image
-                  : `${import.meta.env.VITE_BACKNED_URL}/${content.image}`
-              }
+              src={"http://127.0.0.1:8000/" + content.image}
               alt="card-image"
               className="hover:scale-105" // Apply scale transform on hover
             />

@@ -56,7 +56,7 @@ const Dashboard = (props) => {
         } else {
           // Extract subscription details from invoice name
           const invoiceName = invoiceRes.data.items[0].name;
-          const [typeS, categoryPrefix] = invoiceName.split(" ");
+          const [categoryPrefix, typeS] = invoiceName.split(" ");
 
           // Determine category ID based on categoryPrefix (assuming 'management' corresponds to ID 2, otherwise ID 1)
           const Id_c = categoryPrefix === "management" ? 2 : 1;

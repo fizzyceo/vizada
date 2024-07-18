@@ -11,6 +11,8 @@ import {
 import Activation from "../pages/Activate";
 import Logout from "../pages/Auth/Logout";
 import ChangePass from "../pages/ChangePass";
+import Courses2 from "../pages/Courses2";
+import Courses3 from "../pages/Courses3";
 import ForgetPass from "../pages/ForgetPass";
 import Profile from "../pages/Profile";
 
@@ -46,6 +48,9 @@ const publicRoutes = [
   },
 
   { path: "/Courses", component: <Courses /> },
+  { path: "/courses/:param1", component: <Courses2 /> },
+  { path: "/courses/:param1/:param2", component: <Courses3 /> },
+
   { path: "/login", component: <Login /> },
   { path: "/logout", component: <Logout /> },
 

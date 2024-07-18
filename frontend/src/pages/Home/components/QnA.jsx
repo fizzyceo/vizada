@@ -11,7 +11,7 @@ export default function AccordionCustomStyles() {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   return (
-    <div className="bg-gray-50 p-5 space-y-5">
+    <div id="qa" className="bg-gray-50 p-5 space-y-5">
       <div>
         <h1 className="roboto text-4xl text-center">
           Have some questions for us ?

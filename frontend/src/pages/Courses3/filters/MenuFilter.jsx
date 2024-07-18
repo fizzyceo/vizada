@@ -77,10 +77,10 @@ export default function MenuFilter({
       console.log(relevant);
 
       setRelevantSubCat(relevant);
-      if (relevant.length > 0) {
-        setCurrentSubCategory(relevant[0].id);
-        setCurrentSubCategoryName(relevant[0].Nomsouscategorie);
-      }
+      // if (relevant.length > 0) {
+      //   setCurrentSubCategory(relevant[0].id);
+      //   setCurrentSubCategoryName(relevant[0].Nomsouscategorie);
+      // }
     }
   }, [subcategories, categories]);
   useEffect(() => {
@@ -141,9 +141,9 @@ export default function MenuFilter({
                 setCurrentSubCategory(category.id);
                 setCurrentSubCategoryName(category.Nomsouscategorie);
               }}
-              className={`px-5 cursor-pointer py-3 min-w-[150px] w-fit  text-center transition-all  border-blue-900 border rounded-lg text-sm ${
+              className={`px-5 cursor-pointer py-3 min-w-[150px] w-fit  text-center transition-all bg-gray-200 border-red-900 border rounded-lg text-sm ${
                 currentSubCategory === category.id
-                  ? "text-gray-50 bg-blue-900 "
+                  ? "text-gray-50 bg-red-900 "
                   : ""
               }`}
               style={{

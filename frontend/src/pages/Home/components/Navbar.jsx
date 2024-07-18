@@ -31,13 +31,13 @@ const navListMenuItems = [
     title: "Information Technology",
     description: "Numerous Courses in IT, explore!",
     icon: ComputerDesktopIcon,
-    link: "/courses?type=IT",
+    link: "/courses/IT",
   },
   {
     title: "Management",
     description: "Numerous Courses in Management, explore!",
     icon: RectangleGroupIcon,
-    link: "/courses?type=management",
+    link: "/courses/Management",
   },
 ];
 
@@ -215,8 +215,15 @@ export default function NavbarWithMegaMenu({ isLogged }) {
           {isLogged ? (
             <ProfileMenu />
           ) : (
-            <Button variant="gradient" className="" size="md">
-              <a href="/login">Sign In</a>
+            <Button
+              variant="gradient"
+              className=""
+              size="md"
+              onClick={() => {
+                window.location.href = "/login";
+              }}
+            >
+              Sign In
             </Button>
           )}
 
