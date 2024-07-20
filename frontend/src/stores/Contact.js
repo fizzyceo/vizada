@@ -14,7 +14,7 @@ export const useContactStore = create((set, get) => ({
   sendContact: async (data) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/sendcontactusemail/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/sendcontactusemail/`,
         data,
         config
       );

@@ -26,7 +26,7 @@ export const useAuth = create((set, get) => ({
     set({ isLoading: true, errorMsg: null });
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/jwt/user/",
+        `${import.meta.env.VITE_BACKNED_URL}/jwt/user/`,
         data,
         config
       );
@@ -51,7 +51,7 @@ export const useAuth = create((set, get) => ({
     try {
       set({ loadingRegister: true });
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/auth/users/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/auth/users/`,
         data,
         config
       );
@@ -101,7 +101,7 @@ export const useAuth = create((set, get) => ({
       tokenHelper.removeRefreshToken();
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/auth/logout/",
+        `${import.meta.env.VITE_BACKNED_URL}/auth/logout/`,
         { refresh: refresh },
         { headers: headers }
       );
@@ -114,7 +114,7 @@ export const useAuth = create((set, get) => ({
     try {
       set({ LoadingActivation: true });
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/users/activation/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/users/activation/`,
         { uid, token },
         config
       );
@@ -134,7 +134,9 @@ export const useAuth = create((set, get) => ({
     try {
       set({ LoadingActivation: true });
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/users/reset_password_confirm/",
+        `${
+          import.meta.env.VITE_BACKNED_URL
+        }/api/v1/auth/users/reset_password_confirm/`,
         { uid, token, new_password, re_new_password },
         config
       );
@@ -155,7 +157,7 @@ export const useAuth = create((set, get) => ({
     try {
       set({ LoadingActivation: true });
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/users/reset_password/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/users/reset_password/`,
         { email: email },
         config
       );
@@ -177,7 +179,7 @@ export const useAuth = create((set, get) => ({
       set({ LoadingAuthenticity: true });
       console.log("Checking refresh authentication");
       const responseRefreshToken = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/jwt/verify/`,
         { token: tokenHelper.getRefreshToken() },
         config
       );
@@ -192,7 +194,7 @@ export const useAuth = create((set, get) => ({
     try {
       set({ LoadingAuthenticity: true });
       const responseRefreshToken = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/jwt/verify/`,
         { token: tokenHelper.getRefreshToken() },
         config
       );
@@ -203,7 +205,7 @@ export const useAuth = create((set, get) => ({
     }
     try {
       const responseAccessToken = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/verify/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/jwt/verify/`,
         { token: tokenHelper.getToken() },
         config
       );
@@ -211,7 +213,7 @@ export const useAuth = create((set, get) => ({
       }
     } catch (error) {
       const resNewAT = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/jwt/refresh/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/jwt/refresh/`,
         { refresh: tokenHelper.getRefreshToken() },
         config
       );
@@ -232,7 +234,7 @@ export const useAuth = create((set, get) => ({
         Authorization: "Bearer " + tokenHelper.getToken(),
       };
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/users/set_password/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/v1/auth/users/set_password/`,
         {
           current_password: current_password,
           new_password,
@@ -257,7 +259,7 @@ export const useAuth = create((set, get) => ({
       };
 
       const responseUpdateDevice = await axios.put(
-        "http://127.0.0.1:8000/api/updateprofile/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/updateprofile/`,
         { ...data },
         { headers: headers }
       );

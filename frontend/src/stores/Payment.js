@@ -66,7 +66,7 @@ export const useInvoiceStore = create((set, get) => ({
     try {
       console.log(data);
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/subscribe/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/subscribe/${id}/`,
         data,
         config
       );

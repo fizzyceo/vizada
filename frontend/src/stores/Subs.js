@@ -18,7 +18,7 @@ export const useSubStore = create((set, get) => ({
   getSubs: async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/subscribedetails/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/subscribedetails/`,
 
         config
       );
@@ -31,7 +31,7 @@ export const useSubStore = create((set, get) => ({
   createSub: async (body) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/subscribe/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/subscribe/`,
         body,
         config
       );
@@ -45,7 +45,7 @@ export const useSubStore = create((set, get) => ({
   getOneSub: async (id) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/check_subscription/${id}`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/check_subscription/${id}`,
 
         config
       );
@@ -59,7 +59,7 @@ export const useSubStore = create((set, get) => ({
   getUsers: async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/getusers/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/getusers/`,
 
         config
       );
@@ -72,7 +72,7 @@ export const useSubStore = create((set, get) => ({
     try {
       console.log(data);
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/subscribe/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/subscribe/${id}/`,
         data,
         config
       );

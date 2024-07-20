@@ -19,7 +19,7 @@ export const useCoursesStore = create((set, get) => ({
   getCategories: async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/categorie/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/categorie/`,
 
         config
       );
@@ -31,7 +31,7 @@ export const useCoursesStore = create((set, get) => ({
   getSubCategories: async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/souscategorie/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategorie/`,
 
         config
       );
@@ -43,7 +43,7 @@ export const useCoursesStore = create((set, get) => ({
   getSubCategoriesDetails: async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/souscategoriedetail/",
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategoriedetail/`,
 
         config
       );
@@ -55,7 +55,7 @@ export const useCoursesStore = create((set, get) => ({
   getCourses: async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/`,
         config
       );
       set({ courses: response.data });
@@ -67,7 +67,7 @@ export const useCoursesStore = create((set, get) => ({
   getOneCourses: async (id) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/${id}/`,
         config
       );
       return response.data;
@@ -78,7 +78,7 @@ export const useCoursesStore = create((set, get) => ({
   getOneSousCategory: async (id) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategorie/${id}/`,
         config
       );
       return response.data;
@@ -89,7 +89,7 @@ export const useCoursesStore = create((set, get) => ({
   ModifySousCategory: async (id, data) => {
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategorie/${id}/`,
         data,
         config
       );
@@ -104,7 +104,7 @@ export const useCoursesStore = create((set, get) => ({
   ModifyCourse: async (id, data) => {
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/course/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/${id}/`,
         data,
         config
       );
@@ -128,7 +128,7 @@ export const useCoursesStore = create((set, get) => ({
   AddCourse: async (data) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/course/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/`,
         data,
         config
       );
@@ -143,7 +143,7 @@ export const useCoursesStore = create((set, get) => ({
   AddSousCategory: async (data) => {
     try {
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/souscategorie/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategorie/`,
         data,
         config
       );
@@ -158,7 +158,7 @@ export const useCoursesStore = create((set, get) => ({
   deleteCourse: async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/course/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/${id}/`,
         config
       );
       toast.success("A course has been removed successfully!");
@@ -171,7 +171,7 @@ export const useCoursesStore = create((set, get) => ({
   deleteSousCategory: async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/souscategorie/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/souscategorie/${id}/`,
         config
       );
       get().getSubCategoriesDetails();
@@ -186,7 +186,7 @@ export const useCoursesStore = create((set, get) => ({
   getCoursesDetails: async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/coursedetail/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/coursedetail/`,
         config
       );
       set({ courses: response.data });
@@ -201,7 +201,9 @@ export const useCoursesStore = create((set, get) => ({
         idcategory.charAt(0).toUpperCase() + idcategory.slice(1);
 
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/category/${capitalizedIdCategory}/`,
+        `${
+          import.meta.env.VITE_BACKNED_URL
+        }/api/course/category/${capitalizedIdCategory}/`,
         config
       );
       console.log(idcategory, response.data);
@@ -214,7 +216,7 @@ export const useCoursesStore = create((set, get) => ({
   getCoursesBySousCategory: async (name) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/course/souscategory/${name}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/course/souscategory/${name}/`,
         config
       );
       console.log(response.data);
@@ -232,7 +234,7 @@ export const useCoursesStore = create((set, get) => ({
           Authorization: "Bearer " + tokenHelper.getToken(),
         };
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/favoritesbyuser/`,
+          `${import.meta.env.VITE_BACKNED_URL}/api/favoritesbyuser/`,
           { headers: headers }
         );
         console.log(response.data);
@@ -252,7 +254,7 @@ export const useCoursesStore = create((set, get) => ({
         Authorization: "Bearer " + token,
       };
       const response = await axios.delete(
-        `http://127.0.0.1:8000/api/favorite/${id}/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/favorite/${id}/`,
         { headers: headers }
       );
       toast.success("A saved course has been removed from the list!");
@@ -272,7 +274,7 @@ export const useCoursesStore = create((set, get) => ({
         Authorization: "Bearer " + token,
       };
       const response = await axios.post(
-        `http://127.0.0.1:8000/api/favorite/`,
+        `${import.meta.env.VITE_BACKNED_URL}/api/favorite/`,
         { Id_user: idu, Id_c: idc },
         { headers: headers }
       );
