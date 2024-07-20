@@ -19,12 +19,18 @@ const Intro = () => {
         <div className="flex flex-row justify-between w-full flex-wrap z-10 ">
           <div className="flex  items-center mx-auto w-[90%]  lg:w-[55%] justify-start ">
             <div className=" flex flex-col poppins justify-center items-center mt-2 lg:mt-0 lg:items-start gap-3  mx-auto ">
-              <div className="flex flex-row gap-1 items-center justify-center">
-                <h1 className="lg:text-5xl text-4xl  whitespace-nowrap font-bold ">
-                  Formez vous a votre rythme Avec
-                  {/* <span className="gradient-text no-underline ">Vizada</span> */}
-                </h1>
+              <div className="flex flex-row gap-2 items-start justify-start">
                 <img src={vizadaLogo} className=" w-44 lg:w-52 " />
+                <div>
+                  <h1 className="lg:text-4xl text-2xl  whitespace-nowrap font-bold ">
+                    Formez vous
+                    {/* <span className="gradient-text no-underline ">Vizada</span> */}
+                  </h1>
+                  <h1 className="lg:text-4xl text-2xl  whitespace-nowrap font-bold ">
+                    a votre rythme
+                    {/* <span className="gradient-text no-underline ">Vizada</span> */}
+                  </h1>
+                </div>
               </div>
 
               <h3 className="text-xl">Multiverse of Courses</h3>

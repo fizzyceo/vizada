@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../stores/Auth";
+import { useInvoiceStore } from "../../../stores/Payment";
 
 function CheckIcon() {
   return (
@@ -28,10 +29,18 @@ function CheckIcon() {
   );
 }
 
-export default function PricingCard({ price, isYearly }) {
+export default function ItPricingCard({
+  price,
+  isYearly,
+  loading,
+  setLoading,
+}) {
   const user = useAuth((state) => state.user);
   const navigate = useNavigate();
+  const { CreateInvoice } = useInvoiceStore((state) => state);
+
   const InitiatePayment = async () => {
+    setLoading(true);
     if (user && Object.keys(user).length > 0) {
       let body = {
         amount: parseFloat(price.replace(/\s/g, "")),
@@ -55,7 +64,10 @@ export default function PricingCard({ price, isYearly }) {
     } else {
       navigate("/login");
     }
+
+    setLoading(false);
   };
+
   return (
     <Card
       color="blue-gray"
@@ -73,7 +85,7 @@ export default function PricingCard({ price, isYearly }) {
           color="white"
           className="font-normal uppercase"
         >
-          Management{" "}
+          Information Technology{" "}
         </Typography>
         <Typography
           variant="h1"
@@ -125,6 +137,7 @@ export default function PricingCard({ price, isYearly }) {
           ripple={false}
           onClick={InitiatePayment}
           fullWidth={true}
+          loading={loading}
         >
           Buy Now
         </Button>

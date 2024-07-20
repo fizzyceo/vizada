@@ -9,6 +9,7 @@ import {
 import { useAuth } from "../../../stores/Auth";
 import { useNavigate } from "react-router-dom";
 import { useInvoiceStore } from "../../../stores/Payment";
+import { useState } from "react";
 
 function CheckIcon() {
   return (
@@ -29,11 +30,17 @@ function CheckIcon() {
   );
 }
 
-export default function ManagementPricingCard({ price, isYearly }) {
+export default function ManagementPricingCard({
+  price,
+  isYearly,
+  loading,
+  setLoading,
+}) {
   const user = useAuth((state) => state.user);
   const navigate = useNavigate();
   const { CreateInvoice } = useInvoiceStore((state) => state);
   const InitiatePayment = async () => {
+    setLoading(true);
     if (user && Object.keys(user).length > 0) {
       let body = {
         amount: parseFloat(price.replace(/\s/g, "")),
@@ -57,7 +64,10 @@ export default function ManagementPricingCard({ price, isYearly }) {
     } else {
       navigate("/login");
     }
+
+    setLoading(false);
   };
+
   return (
     <Card color="gray" variant="gradient" className="w-fit max-w-[20rem] p-8">
       <CardHeader
@@ -71,7 +81,7 @@ export default function ManagementPricingCard({ price, isYearly }) {
           color="white"
           className="font-normal uppercase"
         >
-          Information Technology
+          Management
         </Typography>
         <Typography
           variant="h1"
@@ -102,7 +112,7 @@ export default function ManagementPricingCard({ price, isYearly }) {
               <CheckIcon />
             </span>
             <Typography className="font-normal">
-              Access to Alphorm Platform
+              Access to ToutApprendre
             </Typography>
           </li>
           <li className="flex items-center gap-4">
@@ -123,6 +133,7 @@ export default function ManagementPricingCard({ price, isYearly }) {
           ripple={false}
           fullWidth={true}
           onClick={InitiatePayment}
+          loading={loading}
         >
           Buy Now
         </Button>

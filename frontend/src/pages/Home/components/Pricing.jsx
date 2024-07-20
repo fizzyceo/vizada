@@ -6,6 +6,7 @@ import ManagementPricingCard from "./ManagementPricingCard";
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(true);
   const [price, setPrice] = useState("5000");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     console.log(isYearly);
   }, [isYearly]);
@@ -43,8 +44,18 @@ const Pricing = () => {
         <h2>Yearly</h2>
       </div>
       <div className="options flex flex-row gap-5 items-center justify-center flex-wrap">
-        <ManagementPricingCard isYearly={isYearly} price={price} />
-        <ItPricingCard price={price} isYearly={isYearly} />
+        <ItPricingCard
+          price={price}
+          isYearly={isYearly}
+          loading={loading}
+          setLoading={setLoading}
+        />
+        <ManagementPricingCard
+          loading={loading}
+          setLoading={setLoading}
+          isYearly={isYearly}
+          price={price}
+        />
       </div>
     </div>
   );

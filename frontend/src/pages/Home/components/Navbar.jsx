@@ -11,6 +11,7 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
+  Input,
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
@@ -19,6 +20,7 @@ import {
 } from "@heroicons/react/24/outline";
 import {
   ComputerDesktopIcon,
+  MagnifyingGlassIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/solid";
 import vizadaLogo from "../../../assets/navlogonbg.png";
@@ -123,10 +125,10 @@ function NavList() {
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-center justify-center">
       <NavListMenu />
 
-      <ListItem className="flex items-center w-fit justify-center ">
+      <ListItem className="flex items-center p-0 w-fit justify-center ">
         <a
-          href="#pricing"
-          className="cursor-pointer w-fit"
+          href="/#pricing"
+          className="cursor-pointer w-fit p-2"
           onClick={(e) => {
             e.preventDefault();
             const element = document.getElementById("pricing");
@@ -164,10 +166,10 @@ function NavList() {
         </a>
       </ListItem> */}
 
-      <ListItem className="flex items-center w-fit justify-center ">
+      <ListItem className="flex items-center w-fit justify-center p-0 ">
         <a
-          href="#contact"
-          className="cursor-pointer w-fit"
+          href="/#contact"
+          className="cursor-pointer w-fit  p-2"
           onClick={(e) => {
             e.preventDefault();
             const element = document.getElementById("contact");
@@ -181,7 +183,7 @@ function NavList() {
             color="blue-gray"
             className="font-normal text-gray-700"
           >
-            Contact Us
+            Contact
           </Typography>
         </a>
       </ListItem>
@@ -192,7 +194,7 @@ function NavList() {
 export default function NavbarWithMegaMenu({ isLogged }) {
   const [openNav, setOpenNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
+  const [showSearch, setShowSearch] = useState(false);
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -208,7 +210,23 @@ export default function NavbarWithMegaMenu({ isLogged }) {
             <img src={vizadaLogo} width={84} alt="Vizada Logo" />
           </a>
         </Typography>
-        <div className="flex flex-row justify-center items-center gap-2">
+        <div className="flex flex-row  justify-center items-center gap-2">
+          <div className="flex-grow md:w-[300px] lg:w-[500px] relative">
+            <Input
+              className=""
+              label="Search"
+              icon={<MagnifyingGlassIcon className="w-7" />}
+            />
+
+            <div
+              className={`${
+                showSearch ? "block" : "hidden"
+              } absolute -bottom-40 min-h-40  md:w-[300px] lg:w-[500px] p-3 bg-green-400`}
+            >
+              xx
+            </div>
+          </div>
+
           <div className="hidden lg:block">
             <NavList />
           </div>
@@ -217,7 +235,7 @@ export default function NavbarWithMegaMenu({ isLogged }) {
           ) : (
             <Button
               variant="gradient"
-              className=""
+              className="whitespace-nowrap"
               size="md"
               onClick={() => {
                 window.location.href = "/login";
