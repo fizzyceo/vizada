@@ -20,7 +20,7 @@ const Intro = () => {
           <div className="flex  items-center mx-auto w-[90%]  lg:w-[55%] justify-start ">
             <div className=" flex flex-col poppins justify-center items-center mt-2 lg:mt-0 lg:items-start gap-3  mx-auto ">
               <div className="flex flex-row gap-2 items-start justify-start">
-                <img src={vizadaLogo} className=" w-44 lg:w-52 " />
+                <img src={vizadaLogo} className=" w-36 md:w-44 lg:w-52 " />
                 <div>
                   <h1 className="lg:text-4xl text-2xl  whitespace-nowrap font-bold ">
                     Formez vous

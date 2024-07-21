@@ -16,6 +16,21 @@ export const useCoursesStore = create((set, get) => ({
   subcategories: [],
   favorites: [],
   fetchingError: "",
+  coursesSearch: [],
+  navSearch: async (key) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKNED_URL}/api/courses?search=${key}`,
+
+        config
+      );
+      set({ coursesSearch: response.data });
+
+      return response.data;
+    } catch (e) {
+      set({ fetchingError: "error getting search" });
+    }
+  },
   getCategories: async () => {
     try {
       const response = await axios.get(
@@ -237,7 +252,6 @@ export const useCoursesStore = create((set, get) => ({
           `${import.meta.env.VITE_BACKNED_URL}/api/favoritesbyuser/`,
           { headers: headers }
         );
-        console.log(response.data);
         set({ favorites: response.data });
       } else {
         set({ favorites: [] });

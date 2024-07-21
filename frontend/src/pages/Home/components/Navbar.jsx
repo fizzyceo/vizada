@@ -27,6 +27,8 @@ import vizadaLogo from "../../../assets/navlogonbg.png";
 import { ProfileMenu } from "./ProfileMenu";
 import { useAuth } from "../../../stores/Auth";
 import { useNavigate } from "react-router-dom";
+import { useCoursesStore } from "../../../stores/Courses";
+import SearchBar from "../../../Components/SearchBar";
 
 const navListMenuItems = [
   {
@@ -195,6 +197,8 @@ export default function NavbarWithMegaMenu({ isLogged }) {
   const [openNav, setOpenNav] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [search, setSearch] = useState("");
+  const { navSearch, coursesSearch } = useCoursesStore((state) => state);
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -211,21 +215,7 @@ export default function NavbarWithMegaMenu({ isLogged }) {
           </a>
         </Typography>
         <div className="flex flex-row  justify-center items-center gap-2">
-          <div className="flex-grow md:w-[300px] lg:w-[500px] relative">
-            <Input
-              className=""
-              label="Search"
-              icon={<MagnifyingGlassIcon className="w-7" />}
-            />
-
-            <div
-              className={`${
-                showSearch ? "block" : "hidden"
-              } absolute -bottom-40 min-h-40  md:w-[300px] lg:w-[500px] p-3 bg-green-400`}
-            >
-              xx
-            </div>
-          </div>
+          <SearchBar />
 
           <div className="hidden lg:block">
             <NavList />
