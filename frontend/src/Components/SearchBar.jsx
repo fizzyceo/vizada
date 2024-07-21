@@ -52,26 +52,8 @@ const SearchBar = () => {
   // Function to highlight occurrences of search term in text
   const highlightSearchTerm = (text) => {
     if (!search.trim()) return text;
-
-    // Split search into individual words
-    const searchWords = search.trim().toLowerCase().split(/\s+/);
-
-    // Escape special characters in search terms for regex
-    const escapedSearchTerms = searchWords.map((term) =>
-      term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-    );
-
-    // Create regex pattern to match each search term individually
-    const regexPattern = escapedSearchTerms.join("|");
-
-    // Create regex with global flag and case insensitive
-    const regex = new RegExp(regexPattern, "gi");
-
-    // Replace matched search terms with highlighted span
-    return text.replace(
-      regex,
-      (match) => `<span class="bg-yellow-200">${match}</span>`
-    );
+    const regex = new RegExp(`(${search})`, "gi");
+    return text.replace(regex, '<span class="bg-yellow-200">$1</span>');
   };
 
   return (
@@ -83,7 +65,10 @@ const SearchBar = () => {
         onChange={(e) => setSearch(e.target.value)}
         icon={<MagnifyingGlassIcon className="w-7" />}
         onFocus={() => setShowSearch(true)}
-        onBlur={() => setShowSearch(false)}
+        onBlur={() => {
+          // Delay closing the search results to allow clicking on links
+          setTimeout(() => setShowSearch(false), 200);
+        }}
       />
       {showSearch && (
         <div className="absolute -bottom-[260px] h-64 md:w-[300px] lg:w-[500px] p-3 bg-white shadow-md">

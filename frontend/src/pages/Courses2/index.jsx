@@ -177,7 +177,7 @@ const Courses2 = (props) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {user?.role ? (
         <NavbarAdmin />
       ) : (
@@ -185,7 +185,7 @@ const Courses2 = (props) => {
       )}
       <div className="w-[90%] mx-auto flex flex-row items-center justify-between my-10">
         <div className="flex flex-col items-start gap-2">
-          <h1 className="text-4xl text-blue-700 font-medium">
+          <h1 className="text-2xl md:text-4xl text-blue-700 font-medium">
             Formations en{" "}
             {param1.toLowerCase() === "it" ? "Informatique" : "Management"}
           </h1>
@@ -209,14 +209,14 @@ const Courses2 = (props) => {
         </p>
       </div>
       <div className="w-[90%] mx-auto mt-10 space-y-5 roboto flex flex-row items-center justify-center my-5">
-        <div className="left flex flex-row items-start justify-center gap-4 w-full">
-          <div className="sub cat flex flex-col items-center justify-center gap-5">
+        <div className="left flex flex-col md:flex-row items-start justify-center gap-4 w-full">
+          <div className="sub cat flex flex-row md:flex-col items-center justify-center gap-5 overflow-x-scroll md:overflow-x-visible md:w-fit w-screen">
             {relevantSubCategories.length > 0 &&
               relevantSubCategories.map((category, index) => (
                 <div
                   key={category.id}
                   onClick={() => handleSubcategoryClick(category.id)}
-                  className={`px-5 cursor-pointer py-3 w-[250px]  text-center transition-all  border-gray-300 border-2 rounded-lg text-sm `}
+                  className={`px-5 cursor-pointer py-3 min-w-[150px] md:min-w-[200px] w-[250px]  text-center transition-all  border-gray-300 border-2 rounded-lg text-sm `}
                   style={{
                     whiteSpace: "nowrap", // Prevent text wrapping
                     overflow: "hidden", // Hide overflowed text

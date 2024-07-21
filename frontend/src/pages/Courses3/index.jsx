@@ -228,8 +228,8 @@ const Courses3 = (props) => {
         </p>
       </div>
       <div className="w-[90%] mx-auto mt-10 space-y-5 roboto flex flex-row items-center justify-center my-5">
-        <div className="left flex flex-row items-start justify-center gap-4 w-full">
-          <div className="sub cat flex flex-col items-center justify-center gap-5">
+        <div className="left flex flex-col md:flex-row items-start justify-center gap-4 w-full">
+          <div className="sub cat flex flex-row md:flex-col items-center justify-center gap-5 overflow-x-scroll md:overflow-x-visible md:w-fit w-screen">
             <div
               onClick={() => props.router.navigate(`/courses/${param1}`)}
               className={`px-5 cursor-pointer py-3 w-[250px]  text-center transition-all text-green-800  border-green-600 border-2 rounded-lg text-sm                    `}
@@ -247,7 +247,7 @@ const Courses3 = (props) => {
                 <div
                   key={category.id}
                   onClick={() => handleSubcategoryClick(category.id)}
-                  className={`px-5 cursor-pointer py-3 w-[250px]  text-center transition-all  border-gray-300 border-2 rounded-lg text-sm ${
+                  className={`p-5 cursor-pointer py-3 min-w-[150px] md:min-w-[200px] w-[250px]  text-center transition-all  border-gray-300 border-2 rounded-lg text-sm ${
                     parseInt(param2) === category.id
                       ? "text-blue-600 border-blue-900 "
                       : ""
