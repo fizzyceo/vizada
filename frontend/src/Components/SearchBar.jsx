@@ -40,7 +40,7 @@ const SearchBar = () => {
     if (search.length >= 3) {
       timer = setTimeout(() => {
         callSearch(search);
-      }, 1000); // Delay of 1000 milliseconds (1 second)
+      }, 300); // Delay of 1000 milliseconds (1 second)
     } else {
       setSearchResults([]);
     }
@@ -52,8 +52,26 @@ const SearchBar = () => {
   // Function to highlight occurrences of search term in text
   const highlightSearchTerm = (text) => {
     if (!search.trim()) return text;
-    const regex = new RegExp(`(${search})`, "gi");
-    return text.replace(regex, '<span class="bg-yellow-200">$1</span>');
+
+    // Split search into individual words
+    const searchWords = search.trim().toLowerCase().split(/\s+/);
+
+    // Escape special characters in search terms for regex
+    const escapedSearchTerms = searchWords.map((term) =>
+      term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    );
+
+    // Create regex pattern to match each search term individually
+    const regexPattern = escapedSearchTerms.join("|");
+
+    // Create regex with global flag and case insensitive
+    const regex = new RegExp(regexPattern, "gi");
+
+    // Replace matched search terms with highlighted span
+    return text.replace(
+      regex,
+      (match) => `<span class="bg-yellow-200">${match}</span>`
+    );
   };
 
   return (
