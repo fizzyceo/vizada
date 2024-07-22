@@ -9,7 +9,7 @@ export function FooterWithLogo() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-[95%]  bg-[#0e1529] md:w-full md:rounded-none rounded-lg mx-auto p-8 relative">
+    <footer className="w-[95%]  bg-[#0e1529] md:w-full md:rounded-none rounded-lg mx-auto lg:p-8 pt-5 relative">
       <span
         onClick={() => {
           window.scroll({ top: 0, behavior: "smooth" });

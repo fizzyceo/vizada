@@ -21,7 +21,7 @@ const DownloadApp = () => {
           <div className="flex  items-center mx-auto w-[90%]  lg:w-[50%] justify-start   font-serif">
             <div className=" flex flex-col poppins items-center mt-2 lg:mt-0 lg:items-start gap-5  mx-auto ">
               <div className="flex flex-row gap-1 items-center justify-center">
-                <h1 className="lg:text-4xl text-3xl  font-normal ">
+                <h1 className="lg:text-4xl md:text-3xl text-2xl  font-normal ">
                   Profitez de nos applications iOS, Android & Desktop{" "}
                   {/* <span className="gradient-text no-underline ">Vizada</span> */}
                 </h1>
@@ -29,7 +29,7 @@ const DownloadApp = () => {
 
               <Typography
                 variant="paragraph"
-                className="font-normal  text-blue-gray-500"
+                className="font-normal  xl:text-base text-sm text-blue-gray-500"
               >
                 Accédez à toutes vos formations et développez vos compétences
                 quand vous voulez et où que vous soyez !
@@ -63,12 +63,12 @@ const DownloadApp = () => {
             </div>
           </div>
 
-          <div className="xl:w-[520px] w-[400px] h-[450px] xl:h-[520px]   mx-auto z-0  relative">
+          <div className="xl:w-[520px] lg:w-[400px] md:w-[350px] sm:w-[300px] w-[250px] xl:h-[520px] lg:h-[400px] md:h-[350px] sm:h-[300px] h-[250px]    mx-auto z-0  relative">
             {/* <div className="absolute right-[35%] translate-x-[45%] lg:right-80 z-0   bottom-0 rounded-full w-full h-full bg-orange-800 opacity-10 blur-xl"></div>
           <div className="absolute right-[50%] translate-x-[45%] lg:right-48 z-0   bottom-0 rounded-full w-full h-full bg-black opacity-10 blur-xl"></div> */}
             <div className="z-10 w-full h-full relative ">
               {" "}
-              <Lottie options={defaultOptions} height={400} width={400} />
+              <Lottie options={defaultOptions} height={"fit"} />
             </div>
           </div>
         </div>

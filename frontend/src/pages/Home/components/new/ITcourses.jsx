@@ -49,7 +49,7 @@ const ITcourses = ({ router }) => {
   return (
     <div className="w-[90%] mx-auto space-y-5 ">
       <div className="flex justify-between w-full items-center">
-        <h1 className="text-3xl font-medium text-[#4e6ba3] w-[70%] md:w-[50%]">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#4e6ba3] w-[70%] md:w-[50%]">
           Commencez à apprendre avec nos formations IT
         </h1>
       </div>

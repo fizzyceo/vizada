@@ -16,7 +16,7 @@ const ContactBanner = () => {
       <div className="absolute -top-16 left-24 bg-[#3767da] opacity-35 w-[130px] rounded-full h-[200px] z-0"></div>
       <div className="md:px-16 flex flex-row items-start justify-start gap-5 flex-wrap w-[80%] mx-auto z-10">
         <div className="lg:w-[50%]">
-          <h1 className="text-3xl font-medium text-[#4e6ba3]">
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#4e6ba3]">
             Support Client 24H/24 et 7J/7 Contactez notre équipe commerciale
             pour toutes vos questions
           </h1>
@@ -34,7 +34,7 @@ const ContactBanner = () => {
             className="bg-white text-blue-800 rounded-lg shadow-md text-sm w-full md:w-[80%] lg:w-[60%] flex flex-row items-center gap-5 p-5"
           >
             <InboxArrowDownIcon className="w-7 text-[#ffdd00]" />
-            <p>contact@vizada.com</p>
+            <p>contact@vizada.dz</p>
           </a>
         </div>
       </div>

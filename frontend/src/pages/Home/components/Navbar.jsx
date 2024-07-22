@@ -211,7 +211,7 @@ export default function NavbarWithMegaMenu({ isLogged }) {
       <div className="flex items-center justify-between text-blue-gray-600">
         <Typography variant="h6" className="mr-4 cursor-pointer py-1.5 lg:ml-2">
           <a href="/">
-            <img src={vizadaLogo} width={84} alt="Vizada Logo" />
+            <img src={vizadaLogo} className="w-12 md:w-24 " alt="Vizada Logo" />
           </a>
         </Typography>
         <div className="flex flex-row  justify-center items-center gap-2">

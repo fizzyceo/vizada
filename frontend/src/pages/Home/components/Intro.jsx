@@ -20,23 +20,26 @@ const Intro = () => {
           <div className="flex  items-center mx-auto w-[90%]  lg:w-[55%] justify-start ">
             <div className=" flex flex-col poppins justify-center items-center mt-2 lg:mt-0 lg:items-start gap-3  mx-auto ">
               <div className="flex flex-row gap-2 items-start justify-start">
-                <img src={vizadaLogo} className=" w-36 md:w-44 lg:w-52 " />
+                <img
+                  src={vizadaLogo}
+                  className="w-28 sm:w-36 md:w-44 lg:w-52 "
+                />
                 <div>
-                  <h1 className="lg:text-4xl text-2xl  whitespace-nowrap font-bold ">
+                  <h1 className="lg:text-4xl text-xl md:text-2xl  whitespace-nowrap font-bold ">
                     Formez vous
                     {/* <span className="gradient-text no-underline ">Vizada</span> */}
                   </h1>
-                  <h1 className="lg:text-4xl text-2xl  whitespace-nowrap font-bold ">
+                  <h1 className="lg:text-4xl  text-xl md:text-2xl  whitespace-nowrap font-bold ">
                     à votre rythme
                     {/* <span className="gradient-text no-underline ">Vizada</span> */}
                   </h1>
                 </div>
               </div>
 
-              <h3 className="text-xl">Multiverse of Courses</h3>
+              <h3 className="text-md md:text-xl">Multiverse of Courses</h3>
               <Typography
                 variant="paragraph"
-                className="font-normal  text-blue-gray-500"
+                className="font-normal text-sm md:text-base  text-blue-gray-500"
               >
                 Vizada propose une gamme complète de formations sur le
                 management, le marketing, la sécurité, la gestion de projet et
