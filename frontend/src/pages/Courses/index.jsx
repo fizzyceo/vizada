@@ -59,7 +59,7 @@ const Courses = (props) => {
       if (list.length > 0) {
         setInfoText("");
       } else {
-        setInfoText("No Courses Available for this category...");
+        setInfoText("Aucun cours pour cette catégorie...");
       }
     }
   }, [courses, currentSubCategory]);

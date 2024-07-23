@@ -1,0 +1,26 @@
+.pricesection {
+  position: relative;
+}
+
+.price-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.5s ease-out; /* Transition property for smooth animation */
+}
+
+.price-container > div {
+  padding: 20px; /* Adjust padding as needed */
+}
+
+/* Adjust for specific conditions (e.g., only when activePlan is 1) */
+.pricesection .price-container:nth-child(1) {
+  transform: translateX(100%);
+}
+
+.pricesection .price-container:nth-child(2) {
+  transform: translateX(0%);
+}

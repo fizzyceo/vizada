@@ -11,10 +11,10 @@ export default function AccordionCustomStyles() {
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
 
   return (
-    <div id="qa" className="bg-gray-50 p-5 space-y-5">
+    <div id="qa" className="bg-gray-50 p-5 space-y-5 ">
       <div>
         <h1 className="roboto text-4xl text-center">
-          Have some questions for us ?
+          Vous avez des questions à nous poser ?
         </h1>
       </div>
       <div className="w-4/5 mx-auto">

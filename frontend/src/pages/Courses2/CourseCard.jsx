@@ -49,7 +49,7 @@ export default function CourseCard({ content, isFavorite, router }) {
   };
 
   return (
-    <Card className="p-0 min-h-[350px]">
+    <Card className="p-0 h-[450px]">
       {/* <CardHeader
         color="blue-gray"
         className="relative h-56 "
@@ -104,15 +104,15 @@ export default function CourseCard({ content, isFavorite, router }) {
           >
             {content.subCategory}
           </Typography>
-          <Typography variant="h5" color="blue-gray" className="mb-2">
-            {wrapText(content.Nomc, 50)}
+          <Typography color="blue-gray" className="font-medium mb-1">
+            {wrapText(content.Nomc, 48)}
           </Typography>
-          <Typography className="h-20 ">
-            {wrapText(content.Descriptionc, 100)}
+          <Typography className="h-20 lg:text-sm text-xs ">
+            {wrapText(content.Descriptionc, 150)}
           </Typography>
         </div>
       </CardBody>
-      <CardFooter className="pt-0">
+      <CardFooter className="pt-0 absolute bottom-0">
         <Button>
           <Link to={content.link}>Read More</Link>
         </Button>

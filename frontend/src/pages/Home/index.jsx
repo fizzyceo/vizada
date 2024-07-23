@@ -48,7 +48,7 @@ const Home = () => {
   //   }
   // },[user])
   return (
-    <div className="home  bg-gray-50 poppins ">
+    <div className="home  bg-gray-50 roboto ">
       {/**navbar: logo login button  + hyperlinks(courses, Pricing, Q/A,  ) */}
       <React.Fragment>
         {user?.role ? (

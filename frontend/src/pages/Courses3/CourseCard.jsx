@@ -49,7 +49,7 @@ export default function CourseCard({ content, isFavorite, router }) {
   };
 
   return (
-    <Card className="p-0 min-h-[350px]">
+    <Card className="p-0 h-[450px]">
       {/* <CardHeader
         color="blue-gray"
         className="relative h-56 "
@@ -112,7 +112,7 @@ export default function CourseCard({ content, isFavorite, router }) {
           </Typography>
         </div>
       </CardBody>
-      <CardFooter className="pt-0">
+      <CardFooter className="pt-0 absolute bottom-0">
         <Button>
           <Link to={content.link}>Read More</Link>
         </Button>

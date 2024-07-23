@@ -86,7 +86,7 @@ const Courses3 = (props) => {
       if (list.length > 0) {
         setInfoText("");
       } else {
-        setInfoText("No Courses Available for this category...");
+        setInfoText("Aucun cours pour cette catégorie...");
       }
     }
   }, [categoryCourses, param2]);
@@ -210,7 +210,7 @@ const Courses3 = (props) => {
           </h1>
           <div className="flex flex-row items-center justify-center gap-1">
             <PlayCircleIcon className="w-7 text-yellow-700" />
-            <p className="text-sm">{coursesToShow.length} formations</p>
+            <p className="text-sm">{courseList?.length} formations</p>
           </div>
         </div>
         <p

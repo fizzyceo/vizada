@@ -3,6 +3,7 @@ import { Typography } from "@material-tailwind/react";
 import downloadLottie from "../../../Components/Common/download3.json";
 import Lottie from "react-lottie";
 import googlePlayIcon from "../../../assets/google-play.png";
+import appleIcon from "../../../assets/apple.png";
 import laptopIcon from "../../../assets/laptop.png";
 const DownloadApp = () => {
   const defaultOptions = {
@@ -37,26 +38,38 @@ const DownloadApp = () => {
               <div className="formation1  flex flex-row items-end justify-start gap-3">
                 <a
                   href="https://play.google.com/store/apps/details?id=com.mobilev2"
-                  className="border bg-black p-2 rounded-lg text-white border-white flex flex-row gap-1 items-center justify-center"
+                  className="border bg-black p-2 w-[130px] md:w-[150px] rounded-lg text-white border-white flex flex-row gap-1 items-center justify-center"
                 >
                   <img src={googlePlayIcon} className="w-7" alt="" />
                   <div className="text-start mb-1 leading-none">
                     <small className="font-light " style={{ fontSize: "9px" }}>
                       DISPONIBLE SUR{" "}
                     </small>
-                    <h1 className="">Google Play</h1>
+                    <h1 className="text-xs md:text-sm">Google Play</h1>
                   </div>
                 </a>
                 <a
                   href="https://www.alphorm.com/formez-vous-en-mobilite"
-                  className="border bg-black p-2 rounded-lg text-white border-white min-w-36  flex flex-row gap-2 items-center justify-start"
+                  className="border bg-black p-2 w-[130px] md:w-[150px] rounded-lg text-white border-white flex flex-row gap-1 items-center justify-center"
                 >
                   <img src={laptopIcon} className="w-7" alt="" />
                   <div className="text-start mb-1 leading-none">
                     <small className="font-light " style={{ fontSize: "9px" }}>
                       Telecharger Pour{" "}
                     </small>
-                    <h1 className="">Desktop</h1>
+                    <h1 className="text-xs md:text-sm">Desktop</h1>
+                  </div>
+                </a>
+                <a
+                  href="https://apps.apple.com/us/app/alphorm-formations-it-en-ligne/id1016914468"
+                  className="border bg-black p-2 rounded-lg w-[130px] md:w-[150px] text-white border-white flex flex-row gap-3 items-center justify-center"
+                >
+                  <img src={appleIcon} className="w-7" alt="" />
+                  <div className="text-start mb-1 leading-none">
+                    <small className="font-light " style={{ fontSize: "9px" }}>
+                      DISPONIBLE SUR{" "}
+                    </small>
+                    <h1 className="text-xs md:text-sm">App Store</h1>
                   </div>
                 </a>
               </div>

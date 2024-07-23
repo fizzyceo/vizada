@@ -5,12 +5,12 @@ import {
   CreditCardIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/solid";
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
 import Timer from "./CountDown";
 import moment from "moment";
 
 const Subscription = ({ isActive, subscriberContent }) => {
-  const [secondsLeft, setSecondsLeft] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(-1);
   const [totalSeconds, setTotalSeconds] = useState(0);
 
   useEffect(() => {
@@ -41,31 +41,39 @@ const Subscription = ({ isActive, subscriberContent }) => {
       console.log("Total Seconds:", totalSeconds, "Seconds Left:", secondsLeft);
     }
   }, [subscriberContent]);
-
+  useEffect(() => {
+    console.log(isActive);
+  }, [isActive]);
   return (
-    <div className="w-full flex flex-col items-center justify-start text-gray-100 my-3 pb-7">
+    <div className="w-full flex flex-col items-center justify-start text-gray-100 my-3 pb-7 min-h-[350px]">
       {isActive === 1 ? (
         <>
-          <CreditCardIcon className="w-24 lg:w-24 text-gray-100 z-20" />
+          {totalSeconds > 0 && secondsLeft !== -1 ? (
+            <>
+              <CreditCardIcon className="w-24 lg:w-24 text-gray-100 z-20" />
 
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="flex flex-row items-center justify-center gap-2">
-              {subscriberContent.Id_c === 1 ? (
-                <ComputerDesktopIcon className="h-8 text-gray-100 w-8" />
-              ) : (
-                <RectangleGroupIcon className="h-8 text-gray-100 w-8" />
-              )}
-              <h1 className="text-xl">
-                You Are Subscribed to{" "}
-                <span className="font-bold">
-                  {subscriberContent.Id_c === 1
-                    ? "Information Technology"
-                    : "Management"}
-                </span>
-              </h1>
-            </div>
-            <Timer secondsLeft={secondsLeft} totalSeconds={totalSeconds} />
-          </div>
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex flex-row items-center justify-center gap-2">
+                  {subscriberContent.Id_c === 1 ? (
+                    <ComputerDesktopIcon className="h-8 text-gray-100 w-8" />
+                  ) : (
+                    <RectangleGroupIcon className="h-8 text-gray-100 w-8" />
+                  )}
+                  <h1 className="text-xl">
+                    You Are Subscribed to{" "}
+                    <span className="font-bold">
+                      {subscriberContent.Id_c === 1
+                        ? "Information Technology"
+                        : "Management"}
+                    </span>
+                  </h1>
+                </div>
+                <Timer secondsLeft={secondsLeft} totalSeconds={totalSeconds} />
+              </div>
+            </>
+          ) : (
+            <Spinner />
+          )}
         </>
       ) : isActive === 0 ? (
         <div className=" flex flex-col items-center justify-center gap-6">

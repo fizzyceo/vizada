@@ -24,6 +24,7 @@ export function AddCourseModel({
     setBody((prevBody) => ({ ...prevBody, image: base64 }));
   };
   const [errormsg, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleOpen = () => setOpenAddCourse(!OpenAddCourse);
   const { AddCourse } = useCoursesStore((state) => state);
 
@@ -47,7 +48,7 @@ export function AddCourseModel({
     }));
   };
 
-  const handleOk = () => {
+  const handleOk = async () => {
     // Validate fields before proceeding
     if (!body.image) {
       setError("Please choose an image.");
@@ -66,13 +67,15 @@ export function AddCourseModel({
       return;
     }
 
+    setLoading(true);
     try {
-      AddCourse({ ...body, prix: 4.1 });
+      await AddCourse({ ...body, prix: 4.1 });
       setOpenAddCourse(false); // Close the dialog
     } catch (error) {
       console.error("Error modifying course:", error);
       // Handle error (e.g., show error message to the user)
     }
+    setLoading(false);
   };
 
   return (
@@ -174,7 +177,12 @@ export function AddCourseModel({
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="green" onClick={handleOk}>
+          <Button
+            loading={loading}
+            variant="gradient"
+            color="green"
+            onClick={handleOk}
+          >
             <span>Confirm</span>
           </Button>
         </DialogFooter>

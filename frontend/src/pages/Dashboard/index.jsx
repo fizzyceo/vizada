@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "../Home/components/Navbar";
-import { Button, IconButton, Input } from "@material-tailwind/react";
+import { Button, IconButton, Input, Spinner } from "@material-tailwind/react";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -38,7 +38,8 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
   const user = useAuth((state) => state.user);
   const [subscriberContent, setSubscriberContent] = useState(null);
-  const [activeAcc, setActiveAcc] = useState(-1);
+  const [activeAcc, setActiveAcc] = useState(-3);
+  const [loading, setLoading] = useState(true); // State to track loading state
 
   useEffect(() => {
     const checkInvoice = async () => {
@@ -74,6 +75,8 @@ const Dashboard = (props) => {
       } catch (error) {
         console.error("Error in checkInvoice:", error);
         // Handle errors (e.g., display error message, redirect, etc.)
+      } finally {
+        setLoading(false); // Set loading to false when done
       }
     };
 
@@ -97,12 +100,14 @@ const Dashboard = (props) => {
           }
           setSubscriberContent(subscription);
         } else {
-          setActiveAcc(-1); // Handle scenario where no subscription found
+          setActiveAcc(-2); // Handle scenario where no subscription found
         }
       } catch (error) {
         console.error("Error fetching subscription:", error);
-        setActiveAcc(-1); // Set activeAcc to -1 in case of error
+        setActiveAcc(-2); // Set activeAcc to -1 in case of error
         // Handle error (e.g., display error message, redirect, etc.)
+      } finally {
+        setLoading(false); // Set loading to false when done
       }
     };
 
@@ -161,10 +166,16 @@ const Dashboard = (props) => {
           <div className="absolute left-8 lg:right-16 z-0   bottom-0 rounded-full w-24 h-24 opacity-30 bg-gray-400 blur-xl"></div>
           {/* {document.createElement("img", data[tabSelected - 1].icon)} */}
           {tabSelected === 1 && (
-            <Subscription
-              isActive={activeAcc}
-              subscriberContent={subscriberContent}
-            />
+            <div>
+              {activeAcc === -3 ? (
+                <Spinner />
+              ) : (
+                <Subscription
+                  isActive={activeAcc}
+                  subscriberContent={subscriberContent}
+                />
+              )}
+            </div>
           )}
           {/* {tabSelected === 2 && <Credentials />} */}
         </div>

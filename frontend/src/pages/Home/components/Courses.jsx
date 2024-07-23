@@ -36,7 +36,7 @@ const Courses = ({ categories }) => {
             >
               <CardBody className="z-10 min-h-64 min-w-[250px] flex flex-col items-center justify-between ">
                 <img src={vizadaLogo} alt="" className="w-44" />
-                <h1 className="text-sm ">{cat.Nomcategorie} Courses</h1>
+                <h1 className="text-sm ">{cat.Nomcategorie} Cours</h1>
               </CardBody>
             </Card>
           ))}

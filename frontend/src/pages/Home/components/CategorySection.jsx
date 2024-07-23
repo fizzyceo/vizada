@@ -73,7 +73,7 @@ const CategorySection = ({ cat }) => {
                 className="flex flex-row  items-center justify-between"
                 to={`/courses?type=management`}
               >
-                <h1>All Courses</h1>
+                <h1>Tous les Cours</h1>
                 <ArrowRightIcon width={18} className="animate-pulse" />
               </Link>
             </Button>
