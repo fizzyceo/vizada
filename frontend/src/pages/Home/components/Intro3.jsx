@@ -15,15 +15,15 @@ import LottiePc from "./svgs/LottiePc";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 const Intro3 = () => {
   return (
-    <div className=" w-full poppins">
+    <div id="services" className=" w-full poppins">
       <div className="min-h-[550px] w-[90%]  xl:w-[80%]  my-5 pt-10 mx-auto flex flex-col items-center gap-10">
         <h1 className="lg:text-4xl text-light-red-700 text-xl md:text-2xl  whitespace-nowrap font-bold ">
           No Services
         </h1>
         <h1 className="lg:text-2xl text-lg md:text-xl  whitespace-nowrap font-semibold ">
-          Formez vous à votre rythme
+          Apprenez selon vos propres cadences
         </h1>
-        <div className="flex  items-center  mx-auto gap-10 justify-between ">
+        <div className="flex  items-center flex-wrap md:flex-nowrap  mx-auto gap-10 justify-between ">
           <div className="bg-gray-200 rounded-sm p-5 py-10 border-t-4 border-red-700 transition-all hover:scale-105 flex flex-col gap-4 items-center">
             <h1 className="lg:text-2xl text-lg md:text-xl  whitespace-nowrap font-semibold ">
               Formations IT{" "}
@@ -85,7 +85,7 @@ const Intro3 = () => {
           </div>
           <div className="bg-gray-200 rounded-sm p-5 py-10 border-t-4 border-red-700  transition-all hover:scale-105 flex flex-col gap-4 items-center">
             <h1 className="lg:text-2xl text-lg md:text-xl  whitespace-nowrap font-semibold ">
-              Formations Management{" "}
+              Formations SoftSkills{" "}
             </h1>
             <Typography
               variant="paragraph"

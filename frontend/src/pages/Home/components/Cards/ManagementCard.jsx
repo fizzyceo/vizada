@@ -65,7 +65,7 @@ const ManagementCard = () => {
           Mensuel
         </small>
       </div>
-      <h1 className="text-[#4891f7] font-medium text-xl">Management</h1>
+      <h1 className="text-[#4891f7] font-medium text-xl">SoftSkills</h1>
       <p className="font-normal text-sm text-[#a6a1ab] lg:w-[85%]">
         Commencez votre nouvelle carrière informatique maintenant
       </p>

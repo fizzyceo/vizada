@@ -125,6 +125,27 @@ function NavListMenu() {
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1 items-center justify-center">
+      <ListItem className="flex items-center w-fit justify-center p-0 ">
+        <a
+          href="/#services"
+          className="cursor-pointer w-fit  p-2"
+          onClick={(e) => {
+            e.preventDefault();
+            const element = document.getElementById("services");
+            element.scrollIntoView({
+              behavior: "smooth",
+            });
+          }}
+        >
+          <Typography
+            variant="small"
+            color="blue-gray"
+            className="font-normal text-gray-700"
+          >
+            Services
+          </Typography>
+        </a>
+      </ListItem>
       <NavListMenu />
 
       <ListItem className="flex items-center p-0 w-fit justify-center ">

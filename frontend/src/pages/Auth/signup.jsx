@@ -25,6 +25,7 @@ const signup = () => {
     password,
     re_password,
     Date_Naissance,
+    ntel,
   } = formData;
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -60,6 +61,7 @@ const signup = () => {
         last_name,
         email,
         password,
+        ntel,
         Date_Naissance,
         re_password,
       };

@@ -58,6 +58,7 @@ const Home = () => {
           <NavbarWithMegaMenu isLogged={user ? true : false} />
         )}
       </React.Fragment>
+      <Intro />
       <Intro3 />
       {/* <Intro2 /> */}
       <section className=" w-[100%]   mt-5 mb-20  flex items-center justify-center flex-col gap-5 partners ">
