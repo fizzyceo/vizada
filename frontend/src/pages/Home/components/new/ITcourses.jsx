@@ -4,6 +4,7 @@ import { useCoursesStore } from "../../../../stores/Courses";
 import CourseCard from "../../../Courses/CourseCard";
 import withRouter from "../../../../Components/Common/withRouter";
 import { Spinner } from "@material-tailwind/react";
+import CarouselCourses from "../CarouselCourses2";
 
 const ITcourses = ({ router }) => {
   const { getCoursesBySousCategory } = useCoursesStore((state) => state);
@@ -37,7 +38,7 @@ const ITcourses = ({ router }) => {
       const coursesCopy = [...sousCategoryCourses]; // Create a copy of courses array
       const randomCourses = [];
 
-      while (randomCourses.length < 4 && coursesCopy.length > 0) {
+      while (randomCourses.length < 16 && coursesCopy.length > 0) {
         const randomIndex = Math.floor(Math.random() * coursesCopy.length);
         randomCourses.push(coursesCopy[randomIndex]);
         coursesCopy.splice(randomIndex, 1); // Remove selected course to avoid duplicates
@@ -72,16 +73,16 @@ const ITcourses = ({ router }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+        <div>
           {randomCourseList.length === 0 && (
             <div>Aucun cours pour cette catégorie</div>
           )}
-          {randomCourseList.length > 0 &&
-            randomCourseList.map((item, index) => (
-              <div key={index}>
-                <CourseCard content={item} router={router} />
-              </div>
-            ))}
+          {randomCourseList.length > 0 && (
+            <CarouselCourses
+              router={router}
+              randomCourseList={randomCourseList}
+            />
+          )}
         </div>
       )}
     </div>

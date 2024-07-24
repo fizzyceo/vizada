@@ -46,7 +46,7 @@ const ManagementCourses = ({ router }) => {
     }
   }, [sousCategoryCourses]);
   return (
-    <div className="w-[90%] mx-auto space-y-5 min-h-80">
+    <div id="formation2" className="w-[90%] mx-auto space-y-5 min-h-80">
       <div className="flex justify-between w-full items-center">
         <h1 className="text-3xl font-medium text-[#4e6ba3] w-[70%] md:w-[50%]">
           Commencez à apprendre avec nos formations Management

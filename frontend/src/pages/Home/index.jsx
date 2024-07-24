@@ -20,6 +20,7 @@ import { InboxArrowDownIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import ContactBanner from "./components/ContactBanner";
 import DownloadApp from "./components/DownloadApp";
 import Courses2 from "./components/Courses2";
+import Intro3 from "./components/Intro3";
 
 const Home = () => {
   const { getCategories, categories } = useCoursesStore((state) => state);
@@ -57,7 +58,7 @@ const Home = () => {
           <NavbarWithMegaMenu isLogged={user ? true : false} />
         )}
       </React.Fragment>
-      <Intro />
+      <Intro3 />
       {/* <Intro2 /> */}
       <section className=" w-[100%]   mt-5 mb-20  flex items-center justify-center flex-col gap-5 partners ">
         <div className="flex flex-row items-center justify-center gap-10 lg:gap-20 p-2 w-full opacity-50 ">

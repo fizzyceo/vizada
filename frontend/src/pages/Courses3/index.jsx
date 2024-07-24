@@ -218,9 +218,9 @@ const Courses3 = (props) => {
           onClick={(e) => {
             e.preventDefault();
 
-            props.router.navigate(
-              `/courses/${param1.toLowerCase() === "it" ? "management" : "IT"}`
-            );
+            window.location = `${import.meta.env.VITE_PUBLIC_URL}/courses/${
+              param1.toLowerCase() === "it" ? "management" : "IT"
+            }`;
           }}
           className="roboto font-medium text-blue-900 underline cursor-pointer"
         >

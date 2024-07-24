@@ -11,6 +11,7 @@ import {
 import Activation from "../pages/Activate";
 import Logout from "../pages/Auth/Logout";
 import ChangePass from "../pages/ChangePass";
+import Consulting from "../pages/Consulting";
 import Courses2 from "../pages/Courses2";
 import Courses3 from "../pages/Courses3";
 import ForgetPass from "../pages/ForgetPass";
@@ -30,6 +31,7 @@ const adminRoutes = [
 ];
 const publicRoutes = [
   { path: "/activate/:param1/:param2", component: <Activation /> },
+  { path: "/consulting", component: <Consulting /> },
   {
     path: "/",
     component: <Home />,

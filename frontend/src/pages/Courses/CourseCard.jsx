@@ -49,7 +49,7 @@ export default function CourseCard({ content, isFavorite, router }) {
   };
 
   return (
-    <Card className="p-0 h-[450px]">
+    <Card className="p-0 h-[450px] min-w-[300px]">
       {/* <CardHeader
         color="blue-gray"
         className="relative h-56 "

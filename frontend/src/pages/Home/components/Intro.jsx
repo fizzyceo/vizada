@@ -12,12 +12,14 @@ import LottieAnimation from "./svgs/IntroSvg";
 import vizadaLogo from "../../../assets/vizadalogo.png";
 
 import LottiePc from "./svgs/LottiePc";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 const Intro = () => {
   return (
     <div className=" w-full poppins">
       <div className="min-h-[550px] w-[90%]  xl:w-[80%]  py-5 mx-auto ">
         <div className="flex flex-row justify-between w-full flex-wrap z-10 ">
           <div className="flex  items-center mx-auto w-[90%]  lg:w-[55%] justify-start ">
+            
             <div className=" flex flex-col poppins justify-center items-center mt-2 lg:mt-0 lg:items-start gap-3  mx-auto ">
               <div className="flex flex-row gap-2 items-start justify-start">
                 <img
@@ -45,20 +47,41 @@ const Intro = () => {
                 management, le marketing, la sécurité, la gestion de projet et
                 les systèmes d’information.
               </Typography>
-              <Button className=" bg-red-900 flex items-center justify-between place-self-start rounded-full space-x-4 self-center lg:self-auto">
-                <a
-                  className="flex items-center justify-between w-full space-x-4"
-                  onClick={() => {
-                    const element = document.getElementById("formation");
-                    element.scrollIntoView({
-                      behavior: "smooth",
-                    });
-                  }}
+              <div className="flex flex-row items-center justify-center gap-3 ">
+                <Button
+                  style={{ textTransform: "initial" }}
+                  className="text-sm xl:text-base font-medium bg-red-900 flex items-center justify-between place-self-start rounded-full space-x-4 self-center lg:self-auto"
                 >
-                  <p>Nos Formations</p>
-                  <ArrowDownIcon className="w-6" />
-                </a>
-              </Button>
+                  <a
+                    className="flex items-center justify-between w-full space-x-4"
+                    onClick={() => {
+                      const element = document.getElementById("formation");
+                      element.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    <p>Nos Formations</p>
+                    <ArrowDownIcon className="w-6" />
+                  </a>
+                </Button>
+                <Button
+                  style={{ textTransform: "initial" }}
+                  className="text-sm xl:text-base font-medium bg-blue-800 flex items-center justify-between place-self-start rounded-full space-x-4 self-center lg:self-auto "
+                >
+                  <a
+                    className="flex items-center justify-between w-full space-x-4"
+                    onClick={() => {
+                      window.location = `${
+                        import.meta.env.VITE_PUBLIC_URL
+                      }/consulting`;
+                    }}
+                  >
+                    <p>Notre Consultation</p>
+                    <ArrowPathIcon className="w-6" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
 
