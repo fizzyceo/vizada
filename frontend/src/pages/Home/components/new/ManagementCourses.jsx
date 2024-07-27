@@ -4,6 +4,7 @@ import { useCoursesStore } from "../../../../stores/Courses";
 import CourseCard from "../../../Courses/CourseCard";
 import withRouter from "../../../../Components/Common/withRouter";
 import { Spinner } from "@material-tailwind/react";
+import CarouselCourses from "../CarouselCourses2";
 
 const ManagementCourses = ({ router }) => {
   const { getCoursesBySousCategory } = useCoursesStore((state) => state);
@@ -71,16 +72,16 @@ const ManagementCourses = ({ router }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-3">
+        <div>
           {randomCourseList.length === 0 && (
             <div>Aucun cours pour cette catégorie</div>
           )}
-          {randomCourseList.length > 0 &&
-            randomCourseList.map((item, index) => (
-              <div key={index}>
-                <CourseCard content={item} router={router} />
-              </div>
-            ))}
+          {randomCourseList.length > 0 && (
+            <CarouselCourses
+              router={router}
+              randomCourseList={randomCourseList}
+            />
+          )}
         </div>
       )}
     </div>
