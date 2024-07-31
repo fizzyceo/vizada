@@ -6,6 +6,7 @@ import googlePlayIcon from "../../../assets/google-play.png";
 import appleIcon from "../../../assets/apple.png";
 import laptopIcon from "../../../assets/laptop.png";
 import slickPay from "../../../assets/slickpay.png";
+import linkedin from "../../../assets/linkedin.png";
 export function FooterWithLogo() {
   const currentYear = new Date().getFullYear();
 
@@ -23,6 +24,15 @@ export function FooterWithLogo() {
         <div className="flex flex-row items-center justify-between md:border-b-2 border-white  mx-auto pb-5 w-full">
           <img src={vizadaLogo} alt="logo-ct" className="w-28 invert " />
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
+            <Typography
+              as="a"
+              href="hhttps://www.linkedin.com/company/avescon/"
+              className="bg-[#ffdd00] p-2 rounded-full text-gray-900  "
+              target="_blank"
+            >
+              <img src={linkedin} className="h-5 w-5" />
+            </Typography>
+
             <Typography
               as="a"
               href="https://www.facebook.com/Vizada.dz?mibextid=ZbWKwL"
@@ -78,16 +88,16 @@ export function FooterWithLogo() {
             </h2>
             <ul className="text-[#7191ad] space-y-2">
               <li>
-                <a href="/courses/Management/25">Entrepreneurship</a>
+                <a href="/courses/Management/36">Langue</a>
               </li>
               <li>
-                <a href="/courses/Management/16"> Project Management </a>
+                <a href="/courses/Management/37">Marketing</a>
               </li>
               <li>
-                <a href="/courses/Management/18"> Human Ressources </a>
+                <a href="/courses/Management/38">Capitale Humain</a>
               </li>
               <li>
-                <a href="/courses/Management/24">Organizational Behavior</a>
+                <a href="/courses/Management/39">Gestion - Finance</a>
               </li>
             </ul>
           </div>
@@ -95,16 +105,33 @@ export function FooterWithLogo() {
             <h2 className="mb-4 text-transparent">Formations</h2>
             <ul className="text-[#7191ad] space-y-2">
               <li>
-                <a href="/courses/IT/1">Cyber Securite 1.0 </a>
+                <a href="/courses/IT/9">Virtualisation</a>
               </li>
               <li>
-                <a href="/courses/IT/2">Artificial Intelligence</a>
+                <a href="/courses/IT/13">Base de Données</a>
               </li>
               <li>
-                <a href="/courses/IT/12">Network Securite </a>
+                <a href="/courses/IT/14">Infrastructure</a>
               </li>
               <li>
-                <a href="/courses/IT/8">Web Development</a>
+                <a href="/courses/IT/12">Réseaux</a>
+              </li>
+            </ul>
+          </div>
+          <div className="formation1  text-start">
+            <h2 className="mb-4 text-transparent">Formations</h2>
+            <ul className="text-[#7191ad] space-y-2">
+              <li>
+                <a href="/courses/IT/10">Securite</a>
+              </li>
+              <li>
+                <a href="/courses/IT/8">Web Developement</a>
+              </li>
+              <li>
+                <a href="/courses/IT/7">3d Animation </a>
+              </li>
+              <li>
+                <a href="/courses/IT/11">Bureautique</a>
               </li>
             </ul>
           </div>
@@ -117,13 +144,13 @@ export function FooterWithLogo() {
                 <a href="/#pricing"> Tarifs </a>
               </li>
               <li>
-                <a href=""> Consultation </a>
+                <a href=""> Consulting </a>
               </li>
               <li>
                 <a href=""> Devenir Formateur </a>
               </li>
               <li>
-                <a href=""> Plagiat </a>
+                <a href="https://vizada.dz/consulting"> Plagiat </a>
               </li>
             </ul>
           </div>
@@ -140,12 +167,14 @@ export function FooterWithLogo() {
                 <a href="tel:+213540974762"> (+213) 540 974 762 </a>
               </li>
               <li>
-                <a href="mailto:contact@vizada.com"> contact@vizada.com </a>
+                <a>(+213) 023 53 80 84 </a>
+              </li>
+              <li>
+                <a href="mailto:contact@vizada.com"> contact@vizada.dz </a>
               </li>
             </ul>
           </div>
 
-          <div className=" "></div>
           <div className="formation1  flex flex-col items-end justify-start gap-3">
             <a
               href="https://play.google.com/store/apps/details?id=com.mobilev2"

@@ -20,7 +20,7 @@ export const useInvoiceStore = create((set, get) => ({
   CreateInvoice: async (body, navigate) => {
     try {
       const response = await axios.post(
-        "https://devapi.slick-pay.com/api/v2/users/invoices",
+        "https://prodapi.slick-pay.com/api/v2/users/invoices",
         body,
         config
       );
@@ -43,7 +43,7 @@ export const useInvoiceStore = create((set, get) => ({
   GetInvoice: async (id, navigate, email) => {
     try {
       const response = await axios.get(
-        `https://devapi.slick-pay.com/api/v2/users/invoices/${id}`,
+        `https://prodapi.slick-pay.com/api/v2/users/invoices/${id}`,
 
         config
       );

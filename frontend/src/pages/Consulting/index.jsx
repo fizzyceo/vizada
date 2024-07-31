@@ -11,7 +11,7 @@ import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import tiktoksvg from "../../assets/tiktok.svg";
 import { FooterWithLogo } from "../Home/components/Footer";
-
+import imagecons from "../../assets/consultingservice.jpg"
 const Consulting = () => {
   const { user } = useAuth((state) => state);
 
@@ -74,6 +74,9 @@ const Consulting = () => {
       </div>*/}
 
       <Front />
+      <div className="w-[90%] mx-auto my-5">
+        <img src={imagecons} className="w-full" alt="" />
+      </div>
       <Services />
       <Testimonials />
       <Contact />

@@ -37,7 +37,7 @@ const ManagementCourses = ({ router }) => {
       const coursesCopy = [...sousCategoryCourses]; // Create a copy of courses array
       const randomCourses = [];
 
-      while (randomCourses.length < 4 && coursesCopy.length > 0) {
+      while (randomCourses.length < 16 && coursesCopy.length > 0) {
         const randomIndex = Math.floor(Math.random() * coursesCopy.length);
         randomCourses.push(coursesCopy[randomIndex]);
         coursesCopy.splice(randomIndex, 1); // Remove selected course to avoid duplicates
@@ -50,7 +50,7 @@ const ManagementCourses = ({ router }) => {
     <div id="formation2" className="w-[90%] mx-auto space-y-5 min-h-80">
       <div className="flex justify-between w-full items-center">
         <h1 className="text-3xl font-medium text-[#4e6ba3] w-[70%] md:w-[50%]">
-          Commencez à apprendre avec nos formations Management
+          Commencez à apprendre avec nos formations Softskills
         </h1>
       </div>
       <div className="flex items-end justify-end">
@@ -58,7 +58,7 @@ const ManagementCourses = ({ router }) => {
           className="text-sm font-semibold text-blue-900 text-end"
           href="/courses/Management"
         >
-          Voir tous nos formations Management
+          Voir toutes nos formations Softskills
         </a>
       </div>
       <MenuFilter

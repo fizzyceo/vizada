@@ -32,12 +32,13 @@ const Intro = () => {
                   </h1>
                   <h1 className="lg:text-4xl  text-xl md:text-2xl  whitespace-nowrap font-bold ">
                     à votre rythme
+
                     {/* <span className="gradient-text no-underline ">Vizada</span> */}
                   </h1>
                 </div>
               </div>
 
-              <h3 className="text-md md:text-xl">Multiverse of Courses</h3>
+              <h3 className="text-md md:text-xl">Multiverse des formations</h3>
               <Typography
                 variant="paragraph"
                 className="font-normal text-sm md:text-base  text-blue-gray-500"
@@ -68,7 +69,7 @@ const Intro = () => {
             </div>
           </div>
 
-          <div className="2xl:w-[500px] lg:w-[420px] w-[400px] h-[300px] lg:h-[450px] xl:h-[520px]   mx-auto z-0  relative">
+          <div className=" 2xl:w-[420px] lg:w-[400px] w-[380px] h-[300px] lg:h-[450px] xl:h-[520px]   mx-auto z-0  relative">
             <div className="absolute right-[35%] translate-x-[45%] lg:right-80 z-0   bottom-0 rounded-full w-full h-full bg-orange-800 opacity-10 blur-xl"></div>
             <div className="absolute right-[50%] translate-x-[45%] lg:right-48 z-0   bottom-0 rounded-full w-full h-full bg-black opacity-10 blur-xl"></div>
             <div className="z-10 w-full h-full relative ">

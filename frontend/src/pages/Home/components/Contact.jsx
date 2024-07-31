@@ -66,12 +66,12 @@ const Contact = () => {
     <div id="contact" className="bg-gray-50 p-5 space-y-5">
       <div>
         <h1 className="roboto text-4xl text-center">
-          Your Question is unique?{" "}
+        Votre question est unique ? {" "}
         </h1>
         <div className="w-4/5 lg:w-2/5 mx-auto my-10 ">
           <Card className="bg-gray-50">
             <CardHeader>
-              <h1 className="roboto text-3xl text-center">Contact us </h1>
+              <h1 className="roboto text-3xl text-center">Contactez-nous  </h1>
             </CardHeader>
 
             <CardBody className="space-y-5">

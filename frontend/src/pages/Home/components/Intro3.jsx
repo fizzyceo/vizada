@@ -18,7 +18,7 @@ const Intro3 = () => {
     <div id="services" className=" w-full poppins">
       <div className="min-h-[550px] w-[90%]  xl:w-[80%]  my-5 pt-10 mx-auto flex flex-col items-center gap-10">
         <h1 className="lg:text-4xl text-light-red-700 text-xl md:text-2xl  whitespace-nowrap font-bold ">
-          No Services
+          Nos Services
         </h1>
         <h1 className="lg:text-2xl text-lg md:text-xl  whitespace-nowrap font-semibold ">
           Apprenez selon vos propres cadences

@@ -37,6 +37,11 @@ const publicRoutes = [
     component: <Home />,
   },
   {
+    path: "/fr",
+    component: <Home />,
+  },
+  
+  {
     path: "/password/reset/confirm/:param1/:param2",
     component: <ChangePass />,
   },

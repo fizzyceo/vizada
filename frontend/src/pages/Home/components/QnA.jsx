@@ -30,12 +30,13 @@ export default function AccordionCustomStyles() {
               open === 1 ? "text-orange-700 hover:!text-orange-800" : ""
             }`}
           >
-            What is Vizada?
+            Qui sommes-nous?
           </AccordionHeader>
           <AccordionBody className="pt-0 text-base font-normal">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            sapiente consequuntur corporis maiores, ut delectus fugiat
-            repudiandae vero et dignissimos.
+            VIZADA Academy, organisme de consulting, d'accompagnement et de
+            formation, qui propose aux entreprises, aux organisations et aux
+            individus des programmes pour le développement de leurs compétences
+            dans le domaine professionnel.
           </AccordionBody>
         </Accordion>
         <Accordion
@@ -50,12 +51,15 @@ export default function AccordionCustomStyles() {
               open === 2 ? "text-orange-700 hover:!text-orange-800" : ""
             }`}
           >
-            Why choose Vizada?
+            Pourquoi choisir Vizada?
           </AccordionHeader>
           <AccordionBody className="pt-0 text-base font-normal">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            animi ut quae nemo quia soluta praesentium quas possimus qui
-            facilis!
+            À votre rythme, que vous soyez en poste et souhaitez évoluer ou que
+            votre emploi du temps soit trop chargé pour reprendre une formation,
+            tous nos parcours s'adaptent à vos envies et à vos disponibilités.
+            Profitez d'un démarrage immédiat et d'un planning modulable pendant
+            votre formation. Nos cours en ligne sont accessibles 24h/24h, que
+            vous soyez chez vous ou à l'autre bout du monde.
           </AccordionBody>
         </Accordion>
         <Accordion
@@ -70,12 +74,10 @@ export default function AccordionCustomStyles() {
               open === 3 ? "text-orange-700 hover:!text-orange-800" : ""
             }`}
           >
-            Where is vizada located?
+            Où se trouve Vizada ?
           </AccordionHeader>
           <AccordionBody className="pt-0 text-base font-normal">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-            mollitia beatae commodi iure quas? Voluptates repellat nemo mollitia
-            vero laboriosam.
+            Rue Mahmoud KHODJAT EL DJELD, Les Sources, Alger.
           </AccordionBody>
         </Accordion>
       </div>

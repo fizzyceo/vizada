@@ -5,24 +5,24 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptas optio quos maiores obcaecati, tenetur ex quam corrupti deleniti quae?",
-      name: "John Doe",
-      profession: "Web Developer",
+        "Notre partenariat avec cette équipe a été exceptionnel. Leur expertise en conseil a permis à Sonatrach d'optimiser nos processus et d'assurer l'originalité de nos projets. Nous avons une confiance totale en leurs capacités.",
+      name: "Toufik Hakkar",
+      profession: "Sonatrach",
     },
     {
       quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptas optio quos maiores obcaecati, tenetur ex quam corrupti deleniti quae?",
-      name: "Jane Smith",
-      profession: "Designer",
+        "Algérie Télécom a bénéficié grandement de l'accompagnement personnalisé et des solutions sur mesure fournies par cette équipe. Leur service de détection de similarités a été crucial pour garantir la conformité de nos travaux.",
+      name: "Adel BENTOUMI",
+      profession: " Algérie Télécom",
     },
     {
       quote:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur voluptas optio quos maiores obcaecati, tenetur ex quam corrupti deleniti quae?",
-      name: "Michael Johnson",
-      profession: "CEO",
+        "La collaboration avec cette équipe a transformé nos opérations chez Société Générale. Leur approche professionnelle et leur expertise nous ont aidés à atteindre nos objectifs de manière efficace et innovante.",
+      name: "Frédéric Oudéa",
+      profession: "Société Générale",
     },
   ];
-
+  
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const prevTestimonial = () => {
@@ -46,15 +46,16 @@ const Testimonials = () => {
           </div>
           <div className="w-[80%] space-y-5 mx-auto text-center">
             <h1 className="text-3xl font-medium text-[#1a2b6d]">
-              Testimonials
+            Ils nous font confiance
+
             </h1>
             <h1 className="text-2xl">
               {testimonials[currentTestimonial].quote}
             </h1>
             <div>
-              <h1 className="text-base font-medium text-red-800">
+              {/* <h1 className="text-base font-medium text-red-800">
                 {testimonials[currentTestimonial].name}
-              </h1>
+              </h1> */}
               <h1 className="text-base font-medium text-red-800">
                 {testimonials[currentTestimonial].profession}
               </h1>

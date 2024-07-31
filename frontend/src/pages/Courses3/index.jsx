@@ -134,20 +134,61 @@ const Courses3 = (props) => {
     setActive(pageNumber);
   };
 
-  // Pagination buttons logic
-  const paginationButtons = [];
-  for (let i = 1; i <= totalPages; i++) {
-    paginationButtons.push(
-      <IconButton
-        key={i}
-        variant={active === i ? "filled" : "text"}
-        color="gray"
-        onClick={() => changePage(i)}
-      >
-        {i}
-      </IconButton>
-    );
-  }
+  // Generate pagination buttons with ellipses
+  const getPaginationButtons = () => {
+    const buttons = [];
+    const range = 2; // Number of pages to show on each side of the current page
+
+    if (totalPages <= 5) {
+      // If there are 5 or fewer pages, show all pages
+      for (let i = 1; i <= totalPages; i++) {
+        buttons.push(i);
+      }
+    } else {
+      // If there are more than 5 pages
+      if (active <= range + 1) {
+        // If the current page is close to the start
+        for (let i = 1; i <= range + 2; i++) {
+          buttons.push(i);
+        }
+        buttons.push("...");
+        buttons.push(totalPages);
+      } else if (active >= totalPages - range) {
+        // If the current page is close to the end
+        buttons.push(1);
+        buttons.push("...");
+        for (let i = totalPages - range - 1; i <= totalPages; i++) {
+          buttons.push(i);
+        }
+      } else {
+        // If the current page is in the middle
+        buttons.push(1);
+        buttons.push("...");
+        for (let i = active - range; i <= active + range; i++) {
+          buttons.push(i);
+        }
+        buttons.push("...");
+        buttons.push(totalPages);
+      }
+    }
+    return buttons;
+  };
+
+  const paginationButtons = getPaginationButtons().map((page, index) => (
+    <IconButton
+      key={index}
+      variant={active === page ? "filled" : "text"}
+      color="gray"
+      onClick={() => {
+        if (page !== "...") {
+          changePage(page);
+        }
+      }}
+      disabled={page === "..."}
+    >
+      {page}
+    </IconButton>
+  ));
 
   const next = () => {
     if (active < totalPages) {
@@ -160,7 +201,6 @@ const Courses3 = (props) => {
       setActive(active - 1);
     }
   };
-
   const toggleSubcategories = () => {
     if (!showAllSubcategories) {
       // If showing only the first 7, set all subcategories

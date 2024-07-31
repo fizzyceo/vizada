@@ -14,7 +14,7 @@ import { wrapText } from "../../Components/Common/wrapText";
 import { MagnifyingGlassIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
 
 const Courses2 = (props) => {
-  const { param1 } = useParams(); // Get param1 and param2 from URL
+  const { param1 } = useParams();
   const {
     getCoursesByCategory,
     categoryCourses,
@@ -30,9 +30,8 @@ const Courses2 = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [infoText, setInfoText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showAllSubcategories, setShowAllSubcategories] = useState(false); // State to manage showing all subcategories
-  const [showLess, setShowLess] = useState(false); // State to manage showing fewer subcategories
-
+  const [showAllSubcategories, setShowAllSubcategories] = useState(false);
+  const [showLess, setShowLess] = useState(false);
   const { accessToken, user } = useAuth((state) => state);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const Courses2 = (props) => {
       let stringparam1 = param1 === "IT" ? 1 : 2;
       let relevantSubCat = subcategories.filter((s) => s.Id_c === stringparam1);
 
-      setRelevantSubCategories(relevantSubCat.slice(0, 7)); // Only show the first 7 initially
+      setRelevantSubCategories(relevantSubCat.slice(0, 7));
     }
   }, [param1, subcategories]);
 
@@ -56,16 +55,14 @@ const Courses2 = (props) => {
 
     if (param1) {
       let prop = param1.toLowerCase() === "it" ? 1 : 2;
-      console.log(prop);
       getCoursesByCategory(param1);
     }
-  }, [param1]); // Ensure useEffect runs when param1 or param2 changes
+  }, [param1]);
 
   useEffect(() => {
-    console.log(categoryCourses);
     if (categoryCourses.length > 0) {
       setCourseList(categoryCourses);
-      setFilteredCourses(categoryCourses); // Initialize filtered courses with all courses
+      setFilteredCourses(categoryCourses);
       setInfoText("");
     } else {
       setInfoText("Aucun cours pour cette catégorie...");
@@ -73,11 +70,10 @@ const Courses2 = (props) => {
   }, [categoryCourses]);
 
   const handleSubcategoryClick = (id) => {
-    props.router.navigate(`/courses/${param1}/${id}`); // Navigate to currenturl/Nomsouscategorie
+    props.router.navigate(`/courses/${param1}/${id}`);
   };
 
   useEffect(() => {
-    // Filter courses based on searchQuery
     if (searchQuery.length > 2) {
       const filtered = courseList.filter(
         (course) =>
@@ -90,7 +86,6 @@ const Courses2 = (props) => {
       );
       setFilteredCourses(filtered);
     } else {
-      // If searchQuery length is less than or equal to 2, show all courses
       setFilteredCourses(courseList);
     }
   }, [searchQuery, courseList]);
@@ -101,34 +96,71 @@ const Courses2 = (props) => {
 
   const [active, setActive] = useState(1);
   const itemsPerPage = 6;
-
-  // Calculate total number of pages for filtered courses
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
 
-  // Calculate courses to display for the current page
   const start = (active - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   const coursesToShow = filteredCourses.slice(start, end);
 
-  // Handler for changing active page
   const changePage = (pageNumber) => {
     setActive(pageNumber);
   };
 
-  // Pagination buttons logic
-  const paginationButtons = [];
-  for (let i = 1; i <= totalPages; i++) {
-    paginationButtons.push(
-      <IconButton
-        key={i}
-        variant={active === i ? "filled" : "text"}
-        color="gray"
-        onClick={() => changePage(i)}
-      >
-        {i}
-      </IconButton>
-    );
-  }
+  // Generate pagination buttons with ellipses
+  const getPaginationButtons = () => {
+    const buttons = [];
+    const range = 2; // Number of pages to show on each side of the current page
+
+    if (totalPages <= 5) {
+      // If there are 5 or fewer pages, show all pages
+      for (let i = 1; i <= totalPages; i++) {
+        buttons.push(i);
+      }
+    } else {
+      // If there are more than 5 pages
+      if (active <= range + 1) {
+        // If the current page is close to the start
+        for (let i = 1; i <= range + 2; i++) {
+          buttons.push(i);
+        }
+        buttons.push("...");
+        buttons.push(totalPages);
+      } else if (active >= totalPages - range) {
+        // If the current page is close to the end
+        buttons.push(1);
+        buttons.push("...");
+        for (let i = totalPages - range - 1; i <= totalPages; i++) {
+          buttons.push(i);
+        }
+      } else {
+        // If the current page is in the middle
+        buttons.push(1);
+        buttons.push("...");
+        for (let i = active - range; i <= active + range; i++) {
+          buttons.push(i);
+        }
+        buttons.push("...");
+        buttons.push(totalPages);
+      }
+    }
+    return buttons;
+  };
+
+  const paginationButtons = getPaginationButtons().map((page, index) => (
+    <IconButton
+      key={index}
+      variant={active === page ? "filled" : "text"}
+      color="gray"
+      onClick={() => {
+        if (page !== "...") {
+          changePage(page);
+        }
+      }}
+      disabled={page === "..."}
+    >
+      {page}
+    </IconButton>
+  ));
 
   const next = () => {
     if (active < totalPages) {
@@ -144,12 +176,10 @@ const Courses2 = (props) => {
 
   const toggleSubcategories = () => {
     if (!showAllSubcategories) {
-      // If showing only the first 7, set all subcategories
       setRelevantSubCategories(
         subcategories.filter((s) => s.Id_c === (param1 === "IT" ? 1 : 2))
       );
     } else {
-      // Otherwise, set only the first 7 subcategories
       setRelevantSubCategories(
         subcategories
           .filter((s) => s.Id_c === (param1 === "IT" ? 1 : 2))
@@ -158,24 +188,6 @@ const Courses2 = (props) => {
     }
     setShowAllSubcategories(!showAllSubcategories);
   };
-
-  const toggleShowLess = () => {
-    setShowLess(!showLess);
-    if (showLess) {
-      // If showing fewer subcategories, limit to first 7
-      setRelevantSubCategories(
-        subcategories
-          .filter((s) => s.Id_c === (param1 === "IT" ? 1 : 2))
-          .slice(0, 7)
-      );
-    } else {
-      // Otherwise, show all subcategories
-      setRelevantSubCategories(
-        subcategories.filter((s) => s.Id_c === (param1 === "IT" ? 1 : 2))
-      );
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       {user?.role ? (

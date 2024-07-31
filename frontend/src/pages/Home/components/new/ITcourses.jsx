@@ -59,7 +59,7 @@ const ITcourses = ({ router }) => {
           className="text-sm font-semibold text-blue-900 text-end"
           href="/courses/IT"
         >
-          Voir tous nos formations IT
+          Voir toutes nos formations IT
         </a>
       </div>
       <MenuFilter

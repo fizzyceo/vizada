@@ -17,7 +17,7 @@ const ContactBanner = () => {
       <div className="md:px-16 flex flex-row items-start justify-start gap-5 flex-wrap w-[80%] mx-auto z-10">
         <div className="lg:w-[50%]">
           <h1 className="text-xl md:text-2xl lg:text-3xl font-medium text-[#4e6ba3]">
-            Support Client 24H/24 et 7J/7 Contactez notre équipe commerciale
+            Support Client 24h/24h et 7J/7 Contactez notre équipe commerciale
             pour toutes vos questions
           </h1>
         </div>
