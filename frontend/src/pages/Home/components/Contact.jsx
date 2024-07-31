@@ -66,12 +66,12 @@ const Contact = () => {
     <div id="contact" className="bg-gray-50 p-5 space-y-5">
       <div>
         <h1 className="roboto text-4xl text-center">
-        Votre question est unique ? {" "}
+          Votre question est unique ?{" "}
         </h1>
         <div className="w-4/5 lg:w-2/5 mx-auto my-10 ">
           <Card className="bg-gray-50">
             <CardHeader>
-              <h1 className="roboto text-3xl text-center">Contactez-nous  </h1>
+              <h1 className="roboto text-3xl text-center">Contactez-nous </h1>
             </CardHeader>
 
             <CardBody className="space-y-5">
@@ -79,7 +79,7 @@ const Contact = () => {
                 <React.Fragment>
                   <Input
                     color="orange"
-                    label="Email"
+                    label="Votre Email"
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
@@ -87,14 +87,14 @@ const Contact = () => {
                   />
                   <Input
                     color="orange"
-                    label="Your name"
+                    label="Votre Nom"
                     type="text"
                     onChange={(e) => setSubject(e.target.value)}
                   />
                   <Textarea
                     draggable={"true"}
                     color="orange"
-                    label="Your message"
+                    label="Votre Message"
                     type="text"
                     onChange={(e) => setMessage(e.target.value)}
                   />
@@ -103,17 +103,17 @@ const Contact = () => {
                     onClick={handleSubmit}
                     loading={false}
                   >
-                    Submit
+                    Soumettre
                   </Button>
                 </React.Fragment>
               ) : (
                 <div className="w-fit mx-auto">
                   <h1 className="text-xl">
-                    Message successfully{" "}
-                    <strong className="text-orange-800 ">transmitted!</strong>
+                    Message{" "}
+                    <strong className="text-orange-800 ">Transmis!</strong>
                   </h1>
                   <p className="text-sm text-center my-2 ">
-                    You'll hear from us as soon as possible.
+                    Vous aurez de nos nouvelles dans les plus brefs délais.
                   </p>
 
                   <CheckBadgeIcon className="w-72 text-orange-800 self-center" />

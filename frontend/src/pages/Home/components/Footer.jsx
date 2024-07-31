@@ -81,7 +81,7 @@ export function FooterWithLogo() {
             </Typography>
           </div>
         </div>
-        <div className="hidden md:grid grid-cols-6 gap-2 w-full">
+        <div className="hidden md:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 w-full">
           <div className="formation1  text-start">
             <h2 className="mb-4 text-[#4f6ed4] font-medium text-lg">
               Formations
@@ -150,7 +150,7 @@ export function FooterWithLogo() {
                 <a href=""> Devenir Formateur </a>
               </li>
               <li>
-                <a href="https://vizada.dz/consulting"> Plagiat </a>
+                <a href="https://vizada.dz/consulting"> Anti-Plagiat </a>
               </li>
             </ul>
           </div>
@@ -167,7 +167,7 @@ export function FooterWithLogo() {
                 <a href="tel:+213540974762"> (+213) 540 974 762 </a>
               </li>
               <li>
-                <a>(+213) 023 53 80 84 </a>
+                <a>Fax: (+213) 023 53 80 84 </a>
               </li>
               <li>
                 <a href="mailto:contact@vizada.com"> contact@vizada.dz </a>
